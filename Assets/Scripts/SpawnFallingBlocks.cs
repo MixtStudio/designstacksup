@@ -41,7 +41,7 @@ public class SpawnFallingBlocks {
 			float x = Mathf.Cos(a * Mathf.Deg2Rad) * (radius + 0.2794239f / 2 * prefabSize);
 			float z = Mathf.Sin(a * Mathf.Deg2Rad) * (radius + 0.2794239f / 2 * prefabSize);
 
-			categoryList[i].Position = new Vector3(x, 1, z);
+			categoryList[i].Position = new Vector3(x, 0, z);
 		}
 	}
 
@@ -65,6 +65,8 @@ public class SpawnFallingBlocks {
 			//tag="BarHolder",
 			layer = LayerMask.NameToLayer("Gaze")
 		};
+
+		barsHolder.AddComponent<ScaleChanger>();
 
 		// Loop through category list
 		foreach (Category c in categoryList) {
