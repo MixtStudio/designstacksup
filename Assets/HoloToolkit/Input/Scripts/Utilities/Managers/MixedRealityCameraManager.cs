@@ -21,7 +21,7 @@ namespace HoloToolkit.Unity.InputModule
         public float NearClipPlane_OpaqueDisplay = 0.1f;
 
         [Tooltip("Values for Camera.clearFlags, determining what to clear when rendering a Camera for an opaque display.")]
-        public CameraClearFlags CameraClearFlags_OpaqueDisplay = CameraClearFlags.Skybox;
+        public CameraClearFlags CameraClearFlags_OpaqueDisplay = CameraClearFlags.SolidColor;
 
         [Tooltip("Background color for a transparent display.")]
         public Color BackgroundColor_OpaqueDisplay = Color.black;
