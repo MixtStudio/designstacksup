@@ -100,19 +100,21 @@ public class SpawnObjectsController: MonoBehaviour{
 	private void Awake() {
 		instance = this;
 		categoryList = new List<Category>();
-		categoryList = CategoriesSameHeight(numberOfWalls, heightOfWalls);
-		MaxCategorySum = 5;
-		SpawnFallingBlocks sFB = new SpawnFallingBlocks();
-		sFB.CreateBlocks(categoryList);
+		//categoryList = CategoriesSameHeight(numberOfWalls, heightOfWalls);
+		//MaxCategorySum = 5;
+		//SpawnFallingBlocks sFB = new SpawnFallingBlocks();
+		//sFB.CreateBlocks(categoryList);
+		CreateStatsBar();
 	}
 
-
+	/*
 	void Update() {
 		if (Input.GetKeyDown("space")) {
 			Debug.Log("HEYYYY");
 			CreateStatsBar();
 		}
 	}
+	*/
 
 	private void CreateStatsBar() {
 
