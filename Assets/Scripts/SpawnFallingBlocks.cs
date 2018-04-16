@@ -41,7 +41,7 @@ public class SpawnFallingBlocks {
 			float x = Mathf.Cos(a * Mathf.Deg2Rad) * (radius + 0.2794239f / 2 * prefabSize);
 			float z = Mathf.Sin(a * Mathf.Deg2Rad) * (radius + 0.2794239f / 2 * prefabSize);
 
-			categoryList[i].Position = new Vector3(x, 1, z);
+			categoryList[i].Position = new Vector3(x, 0, z);
 		}
 	}
 
@@ -66,6 +66,8 @@ public class SpawnFallingBlocks {
 			layer = LayerMask.NameToLayer("Gaze")
 		};
 
+		barsHolder.AddComponent<ScaleChanger>();
+
 		// Loop through category list
 		foreach (Category c in categoryList) {
 			c.CategoryContainer = new GameObject() {
@@ -80,7 +82,7 @@ public class SpawnFallingBlocks {
 			float sum = c.Sum * 20 / maxCategorySum;
 
 			for (var i = 0; i < sum; i++) {
-				SpawnBlock(c, i / sum);
+				SpawnBlock(c, i / sum, 20+i);
 				yield return wait;
 			}
 
@@ -141,11 +143,11 @@ public class SpawnFallingBlocks {
 /// </summary>
 /// <param name="position">Position of the block.</param>
 /// <param name="size">Size of the block.</param>
-void SpawnBlock(Category c,float index) {
+void SpawnBlock(Category c, float index, float posY) {
 		//GameObject o = Object.Instantiate(FallingBlock, c.Position + Vector3.up * 20, Quaternion.Euler(0, -c.Angle, 0), c.CategoryContainer.transform);
 		GameObject o = Object.Instantiate(FallingBlock, c.CategoryContainer.transform, false);
 		o.transform.localEulerAngles = Vector3.zero;
-		o.transform.localPosition = Vector3.up * 20;
+		o.transform.localPosition = Vector3.up * posY;
 		o.transform.localScale *= prefabSize;
 		o.GetComponent<Renderer>().material.color = Color.Lerp(Color.red, Color.yellow, index);
 	}
