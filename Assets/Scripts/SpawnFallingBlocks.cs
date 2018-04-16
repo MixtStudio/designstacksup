@@ -88,7 +88,7 @@ public class SpawnFallingBlocks {
 		}
 
 		foreach( Category c in categoryList) {
-			AddCollider(c);
+			//AddCollider(c);
 			//CreateText(c);
 			//GazeInteraction(c);
 		}
