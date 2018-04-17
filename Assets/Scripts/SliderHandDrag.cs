@@ -5,7 +5,7 @@ using System;
 
 namespace HoloToolkit.Unity.InputModule {
 
-	public class SliderHandDrag : HandDraggable {
+	public class SliderHandDrag: HandDraggable {
 
 		public float maxHeight = 3.0f;
 		public float minHeight = 1.0f;
@@ -20,7 +20,6 @@ namespace HoloToolkit.Unity.InputModule {
 
 		protected override void StartDragging(Vector3 initialDraggingPosition) {
 			base.StartDragging(initialDraggingPosition);
-			HostTransform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
 			ConstraintCheck();
 			ChangeScale();
 		}
@@ -28,7 +27,6 @@ namespace HoloToolkit.Unity.InputModule {
 
 		protected override void UpdateDragging() {
 			base.UpdateDragging();
-			HostTransform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
 			ConstraintCheck();
 			ChangeScale();
 		}
@@ -36,7 +34,6 @@ namespace HoloToolkit.Unity.InputModule {
 
 		protected override void StopDragging() {
 			base.StopDragging();
-			HostTransform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
 			ConstraintCheck();
 			ChangeScale();
 		}

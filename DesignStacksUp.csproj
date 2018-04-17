@@ -957,6 +957,7 @@
     <Compile Include="Assets\Scripts\ScaleChanger.cs" />
     <Compile Include="Assets\Scripts\Screenshot.cs" />
     <Compile Include="Assets\Scripts\SliderHandDrag.cs" />
+    <Compile Include="Assets\Scripts\SliderHandDragConstraint.cs" />
     <Compile Include="Assets\Scripts\SpawnFallingBlocks.cs" />
     <Compile Include="Assets\Scripts\SpawnObjectsController.cs" />
   </ItemGroup>
