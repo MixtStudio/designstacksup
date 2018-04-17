@@ -67,6 +67,9 @@ public class SpawnFallingBlocks {
 			layer = LayerMask.NameToLayer("Gaze")
 		};
 
+		//Change to SliderHandDragConstraint to limit the axis movement
+		//GameObject.FindObjectOfType<SliderHandDragConstraint>().SetBarsHolder(barsHolder);
+
 		GameObject.FindObjectOfType<SliderHandDrag>().SetBarsHolder(barsHolder);
 
 		// Loop through category list
