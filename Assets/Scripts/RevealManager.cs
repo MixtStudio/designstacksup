@@ -16,11 +16,7 @@ public class RevealManager : MonoBehaviour {
 			obj.SetActive(false);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+	
 	public GameObject[] GetHiddenObjects() { return hiddenObjs; }
 
 	public void IncrementRevealNum() {

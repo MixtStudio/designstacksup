@@ -5,11 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-<<<<<<< HEAD
-    <ProjectGuid>{3CAA48B0-CF1F-4D29-9677-E5A8B41FFB9F}</ProjectGuid>
-=======
-    <ProjectGuid>{7170FDFD-8654-4D61-A295-A7AF4A85C45D}</ProjectGuid>
->>>>>>> master
+    <ProjectGuid>{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp-player</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -868,9 +864,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="DesignStacksUp.Plugins.Player.csproj">
-      <Project>{FA338CE5-7774-1C9A-7572-EE6BF6530FB7}</Project>
-      <Name>DesignStacksUp.Plugins.Player</Name>
+    <ProjectReference Include="designstacksup.Plugins.Player.csproj">
+      <Project>{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}</Project>
+      <Name>designstacksup.Plugins.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -1516,7 +1512,11 @@
     <Compile Include="Assets\Scripts\Category.cs" />
     <Compile Include="Assets\Scripts\CSVReader.cs" />
     <Compile Include="Assets\Scripts\CubeCollision.cs" />
+    <Compile Include="Assets\Scripts\Reveal.cs" />
+    <Compile Include="Assets\Scripts\RevealManager.cs" />
+    <Compile Include="Assets\Scripts\ScaleChanger.cs" />
     <Compile Include="Assets\Scripts\Screenshot.cs" />
+    <Compile Include="Assets\Scripts\SliderHandDrag.cs" />
     <Compile Include="Assets\Scripts\SpawnFallingBlocks.cs" />
     <Compile Include="Assets\Scripts\SpawnObjectsController.cs" />
   </ItemGroup>
