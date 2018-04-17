@@ -9,6 +9,8 @@ public class TransitionManager : MonoBehaviour {
 
 	private GameObject barsHolder;
 	private bool fallCheck = false;
+	private List<Transform> columns;
+	private static Random rnd;
 
 	public void SetBarsHolder(GameObject obj) { barsHolder = obj; }
 	public GameObject GetBarsHolder() { return barsHolder; }
@@ -16,15 +18,16 @@ public class TransitionManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//barsHolder = GameObject.FindObjectOfType<SpawnFallingBlocks>().GetBarsHolder();
+		rnd = new Random();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.K))
-			Fall();
+			BeginFalling();
 	}
 
-	public void Fall() {
+	public void BeginFalling() {
 		if (fallCheck) return;
 
 		Debug.Log("Begin Falling");
@@ -34,12 +37,33 @@ public class TransitionManager : MonoBehaviour {
 
 		if (platform!=null)
 			platform.GetComponent<MeshCollider>().enabled = false;
-	
-		//falls in unison
-		foreach (CubeCollision cc in barsHolder.GetComponentsInChildren<CubeCollision>(barsHolder)) {
-			cc.Unfreeze();
-			cc.enabled = false;			
+
+		columns = new List<Transform>();
+
+		foreach(Transform trans in barsHolder.transform) {
+			//ColumnFall(trans);
+			columns.Add(trans);
 		}
+
 		fallCheck = true;
+		StartCoroutine(FallingColumns());
+	}
+
+	private IEnumerator FallingColumns() {
+		Transform column = columns[Random.Range(0,columns.Count-1)];
+		ColumnFall(column);
+		columns.Remove(column);		
+
+		yield return new WaitForSeconds(0.5f);
+		if (columns.Count != 0)
+			StartCoroutine(FallingColumns());
+	}
+
+	private void ColumnFall(Transform trans) {
+		foreach (CubeCollision cc in trans.GetComponentsInChildren<CubeCollision>()) {
+			cc.Unfreeze();
+			cc.enabled = false;
+			Destroy(cc);
+		}
 	}
 }
