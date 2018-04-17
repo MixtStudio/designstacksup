@@ -13,7 +13,6 @@ public class SpawnFallingBlocks {
 	private TextMesh TextPrefab;
 	private float maxCategorySum;
 
-
 	/// <summary>
 	/// Constructor to bring in the variables from SpawnObjectsController.
 	/// </summary>
@@ -67,7 +66,7 @@ public class SpawnFallingBlocks {
 			layer = LayerMask.NameToLayer("Gaze")
 		};
 
-		GameObject.FindObjectOfType<SliderHandDrag>().SetBarsHolder(barsHolder);
+		GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(barsHolder);
 
 		// Loop through category list
 		foreach (Category c in categoryList) {

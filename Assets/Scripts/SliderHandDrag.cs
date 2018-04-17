@@ -16,6 +16,7 @@ namespace HoloToolkit.Unity.InputModule {
 		protected override void Start() {
 			base.Start();
 			HostTransform.position = new Vector3(HostTransform.position.x, minHeight, HostTransform.position.z);
+			//barsHolder = ((SpawnFallingBlocks)(FindObjectOfType(typeof(SpawnFallingBlocks)))).GetBarsHolder();
 		}
 
 		protected override void StartDragging(Vector3 initialDraggingPosition) {
@@ -49,10 +50,9 @@ namespace HoloToolkit.Unity.InputModule {
 				HostTransform.position = new Vector3(HostTransform.position.x, minHeight, HostTransform.position.z);
 		}
 
-		public void SetBarsHolder(GameObject obj) { barsHolder = obj; }
-
 		public void ChangeScale() {
-			if (barsHolder == null) return;
+			if (barsHolder == null)
+				barsHolder = GameObject.FindObjectOfType<TransitionManager>().GetBarsHolder();
 
 			float scaleNum = Mathf.InverseLerp(minHeight, maxHeight, HostTransform.position.y);
 			barsHolder.transform.localScale = new Vector3(barsHolder.transform.localScale.x, (scaleFactor*scaleNum)+1, barsHolder.transform.localScale.z);

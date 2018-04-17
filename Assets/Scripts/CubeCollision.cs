@@ -29,4 +29,10 @@ public class CubeCollision : MonoBehaviour {
 		rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
 		yield break;
 	}
+
+	public void Unfreeze() {
+		Debug.Log("Unfreezing");
+		rb.constraints = RigidbodyConstraints.None;
+		rb.isKinematic = false;
+	}
 }
