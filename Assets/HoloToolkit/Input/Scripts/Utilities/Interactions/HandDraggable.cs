@@ -66,7 +66,7 @@ namespace HoloToolkit.Unity.InputModule
         private Rigidbody hostRigidbody;
         private bool hostRigidbodyWasKinematic;
 
-        private void Start()
+        protected virtual void Start()
         {
             if (HostTransform == null)
             {
@@ -100,7 +100,7 @@ namespace HoloToolkit.Unity.InputModule
         /// <summary>
         /// Starts dragging the object.
         /// </summary>
-        public void StartDragging(Vector3 initialDraggingPosition)
+        protected virtual void StartDragging(Vector3 initialDraggingPosition)
         {
             if (!IsDraggingEnabled)
             {
@@ -202,7 +202,7 @@ namespace HoloToolkit.Unity.InputModule
         /// <summary>
         /// Update the position of the object being dragged.
         /// </summary>
-        private void UpdateDragging()
+        protected virtual void UpdateDragging()
         {
             Transform cameraTransform = CameraCache.Main.transform;
 
@@ -286,7 +286,7 @@ namespace HoloToolkit.Unity.InputModule
         /// <summary>
         /// Stops dragging the object.
         /// </summary>
-        public void StopDragging()
+        protected virtual void StopDragging()
         {
             if (!isDragging)
             {

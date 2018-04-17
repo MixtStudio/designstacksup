@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using HoloToolkit.Unity.InputModule;
 
 /// <summary>
 /// Creates the positions for the blocks and text to spawn at, and spawns them in.
@@ -66,7 +67,7 @@ public class SpawnFallingBlocks {
 			layer = LayerMask.NameToLayer("Gaze")
 		};
 
-		barsHolder.AddComponent<ScaleChanger>();
+		GameObject.FindObjectOfType<SliderHandDrag>().SetBarsHolder(barsHolder);
 
 		// Loop through category list
 		foreach (Category c in categoryList) {

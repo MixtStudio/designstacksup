@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2B84E959-4C36-19B6-DDB3-889D4ED220D2}</ProjectGuid>
+    <ProjectGuid>{F3A7ECD9-498F-2624-513D-1A33FDA64142}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -359,17 +359,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="DesignStacksUp.Plugins.csproj">
-      <Project>{FA338CE5-7774-1C9A-7572-EE6BF6530FB7}</Project>
-      <Name>DesignStacksUp.Plugins</Name>
+    <ProjectReference Include="designstacksup.Plugins.csproj">
+      <Project>{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}</Project>
+      <Name>designstacksup.Plugins</Name>
     </ProjectReference>
-    <ProjectReference Include="DesignStacksUp.csproj">
-      <Project>{F1C09684-984A-9F8F-2730-7977B46F8DB5}</Project>
-      <Name>DesignStacksUp</Name>
+    <ProjectReference Include="designstacksup.csproj">
+      <Project>{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}</Project>
+      <Name>designstacksup</Name>
     </ProjectReference>
-    <ProjectReference Include="DesignStacksUp.Editor.Plugins.csproj">
-      <Project>{CF1EB451-6F6B-8E9E-CA91-1F4D64A8A7D2}</Project>
-      <Name>DesignStacksUp.Editor.Plugins</Name>
+    <ProjectReference Include="designstacksup.Editor.Plugins.csproj">
+      <Project>{03CD879F-CF39-3D9D-2231-FA0DBEFEF8AD}</Project>
+      <Name>designstacksup.Editor.Plugins</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.StandardEvents.csproj">
       <Project>{6800202F-4402-D405-F8CB-03DC7BD78B92}</Project>

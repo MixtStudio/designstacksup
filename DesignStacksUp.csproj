@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F1C09684-984A-9F8F-2730-7977B46F8DB5}</ProjectGuid>
+    <ProjectGuid>{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -296,9 +296,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="DesignStacksUp.Plugins.csproj">
-      <Project>{FA338CE5-7774-1C9A-7572-EE6BF6530FB7}</Project>
-      <Name>DesignStacksUp.Plugins</Name>
+    <ProjectReference Include="designstacksup.Plugins.csproj">
+      <Project>{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}</Project>
+      <Name>designstacksup.Plugins</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.StandardEvents.csproj">
       <Project>{6800202F-4402-D405-F8CB-03DC7BD78B92}</Project>
@@ -952,7 +952,11 @@
     <Compile Include="Assets\Scripts\Category.cs" />
     <Compile Include="Assets\Scripts\CSVReader.cs" />
     <Compile Include="Assets\Scripts\CubeCollision.cs" />
+    <Compile Include="Assets\Scripts\Reveal.cs" />
+    <Compile Include="Assets\Scripts\RevealManager.cs" />
+    <Compile Include="Assets\Scripts\ScaleChanger.cs" />
     <Compile Include="Assets\Scripts\Screenshot.cs" />
+    <Compile Include="Assets\Scripts\SliderHandDrag.cs" />
     <Compile Include="Assets\Scripts\SpawnFallingBlocks.cs" />
     <Compile Include="Assets\Scripts\SpawnObjectsController.cs" />
   </ItemGroup>
