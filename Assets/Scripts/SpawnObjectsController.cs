@@ -18,11 +18,7 @@ public class SpawnObjectsController: MonoBehaviour{
 		}
 	}
 
-	[SerializeField]
-	private int numberOfWalls;
-
-	[SerializeField]
-	private int heightOfWalls;
+	
 
 	/// <summary>
 	/// Select which column to classify by
@@ -45,6 +41,22 @@ public class SpawnObjectsController: MonoBehaviour{
 	public DataValues DataRep {
 		get {
 			return _dataRep;
+		}
+	}
+
+	[SerializeField]
+	private Color _color1;
+	public Color Color1  {
+		get {
+			return _color1;
+		}
+	}
+
+	[SerializeField]
+	private Color _color2;
+	public Color Color2 {
+		get {
+			return _color2;
 		}
 	}
 
@@ -100,34 +112,13 @@ public class SpawnObjectsController: MonoBehaviour{
 	private void Awake() {
 		instance = this;
 		categoryList = new List<Category>();
-		//categoryList = CategoriesSameHeight(numberOfWalls, heightOfWalls);
-		//MaxCategorySum = 5;
-		//SpawnFallingBlocks sFB = new SpawnFallingBlocks();
-		//sFB.CreateBlocks(categoryList);
 		CreateStatsBar();
 	}
 
-	/*
-	void Update() {
-		if (Input.GetKeyDown("space")) {
-			Debug.Log("HEYYYY");
-			CreateStatsBar();
-		}
-	}
-	*/
 
 	private void CreateStatsBar() {
 
-		//GameObject walls = GameObject.FindWithTag("BarHolder");
-		GameObject walls = GameObject.Find("BarsHolder");
-		Destroy(walls);
-		categoryList.Clear();
-		var watch = System.Diagnostics.Stopwatch.StartNew();
-		// the code that you want to measure comes here
 		valueList = CSVReader.Read(InputFile); // 1. Fills valueList
-		watch.Stop();
-		var elapsedMs = watch.ElapsedMilliseconds;
-		Debug.Log("Time is: " + elapsedMs);
 		categoryList = new List<Category>();
 		categoryList = GetCategories(); // 2. Fills categoryList
 		MaxCategorySum = GetMaxCategorySum();
@@ -137,18 +128,7 @@ public class SpawnObjectsController: MonoBehaviour{
 		sFBx.CreateBlocks(categoryList);
 	}
 
-	private List<Category> CategoriesSameHeight(int numberWalls, float height) {
-		List<Category> categories = new List<Category>();
-		for (int i = 0; i < numberWalls; i++) {
-			string categoryName = "Wall_" + i;
-			Category c = new Category(categoryName) {
-				Sum = height
-			};
-			categories.Add(c);
-		}
-
-		return categories;
-	}
+	
 
 	/// <summary>
 	/// Returns the name of the columns according to user input

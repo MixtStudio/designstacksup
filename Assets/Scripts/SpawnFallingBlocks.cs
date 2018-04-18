@@ -12,7 +12,7 @@ public class SpawnFallingBlocks {
 	private GameObject FallingBlock;
 	private TextMesh TextPrefab;
 	private float maxCategorySum;
-
+	private Color[] colors;
 
 	/// <summary>
 	/// Constructor to bring in the variables from SpawnObjectsController.
@@ -24,6 +24,7 @@ public class SpawnFallingBlocks {
 		FallingBlock = SOC.FallingBlock;
 		TextPrefab = SOC.TextPrefab;
 		maxCategorySum = SOC.MaxCategorySum;
+		colors = new Color[] { SOC.Color1, SOC.Color2 };
 	}
 
 	/// <summary>
@@ -68,9 +69,10 @@ public class SpawnFallingBlocks {
 		};
 
 		//Change to SliderHandDragConstraint to limit the axis movement
-		//GameObject.FindObjectOfType<SliderHandDragConstraint>().SetBarsHolder(barsHolder);
-
 		GameObject.FindObjectOfType<SliderHandDrag>().SetBarsHolder(barsHolder);
+		
+		//To be used for Color alternate
+		int index = 1;
 
 		// Loop through category list
 		foreach (Category c in categoryList) {
@@ -86,10 +88,11 @@ public class SpawnFallingBlocks {
 			float sum = c.Sum * 20 / maxCategorySum;
 
 			for (var i = 0; i < sum; i++) {
-				SpawnBlock(c, i / sum, 20+i);
+				SpawnBlock(c, 20+i,index);
 				yield return wait;
 			}
 
+			index++;
 			yield return wait;	
 		}
 
@@ -140,19 +143,20 @@ public class SpawnFallingBlocks {
 		}
 	}
 
-	
 
 /// <summary>
 /// Instantiates a block of the defined size at the defined position, and sets its color.
 /// </summary>
 /// <param name="position">Position of the block.</param>
 /// <param name="size">Size of the block.</param>
-void SpawnBlock(Category c, float index, float posY) {
-		//GameObject o = Object.Instantiate(FallingBlock, c.Position + Vector3.up * 20, Quaternion.Euler(0, -c.Angle, 0), c.CategoryContainer.transform);
+void SpawnBlock(Category c, float posY,int index) {
 		GameObject o = Object.Instantiate(FallingBlock, c.CategoryContainer.transform, false);
 		o.transform.localEulerAngles = Vector3.zero;
 		o.transform.localPosition = Vector3.up * posY;
 		o.transform.localScale *= prefabSize;
-		o.GetComponent<Renderer>().material.color = Color.Lerp(Color.red, Color.yellow, index);
+		if (index % 2 == 0) 
+			 o.GetComponent<Renderer>().material.color=colors[0];
+		else 
+			o.GetComponent<Renderer>().material.color = colors[1];
 	}
 }

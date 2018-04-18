@@ -10,6 +10,9 @@ namespace HoloToolkit.Unity.InputModule {
 		public float maxHeight = 3.0f;
 		public float minHeight = 1.0f;
 		public float scaleFactor = 3.0f;
+		public Camera VR_camera;
+		private float distanceCam;
+		public float speed = 20f;
 
 		private GameObject barsHolder;
 
@@ -26,6 +29,7 @@ namespace HoloToolkit.Unity.InputModule {
 
 
 		protected override void UpdateDragging() {
+			//HostTransform.Rotate(Vector3.up, speed * Time.deltaTime);
 			base.UpdateDragging();
 			ConstraintCheck();
 			ChangeScale();
@@ -39,6 +43,8 @@ namespace HoloToolkit.Unity.InputModule {
 		}
 
 		private void ConstraintCheck() {
+			distanceCam = Vector3.Distance(HostTransform.position, VR_camera.transform.position);
+			Debug.Log("Distance of " + VR_camera.name + "is "+ distanceCam);
 			if (HostTransform.position.y > maxHeight)
 				HostTransform.position = new Vector3(HostTransform.position.x, maxHeight, HostTransform.position.z);
 
