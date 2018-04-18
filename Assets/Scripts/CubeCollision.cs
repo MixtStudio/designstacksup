@@ -13,7 +13,7 @@ public class CubeCollision : MonoBehaviour {
 
 	IEnumerator TurnOnCollider()
     {
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.05f);
         GetComponent<Collider>().enabled = true;
         yield break;
     }

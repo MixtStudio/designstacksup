@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/FallingGraphs.unity
+=======
+- path: Assets/Scenes/DSU_SCN1_V11.unity
+>>>>>>> 21-Different-Scenes-Cube-Control
   isLoaded: 1
   isActive: 1
