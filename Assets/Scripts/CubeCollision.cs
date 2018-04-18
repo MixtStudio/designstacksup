@@ -23,10 +23,15 @@ public class CubeCollision : MonoBehaviour {
 	}
 
 	IEnumerator Freeze() {
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSeconds(3);
 		rb.constraints = RigidbodyConstraints.FreezeAll;
 		rb.isKinematic = true;
 		rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
 		yield break;
+	}
+
+	public void Unfreeze() {
+		rb.constraints = RigidbodyConstraints.None;
+		rb.isKinematic = false;
 	}
 }
