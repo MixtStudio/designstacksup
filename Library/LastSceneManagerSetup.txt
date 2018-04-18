@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Pedastal.unity
+=======
+- path: Assets/Scenes/DSU_SCN1_V5.unity
+>>>>>>> master
   isLoaded: 1
   isActive: 1
