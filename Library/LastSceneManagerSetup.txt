@@ -1,6 +1,10 @@
 sceneSetups:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - path: Assets/Scenes/FallingGraphs.unity
+=======
+- path: Assets/Scenes/Pedastal.unity
+>>>>>>> master
 =======
 - path: Assets/Scenes/DSU_SCN1_V5.unity
 >>>>>>> master
