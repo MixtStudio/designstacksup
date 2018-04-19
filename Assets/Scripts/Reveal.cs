@@ -31,7 +31,7 @@ public class Reveal : MonoBehaviour {
 		foreach(GameObject obj in hiddenObjs) {
 			if (Vector3.Distance(transform.position, obj.transform.position) <= revealRadius) {
 				Debug.Log("Revealing Obj");
-				obj.SetActive(true);
+				obj.GetComponent<MeshRenderer>().enabled = true;
 			}
 		}
 		revealManager.IncrementRevealNum();
