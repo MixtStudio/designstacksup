@@ -12,10 +12,9 @@ public class SpawnFallingBlocks {
 	private GameObject FallingBlock;
 	private TextMesh TextPrefab;
 	private float maxCategorySum;
-<<<<<<< HEAD
-=======
+
 	private Color[] colors;
->>>>>>> 21-Different-Scenes-Cube-Control
+
 
 	/// <summary>
 	/// Constructor to bring in the variables from SpawnObjectsController.
@@ -73,13 +72,9 @@ public class SpawnFallingBlocks {
 
 		GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(barsHolder);
 		//Change to SliderHandDragConstraint to limit the axis movement
-<<<<<<< HEAD
-=======
-		GameObject.FindObjectOfType<SliderHandDrag>().SetBarsHolder(barsHolder);
 		
 		//To be used for Color alternate
 		int index = 1;
->>>>>>> 21-Different-Scenes-Cube-Control
 
 		// Loop through category list
 		foreach (Category c in categoryList) {
@@ -95,7 +90,7 @@ public class SpawnFallingBlocks {
 			float sum = c.Sum * 20 / maxCategorySum;
 
 			for (var i = 0; i < sum; i++) {
-				SpawnBlock(c, 20+i,index);
+				SpawnBlock(c, 20+i, index);
 				yield return wait;
 			}
 
@@ -156,13 +151,13 @@ public class SpawnFallingBlocks {
 /// </summary>
 /// <param name="position">Position of the block.</param>
 /// <param name="size">Size of the block.</param>
-void SpawnBlock(Category c, float posY,int index) {
+void SpawnBlock(Category c, float posY, int index) {
 		GameObject o = Object.Instantiate(FallingBlock, c.CategoryContainer.transform, false);
 		o.transform.localEulerAngles = Vector3.zero;
 		o.transform.localPosition = Vector3.up * posY;
 		o.transform.localScale *= prefabSize;
 		if (index % 2 == 0) 
-			 o.GetComponent<Renderer>().material.color=colors[0];
+			 o.GetComponent<Renderer>().material.color = colors[0];
 		else 
 			o.GetComponent<Renderer>().material.color = colors[1];
 	}

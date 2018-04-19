@@ -27,14 +27,13 @@ public class Pedastal : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.J) && !risingDone) {
-			rising = true;
-			meshRenderer.enabled = true;
-		}
-
 		if (rising && !risingDone)
-			Rise();
-		
+			Rise();		
+	}
+
+	public void BeginRaising() {
+		rising = true;
+		meshRenderer.enabled = true;
 	}
 
 	private void Rise() {
