@@ -91,6 +91,7 @@ namespace HoloToolkit.Unity.InputModule {
 			Rigidbody rg = GetComponent<Rigidbody>();
 			rg.isKinematic = false;
 			rg.useGravity = true;
+			rg.GetComponent<BoxCollider>().enabled = false;
 			GetComponent<SliderHandDrag>().enabled = false;
 		}
 

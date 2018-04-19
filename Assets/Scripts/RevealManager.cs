@@ -10,10 +10,12 @@ public class RevealManager : MonoBehaviour {
 	private GameObject[] hiddenObjs;
 
 	// Use this for initialization
-	void Start () {
+	public IEnumerator ScanHidden () {
+		yield return new WaitForSeconds(0.1f);
 		hiddenObjs = GameObject.FindGameObjectsWithTag("Hidden");
-		foreach (GameObject obj in hiddenObjs)
-			obj.SetActive(false);
+		//foreach (GameObject obj in hiddenObjs)
+		//	obj.SetActive(false);
+		Debug.Log(hiddenObjs.Length + " Hidden objects detected");
 	}
 	
 	
@@ -28,7 +30,7 @@ public class RevealManager : MonoBehaviour {
 		if(revealNum >= revealNumThreshold) {
 			Debug.Log("Revealing Everything");
 			foreach (GameObject obj in hiddenObjs)
-				obj.SetActive(true);
+				obj.GetComponent<MeshRenderer>().enabled = true;
 		}
 	}
 }

@@ -14,6 +14,8 @@ public class TransitionManager : MonoBehaviour {
 	private static Random rnd;
 	private Pedastal pedastal;
 	private SliderHandDrag sliderHandDrag;
+	private LoadManager loadManager;
+	private RevealManager revealManager;
 
 	public void SetBarsHolder(GameObject obj) { barsHolder = obj; }
 	public GameObject GetBarsHolder() { return barsHolder; }
@@ -23,6 +25,8 @@ public class TransitionManager : MonoBehaviour {
 		rnd = new Random();
 		pedastal = FindObjectOfType<Pedastal>();
 		sliderHandDrag = FindObjectOfType<SliderHandDrag>();
+		loadManager = FindObjectOfType<LoadManager>();
+		revealManager = FindObjectOfType<RevealManager>();
 	}
 	
 	// Update is called once per frame
@@ -40,13 +44,13 @@ public class TransitionManager : MonoBehaviour {
 		if (fallCheck) return;
 
 		Debug.Log("Begin Falling");
-
+		/*
 		if(floor!=null)
 			floor.GetComponent<MeshCollider>().enabled = false;
 
 		if (platform!=null)
 			platform.GetComponent<MeshCollider>().enabled = false;
-
+		*/
 		sliderHandDrag.BeginFalling();
 
 		columns = new List<Transform>();
@@ -56,6 +60,8 @@ public class TransitionManager : MonoBehaviour {
 
 		fallCheck = true;
 		StartCoroutine(FallingColumns());
+		loadManager.AdditiveLoadByName("Scene2additive");
+		StartCoroutine(revealManager.ScanHidden());
 	}
 
 	private IEnumerator FallingColumns() {
@@ -72,6 +78,8 @@ public class TransitionManager : MonoBehaviour {
 		foreach (CubeCollision cc in trans.GetComponentsInChildren<CubeCollision>()) {
 			cc.Unfreeze();
 			cc.enabled = false;
+			BoxCollider bc = cc.GetComponent<BoxCollider>();
+			Destroy(bc);
 			Destroy(cc);
 		}
 	}
