@@ -23,7 +23,7 @@ public class CubeCollision : MonoBehaviour {
 	}
 
 	IEnumerator Freeze() {
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(2);
 		rb.constraints = RigidbodyConstraints.FreezeAll;
 		rb.isKinematic = true;
 		rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
@@ -31,7 +31,9 @@ public class CubeCollision : MonoBehaviour {
 	}
 
 	public void Unfreeze() {
-		rb.constraints = RigidbodyConstraints.None;
+		//rb.constraints = RigidbodyConstraints.None;
+		rb.constraints =	RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ
+						  | RigidbodyConstraints.FreezePositionX                                        | RigidbodyConstraints.FreezePositionZ;
 		rb.isKinematic = false;
 	}
 }

@@ -11,15 +11,41 @@ namespace HoloToolkit.Unity.InputModule {
 		public float minHeight = 1.0f;
 		public float scaleFactor = 3.0f;
 		public Camera VR_camera;
-		private float distanceCam;
-		public float speed = 20f;
+		public float percentageThreshold = 0.9f;
+		public float timeThreshold = 3.0f;
 
 		private GameObject barsHolder;
+		private float distanceCam;
+		private float timeCounter;
+		private TransitionManager transitionManager;
+		private bool pedastalCheck = false;
+
 
 		protected override void Start() {
 			base.Start();
+			transitionManager = FindObjectOfType<TransitionManager>();
 			HostTransform.position = new Vector3(HostTransform.position.x, minHeight, HostTransform.position.z);
-			//barsHolder = ((SpawnFallingBlocks)(FindObjectOfType(typeof(SpawnFallingBlocks)))).GetBarsHolder();
+
+			if (percentageThreshold > 1.0f)
+				percentageThreshold = 1.0f;
+			if (percentageThreshold <= 0.0f)
+				percentageThreshold = 0.01f;
+
+			if (timeThreshold <= 0.0f)
+				timeThreshold = 0.1f;
+		}
+
+		protected override void Update() {
+			base.Update();
+			if (!pedastalCheck) {
+				if (HostTransform.position.y >= (percentageThreshold * maxHeight))
+					timeCounter += Time.deltaTime;
+
+				if (timeCounter >= timeThreshold) {
+					transitionManager.RaisePedastal();
+					pedastalCheck = true;
+				}
+			}
 		}
 
 		protected override void StartDragging(Vector3 initialDraggingPosition) {
@@ -55,10 +81,17 @@ namespace HoloToolkit.Unity.InputModule {
 
 		public void ChangeScale() {
 			if (barsHolder == null)
-				barsHolder = GameObject.FindObjectOfType<TransitionManager>().GetBarsHolder();
+				barsHolder = transitionManager.GetBarsHolder();
 
 			float scaleNum = Mathf.InverseLerp(minHeight, maxHeight, HostTransform.position.y);
 			barsHolder.transform.localScale = new Vector3(barsHolder.transform.localScale.x, (scaleFactor*scaleNum)+1, barsHolder.transform.localScale.z);
+		}
+
+		public void BeginFalling() {
+			Rigidbody rg = GetComponent<Rigidbody>();
+			rg.isKinematic = false;
+			rg.useGravity = true;
+			GetComponent<SliderHandDrag>().enabled = false;
 		}
 
 	}

@@ -89,7 +89,7 @@ namespace HoloToolkit.Unity.InputModule
             }
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (IsDraggingEnabled && isDragging)
             {
