@@ -63,7 +63,7 @@ public class TransitionManager : MonoBehaviour {
 		ColumnFall(column);
 		columns.Remove(column);		
 
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.1f);
 		if (columns.Count != 0)
 			StartCoroutine(FallingColumns());
 	}

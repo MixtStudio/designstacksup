@@ -324,7 +324,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 5
   m_Range: 30.86
-  m_SpotAngle: 34.6
+  m_SpotAngle: 64
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -447,7 +447,7 @@ MonoBehaviour:
   _dataRep: 1
   _color1: {r: 0.9918617, g: 1, b: 0.051886797, a: 0.5019608}
   _color2: {r: 0.90418875, g: 1, b: 0, a: 0.5019608}
-  _fallingBlock: {fileID: 1803977124399898, guid: 2995680a2ae62de4f9e1d650a651e2ad,
+  _fallingBlock: {fileID: 1758218082611958, guid: 03c2caa2d338540a1aa665863f756dbf,
     type: 2}
   _textPrefab: {fileID: 102255388773740906, guid: 25238f7a6c7b34228a7d0bf2c61c2a15,
     type: 2}
