@@ -27,7 +27,6 @@ public class RatTrap : MonoBehaviour {
 		transitionManager = FindObjectOfType<TransitionManager>();
 		handDraggable = GetComponent<HandDraggable>();
 		handDraggable.StartedDragging += DraggingStart;
-		//spawnPos = transform.position;
 		spawnRot = transform.rotation;
 		rg = GetComponent<Rigidbody>();
 	}
@@ -61,10 +60,13 @@ public class RatTrap : MonoBehaviour {
 			}
 		}
 		revealManager.IncrementRevealNum();
-		//GetComponent<Rigidbody>().isKinematic = true;
-		//handDraggable.IsDraggingEnabled = false;
+
 		if(SpawnCount < number_of_Spawns)
 			Respawn();
+		else {
+			rg.isKinematic = true;
+			handDraggable.IsDraggingEnabled = false;
+		}
 	}
 
 	private void Respawn() {
