@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 23389248981936288}
   - component: {fileID: 135838568795355314}
   - component: {fileID: 54218157052273192}
-  - component: {fileID: 114414441789638852}
-  - component: {fileID: 114918739236991566}
+  - component: {fileID: 114042824835528344}
+  - component: {fileID: 114538304096109236}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -102,24 +102,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114414441789638852
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1470379913342780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b56ca9a452c70d94e8f81d0de6990eb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HostTransform: {fileID: 0}
-  DistanceScale: 2
-  RotationMode: 0
-  PositionLerpSpeed: 0.2
-  RotationLerpSpeed: 0.2
-  IsDraggingEnabled: 1
---- !u!114 &114918739236991566
+--- !u!114 &114042824835528344
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -131,6 +114,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   revealRadius: 3
+--- !u!114 &114538304096109236
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1470379913342780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d5a0a60fbe897549ad0bfe2039f12b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HostTransform: {fileID: 0}
+  DistanceScale: 2
+  RotationMode: 0
+  PositionLerpSpeed: 0.2
+  RotationLerpSpeed: 0.2
+  IsDraggingEnabled: 1
 --- !u!135 &135838568795355314
 SphereCollider:
   m_ObjectHideFlags: 1
