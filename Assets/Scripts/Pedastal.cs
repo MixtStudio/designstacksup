@@ -42,13 +42,14 @@ public class Pedastal : MonoBehaviour {
 
 		if (delta >= 1.0f) {
 			risingDone = true;
-			StartCoroutine(WaitSpawn(spawnWaitTime));
+			StartCoroutine(WaitSpawnRatTrap(spawnWaitTime));
 		}
 	}
 
-	public IEnumerator WaitSpawn(float waitTime) {
+	public IEnumerator WaitSpawnRatTrap(float waitTime) {
 		yield return new WaitForSeconds(waitTime);
 		GameObject spawnedObj = Instantiate(spawnPrefab);
 		spawnedObj.transform.position = SpawnPoint.transform.position;
+		spawnedObj.GetComponent<RatTrap>().SetSpawnPosition(SpawnPoint.transform.position);
 	}
 }
