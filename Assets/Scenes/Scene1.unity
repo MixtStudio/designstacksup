@@ -753,10 +753,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   revealNumThreshold: 3
-  ColourArray:
-  - {r: 0, g: 0.333, b: 0, a: 1}
+  FloorColourArray:
+  - {r: 0, g: 0.33, b: 0, a: 1}
   - {r: 0, g: 0.666, b: 0, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
+  BackgroundColourArray:
+  - {r: 0, g: 0.222, b: 0.222, a: 1}
+  - {r: 0, g: 0.444, b: 0.444, a: 1}
+  - {r: 0, g: 0.666, b: 0.666, a: 1}
 --- !u!1 &1176434437
 GameObject:
   m_ObjectHideFlags: 0
