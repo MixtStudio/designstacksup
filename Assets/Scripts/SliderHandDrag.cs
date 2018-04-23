@@ -45,7 +45,7 @@ namespace HoloToolkit.Unity.InputModule {
 
 		private void ConstraintCheck() {
 			distanceCam = Vector3.Distance(HostTransform.position, VR_camera.transform.position);
-			Debug.Log("Distance of " + VR_camera.name + "is "+ distanceCam);
+			//Debug.Log("Distance of " + VR_camera.name + "is "+ distanceCam);
 			if (HostTransform.position.y > maxHeight)
 				HostTransform.position = new Vector3(HostTransform.position.x, maxHeight, HostTransform.position.z);
 

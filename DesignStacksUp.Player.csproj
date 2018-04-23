@@ -5,11 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-<<<<<<< HEAD
-    <ProjectGuid>{4CEFE944-5355-4298-A218-82ED268CB082}</ProjectGuid>
-=======
-    <ProjectGuid>{B4AD1EB9-7D99-4168-8F1C-38A565FB6201}</ProjectGuid>
->>>>>>> master
+    <ProjectGuid>{BC438918-2146-46C4-A3E0-C908FB6608C9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp-player</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -1561,6 +1557,8 @@
     <Compile Include="Assets\Scripts\Category.cs" />
     <Compile Include="Assets\Scripts\CSVReader.cs" />
     <Compile Include="Assets\Scripts\CubeCollision.cs" />
+    <Compile Include="Assets\Scripts\DestroyOnTrigger.cs" />
+    <Compile Include="Assets\Scripts\Pedastal.cs" />
     <Compile Include="Assets\Scripts\Reveal.cs" />
     <Compile Include="Assets\Scripts\RevealManager.cs" />
     <Compile Include="Assets\Scripts\ScaleChanger.cs" />
@@ -1569,6 +1567,8 @@
     <Compile Include="Assets\Scripts\SliderHandDragConstraint.cs" />
     <Compile Include="Assets\Scripts\SpawnFallingBlocks.cs" />
     <Compile Include="Assets\Scripts\SpawnObjectsController.cs" />
+    <Compile Include="Assets\Scripts\TextDisplay.cs" />
+    <Compile Include="Assets\Scripts\TransitionManager.cs" />
     <Compile Include="Assets\Volumetric Lights\Scripts\VolumetricLight.cs" />
     <Compile Include="Assets\Volumetric Lights\Scripts\VolumetricLightRenderer.cs" />
   </ItemGroup>
@@ -1674,10 +1674,6 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\Uber.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\UberSecondPass.cginc" />
     <None Include="Assets\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
-    <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
-    <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
-    <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
-    <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
     <None Include="Assets\Volumetric Lights\Shaders\BilateralBlur.shader" />
     <None Include="Assets\Volumetric Lights\Shaders\BlitAdd.shader" />

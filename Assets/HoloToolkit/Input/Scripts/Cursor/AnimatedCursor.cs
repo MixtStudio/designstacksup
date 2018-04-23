@@ -53,6 +53,7 @@ namespace HoloToolkit.Unity.InputModule
         public override void OnInputEnabled()
         {
             base.OnInputEnabled();
+
             SetAnimatorParameter(InputEnabledParameter);
         }
 
@@ -138,5 +139,7 @@ namespace HoloToolkit.Unity.InputModule
                     break;
             }
         }
+
+		
     }
 }

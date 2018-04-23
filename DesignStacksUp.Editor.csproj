@@ -367,10 +367,6 @@
       <Project>{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}</Project>
       <Name>designstacksup</Name>
     </ProjectReference>
-    <ProjectReference Include="designstacksup.Editor.Plugins.csproj">
-      <Project>{03CD879F-CF39-3D9D-2231-FA0DBEFEF8AD}</Project>
-      <Name>designstacksup.Editor.Plugins</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEditor.StandardEvents.csproj">
       <Project>{6800202F-4402-D405-F8CB-03DC7BD78B92}</Project>
       <Name>UnityEditor.StandardEvents</Name>
@@ -597,10 +593,6 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\Uber.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\UberSecondPass.cginc" />
     <None Include="Assets\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
-    <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
-    <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
-    <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
-    <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
     <None Include="Assets\Volumetric Lights\Shaders\BilateralBlur.shader" />
     <None Include="Assets\Volumetric Lights\Shaders\BlitAdd.shader" />

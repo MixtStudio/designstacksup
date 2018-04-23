@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 using System.Collections.Generic;
-using HoloToolkit.Unity.InputModule;
+using HoloToolkit.Unity.InputModule.Tests;
 
 /// <summary>
 /// Creates the positions for the blocks and text to spawn at, and spawns them in.
@@ -10,12 +11,11 @@ public class SpawnFallingBlocks {
 	private static SpawnObjectsController SOC;
 	private float radius, prefabSize;
 	private GameObject FallingBlock;
-	private TextMesh TextPrefab;
+	private GameObject TextContainer;
+	private GameObject TextContainerTransform;
 	private float maxCategorySum;
-<<<<<<< HEAD
-=======
 	private Color[] colors;
->>>>>>> 21-Different-Scenes-Cube-Control
+
 
 	/// <summary>
 	/// Constructor to bring in the variables from SpawnObjectsController.
@@ -25,8 +25,9 @@ public class SpawnFallingBlocks {
 		radius = SOC.Radius;
 		prefabSize = SOC.PrefabSize;
 		FallingBlock = SOC.FallingBlock;
-		TextPrefab = SOC.TextPrefab;
+		TextContainer = SOC.TextContainer;
 		maxCategorySum = SOC.MaxCategorySum;
+		TextContainerTransform = SOC.TextContainerTransform;
 		colors = new Color[] { SOC.Color1, SOC.Color2 };
 	}
 
@@ -67,25 +68,24 @@ public class SpawnFallingBlocks {
 
 		GameObject barsHolder = new GameObject() {
 			name = "BarsHolder",
-			//tag="BarHolder",
-			layer = LayerMask.NameToLayer("Gaze")
+			//tag="BarsHolder",
+			//layer = LayerMask.NameToLayer("Gaze")
 		};
 
 		GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(barsHolder);
 		//Change to SliderHandDragConstraint to limit the axis movement
-<<<<<<< HEAD
-=======
-		GameObject.FindObjectOfType<SliderHandDrag>().SetBarsHolder(barsHolder);
+
+		//GameObject.FindObjectOfType<SliderHandDrag>().SetBarsHolder(barsHolder);
 		
 		//To be used for Color alternate
 		int index = 1;
->>>>>>> 21-Different-Scenes-Cube-Control
+
 
 		// Loop through category list
 		foreach (Category c in categoryList) {
 			c.CategoryContainer = new GameObject() {
 				name = c.Name,
-				layer = LayerMask.NameToLayer("Gaze")
+				//layer = LayerMask.NameToLayer("Gaze")
 			};
 
 			c.CategoryContainer.transform.parent = barsHolder.transform;
@@ -99,15 +99,16 @@ public class SpawnFallingBlocks {
 				yield return wait;
 			}
 
+			AddTextDisplay(c);
 			index++;
 			yield return wait;	
 		}
 
-		foreach( Category c in categoryList) {
-			//AddCollider(c);
-			//CreateText(c);
-			//GazeInteraction(c);
-		}
+		//foreach( Category c in categoryList) {
+		//	//AddCollider(c);
+		//	//CreateText(c);
+		//	//GazeInteraction(c);
+		//}
 
 		yield break;
 	}
@@ -119,11 +120,14 @@ public class SpawnFallingBlocks {
 		return col;
 	}
 
-	//private void GazeInteraction(Category c) {
-	//	CategoryGaze gaze = c.CategoryContainer.AddComponent<CategoryGaze>();
-	//	gaze.frontObject = TextPrefab;
-	//	gaze.MsgToPrint = c.Name;
-	//}
+	private void AddTextDisplay(Category c) {
+		var focusEvt = c.CategoryContainer.AddComponent<OnFocusEvent>();
+		TextDisplay textDisp = c.CategoryContainer.AddComponent<TextDisplay>();
+		textDisp.textContainerTransform = TextContainerTransform.transform;
+		textDisp._textContainer = TextContainer;
+		string categoryInfo = c.Name + " " + c.Sum.ToString();
+		textDisp.info = categoryInfo;
+	}
 
 	private void FitColliderToChildren(GameObject parentObject) {
 		BoxCollider bc = parentObject.GetComponent<BoxCollider>();
