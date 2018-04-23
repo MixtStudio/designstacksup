@@ -5,18 +5,21 @@ using UnityEngine;
 public class RevealManager : MonoBehaviour {
 
 	public int revealNumThreshold = 3;
-	public Color targetColour;
+	//public Color targetColour;
+	public Color[] ColourArray;
 
 	private int revealNum = 0;
 	private GameObject[] hiddenObjs;
-	private Color startColour;
+	//private Color startColour;
 	private GameObject floor;
+
+	private void Start() {
+		floor = GameObject.FindGameObjectWithTag("Floor");		
+	}
 
 	public IEnumerator ScanHidden () {
 		yield return new WaitForSeconds(0.1f);
 		hiddenObjs = GameObject.FindGameObjectsWithTag("Hidden");
-		//foreach (GameObject obj in hiddenObjs)
-		//	obj.SetActive(false);
 		Debug.Log(hiddenObjs.Length + " Hidden objects detected");
 	}
 	
@@ -25,6 +28,7 @@ public class RevealManager : MonoBehaviour {
 
 	public void IncrementRevealNum() {
 		revealNum++;
+		//ColourLerp();
 		ColourChange();
 		ThresholdCheck();
 	}	
@@ -38,6 +42,10 @@ public class RevealManager : MonoBehaviour {
 	}
 
 	private void ColourChange() {
+		floor.GetComponent<MeshRenderer>().material.color = ColourArray[revealNum-1];
+	}
+	/*
+	private void ColourLerp() {
 		//Debug.Log("Colour Change");
 		if (floor == null)
 			floor = GameObject.FindGameObjectWithTag("Floor");
@@ -45,8 +53,9 @@ public class RevealManager : MonoBehaviour {
 		if (startColour == null)
 			startColour = floor.GetComponent<MeshRenderer>().material.color;
 
-		Debug.Log("Colour Before: " + floor.GetComponent<MeshRenderer>().material.color);
+		//Debug.Log("Colour Before: " + floor.GetComponent<MeshRenderer>().material.color);
 		floor.GetComponent<MeshRenderer>().material.color = Color.Lerp(startColour, targetColour, ((float)revealNum / (float)revealNumThreshold) );
-		Debug.Log("Colour After: " + floor.GetComponent<MeshRenderer>().material.color);
+		//Debug.Log("Colour After: " + floor.GetComponent<MeshRenderer>().material.color);
 	}
+	*/
 }
