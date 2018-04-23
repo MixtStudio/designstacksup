@@ -34,7 +34,11 @@ public class RatTrap : MonoBehaviour {
 	private void DraggingStart() {
 		Debug.Log("DraggingStart");
 		if (!fallingCheck) {
-			transitionManager.BeginFalling();
+			if (transitionManager != null)
+				transitionManager.BeginFalling();
+			else
+				GameObject.FindObjectOfType<TransitionManagerScaling>().BeginDisappear();
+
 			fallingCheck = true;
 		}
 	}

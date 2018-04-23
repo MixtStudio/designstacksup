@@ -5,13 +5,9 @@ using HoloToolkit.Unity.InputModule;
 
 public class TransitionManager : MonoBehaviour {
 
-	public GameObject floor;
-	public GameObject platform;
-
 	private GameObject barsHolder;
 	private bool fallCheck = false;
 	private List<Transform> columns;
-	private static Random rnd;
 	private Pedastal pedastal;
 	private SliderHandDrag sliderHandDrag;
 	private LoadManager loadManager;
@@ -22,7 +18,6 @@ public class TransitionManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		rnd = new Random();
 		pedastal = FindObjectOfType<Pedastal>();
 		sliderHandDrag = FindObjectOfType<SliderHandDrag>();
 		loadManager = FindObjectOfType<LoadManager>();
