@@ -44,13 +44,7 @@ public class TransitionManager : MonoBehaviour {
 		if (fallCheck) return;
 
 		Debug.Log("Begin Falling");
-		/*
-		if(floor!=null)
-			floor.GetComponent<MeshCollider>().enabled = false;
-
-		if (platform!=null)
-			platform.GetComponent<MeshCollider>().enabled = false;
-		*/
+		
 		sliderHandDrag.BeginFalling();
 
 		columns = new List<Transform>();

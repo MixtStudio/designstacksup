@@ -637,8 +637,8 @@ GameObject:
   - component: {fileID: 1106877577}
   - component: {fileID: 1106877576}
   m_Layer: 10
-  m_Name: Ground
-  m_TagString: Untagged
+  m_Name: Floor
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -753,6 +753,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   revealNumThreshold: 3
+  FloorColourArray:
+  - {r: 0, g: 0.33, b: 0, a: 1}
+  - {r: 0, g: 0.666, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  BackgroundColourArray:
+  - {r: 0, g: 0.222, b: 0.222, a: 1}
+  - {r: 0, g: 0.444, b: 0.444, a: 1}
+  - {r: 0, g: 0.666, b: 0.666, a: 1}
 --- !u!1 &1176434437
 GameObject:
   m_ObjectHideFlags: 0
