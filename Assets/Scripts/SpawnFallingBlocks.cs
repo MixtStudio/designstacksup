@@ -70,7 +70,11 @@ public class SpawnFallingBlocks {
 			layer = LayerMask.NameToLayer("Gaze")
 		};
 
-		GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(barsHolder);
+		if(GameObject.FindObjectOfType<TransitionManager>() != null)
+			GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(barsHolder);
+		else 
+			GameObject.FindObjectOfType<TransitionManagerScaling>().SetBarsHolder(barsHolder);
+		
 		//Change to SliderHandDragConstraint to limit the axis movement
 		
 		//To be used for Color alternate

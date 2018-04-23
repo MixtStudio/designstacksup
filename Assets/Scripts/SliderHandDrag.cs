@@ -42,7 +42,10 @@ namespace HoloToolkit.Unity.InputModule {
 					timeCounter += Time.deltaTime;
 
 				if (timeCounter >= timeThreshold) {
-					transitionManager.RaisePedastal();
+					if (transitionManager != null)
+						transitionManager.RaisePedastal();
+					else
+						GameObject.FindObjectOfType<TransitionManagerScaling>().RaisePedastal();
 					pedastalCheck = true;
 				}
 			}
@@ -82,6 +85,9 @@ namespace HoloToolkit.Unity.InputModule {
 		public void ChangeScale() {
 			if (barsHolder == null)
 				barsHolder = transitionManager.GetBarsHolder();
+
+			if (barsHolder == null)
+				barsHolder = GameObject.FindObjectOfType<TransitionManagerScaling>().GetBarsHolder();
 
 			float scaleNum = Mathf.InverseLerp(minHeight, maxHeight, HostTransform.position.y);
 			barsHolder.transform.localScale = new Vector3(barsHolder.transform.localScale.x, (scaleFactor*scaleNum)+1, barsHolder.transform.localScale.z);
