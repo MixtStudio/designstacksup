@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 /// <summary>
 /// Class that attaches to a spawner object, gets the public variables and does things that are non-specific to the
@@ -19,7 +20,6 @@ public class SpawnObjectsController: MonoBehaviour{
 	}
 
 	
-
 	/// <summary>
 	/// Select which column to classify by
 	/// </summary>
@@ -69,12 +69,23 @@ public class SpawnObjectsController: MonoBehaviour{
 	}
 
 	[SerializeField]
-	private TextMesh _textPrefab;
-	public TextMesh TextPrefab {
+	private GameObject _textContainer;
+	public GameObject TextContainer {
 		get {
-			return _textPrefab;
+			return _textContainer;
 		}
 	}
+
+
+	[SerializeField]
+	private GameObject _textContainerTransform;
+	public GameObject TextContainerTransform {
+		get {
+			return _textContainerTransform;
+		}
+	}
+
+
 
 	[SerializeField]
 	private float _radius = 5;

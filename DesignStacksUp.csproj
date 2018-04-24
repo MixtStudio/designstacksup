@@ -997,6 +997,8 @@
     <Compile Include="Assets\Scripts\Category.cs" />
     <Compile Include="Assets\Scripts\CSVReader.cs" />
     <Compile Include="Assets\Scripts\CubeCollision.cs" />
+    <Compile Include="Assets\Scripts\DestroyOnTrigger.cs" />
+    <Compile Include="Assets\Scripts\Pedastal.cs" />
     <Compile Include="Assets\Scripts\Reveal.cs" />
     <Compile Include="Assets\Scripts\RevealManager.cs" />
     <Compile Include="Assets\Scripts\ScaleChanger.cs" />
@@ -1005,6 +1007,8 @@
     <Compile Include="Assets\Scripts\SliderHandDragConstraint.cs" />
     <Compile Include="Assets\Scripts\SpawnFallingBlocks.cs" />
     <Compile Include="Assets\Scripts\SpawnObjectsController.cs" />
+    <Compile Include="Assets\Scripts\TextDisplay.cs" />
+    <Compile Include="Assets\Scripts\TransitionManager.cs" />
     <Compile Include="Assets\Volumetric Lights\Scripts\VolumetricLight.cs" />
     <Compile Include="Assets\Volumetric Lights\Scripts\VolumetricLightRenderer.cs" />
   </ItemGroup>
@@ -1110,10 +1114,6 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\Uber.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\UberSecondPass.cginc" />
     <None Include="Assets\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
-    <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
-    <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
-    <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
-    <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
     <None Include="Assets\Volumetric Lights\Shaders\BilateralBlur.shader" />
     <None Include="Assets\Volumetric Lights\Shaders\BlitAdd.shader" />
