@@ -388,8 +388,9 @@ MonoBehaviour:
   _color2: {r: 0.90418875, g: 1, b: 0, a: 0.5019608}
   _fallingBlock: {fileID: 1758218082611958, guid: 03c2caa2d338540a1aa665863f756dbf,
     type: 2}
-  _textPrefab: {fileID: 102255388773740906, guid: 25238f7a6c7b34228a7d0bf2c61c2a15,
+  _textContainer: {fileID: 1779733128930780, guid: 04538f765a85dee42b2753a8fd81c1aa,
     type: 2}
+  _textContainerTransform: {fileID: 2065066611}
   _radius: 5
   _prefabSize: 1
   MaxCategorySum: 3932.0996
@@ -1114,6 +1115,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c8f22f0ac7700e428cd9af6234a8c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2065066611 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012072213228, guid: a611e772ef8ddf64d8106a9cbb70f31c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1853978898}
 --- !u!1 &2104233712
 GameObject:
   m_ObjectHideFlags: 0

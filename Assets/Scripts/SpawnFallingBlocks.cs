@@ -86,6 +86,7 @@ public class SpawnFallingBlocks {
 		foreach (Category c in categoryList) {
 			c.CategoryContainer = new GameObject() {
 				name = c.Name,
+				tag = "Gaze"
 				//layer = LayerMask.NameToLayer("Gaze")
 			};
 
@@ -163,6 +164,7 @@ public class SpawnFallingBlocks {
 /// <param name="size">Size of the block.</param>
 void SpawnBlock(Category c, float posY, int index) {
 		GameObject o = Object.Instantiate(FallingBlock, c.CategoryContainer.transform, false);
+		o.tag = "Gaze";
 		o.transform.localEulerAngles = Vector3.zero;
 		o.transform.localPosition = Vector3.up * posY;
 		o.transform.localScale *= prefabSize;
