@@ -16,7 +16,6 @@ public class SpawnFallingBlocks {
 	private float maxCategorySum;
 	private Color[] colors;
 
-
 	/// <summary>
 	/// Constructor to bring in the variables from SpawnObjectsController.
 	/// </summary>
@@ -73,52 +72,44 @@ public class SpawnFallingBlocks {
 		};
 
 		GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(barsHolder);
-		//Change to SliderHandDragConstraint to limit the axis movement
-
-		//GameObject.FindObjectOfType<SliderHandDrag>().SetBarsHolder(barsHolder);
-		
+	
 		//To be used for Color alternate
 		int index = 1;
 
+		//To trace how many columns are left to spawn 
+		int columnsIndex = categoryList.Count;
 
-		// Loop through category list
-		foreach (Category c in categoryList) {
-			c.CategoryContainer = new GameObject() {
-				name = c.Name,
-				//layer = LayerMask.NameToLayer("Gaze")
-			};
+		//Allows a random fall of blocks
+		while (columnsIndex != 0) {
+			Category c = categoryList[Random.Range(0, categoryList.Count)];
+			if(c.Exists != true) {
+				c.CategoryContainer = new GameObject() {
+					name = c.Name,
+				};
 
-			c.CategoryContainer.transform.parent = barsHolder.transform;
-			c.CategoryContainer.transform.localPosition = c.Position;
-			c.CategoryContainer.transform.localRotation = Quaternion.Euler(0, -c.Angle, 0);
+				c.CategoryContainer.transform.parent = barsHolder.transform;
+				c.CategoryContainer.transform.localPosition = c.Position;
+				c.CategoryContainer.transform.localRotation = Quaternion.Euler(0, -c.Angle, 0);
 
-			float sum = c.Sum * 20 / maxCategorySum;
+				float sum = c.Sum * 20 / maxCategorySum;
 
-			for (var i = 0; i < sum; i++) {
-				SpawnBlock(c, 20+i,index);
-				yield return wait;
+				for (var i = 0; i < sum; i++) {
+					SpawnBlock(c, 20 + i, index);
+					yield return wait;
+				}
+
+				AddTextDisplay(c);
+				index++;
+				columnsIndex--;
+				c.Exists = true;		
 			}
 
-			AddTextDisplay(c);
-			index++;
-			yield return wait;	
+			Debug.Log(" I am not out");
 		}
-
-		//foreach( Category c in categoryList) {
-		//	//AddCollider(c);
-		//	//CreateText(c);
-		//	//GazeInteraction(c);
-		//}
-
 		yield break;
 	}
 
-	private BoxCollider AddCollider(Category c) {
-		BoxCollider col = c.CategoryContainer.AddComponent<BoxCollider>();
-		col.isTrigger = true;	
-		FitColliderToChildren(c.CategoryContainer);
-		return col;
-	}
+
 
 	private void AddTextDisplay(Category c) {
 		var focusEvt = c.CategoryContainer.AddComponent<OnFocusEvent>();
@@ -128,32 +119,6 @@ public class SpawnFallingBlocks {
 		string categoryInfo = c.Name + " " + c.Sum.ToString();
 		textDisp.info = categoryInfo;
 	}
-
-	private void FitColliderToChildren(GameObject parentObject) {
-		BoxCollider bc = parentObject.GetComponent<BoxCollider>();
-		if (bc == null) { bc = parentObject.AddComponent<BoxCollider>(); }
-		Bounds bounds = new Bounds(Vector3.zero, Vector3.zero);
-		bool hasBounds = false;
-		Renderer[] renderers = parentObject.GetComponentsInChildren<Renderer>();
-		foreach (Renderer render in renderers) {
-			if (hasBounds) {
-				bounds.Encapsulate(render.bounds);
-			} else {
-				bounds = render.bounds;
-				hasBounds = true;
-			}
-		}
-		if (hasBounds) {
-			Vector3 targetCenter = bounds.center;
-			targetCenter.y = bounds.size.y / 2;
-			bc.center = targetCenter - parentObject.transform.position;
-			bc.size = bounds.size;
-		} else {
-			bc.size = bc.center = Vector3.zero;
-			bc.size = Vector3.zero;
-		}
-	}
-
 
 /// <summary>
 /// Instantiates a block of the defined size at the defined position, and sets its color.

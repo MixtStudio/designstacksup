@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designstacksup", "designstacksup.csproj", "{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designstacksup.Player", "designstacksup.Player.csproj", "{BC438918-2146-46C4-A3E0-C908FB6608C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designstacksup.Player", "designstacksup.Player.csproj", "{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designstacksup.Plugins", "designstacksup.Plugins.csproj", "{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designstacksup.Plugins.Player", "designstacksup.Plugins.Player.csproj", "{EC4D6193-3239-4A3A-8651-5BB56A586D79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designstacksup.Plugins.Player", "designstacksup.Plugins.Player.csproj", "{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designstacksup.Editor", "designstacksup.Editor.csproj", "{F3A7ECD9-498F-2624-513D-1A33FDA64142}"
 EndProject
@@ -27,18 +25,18 @@ Global
 		{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BC438918-2146-46C4-A3E0-C908FB6608C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC438918-2146-46C4-A3E0-C908FB6608C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC438918-2146-46C4-A3E0-C908FB6608C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC438918-2146-46C4-A3E0-C908FB6608C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC4D6193-3239-4A3A-8651-5BB56A586D79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC4D6193-3239-4A3A-8651-5BB56A586D79}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC4D6193-3239-4A3A-8651-5BB56A586D79}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC4D6193-3239-4A3A-8651-5BB56A586D79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F3A7ECD9-498F-2624-513D-1A33FDA64142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F3A7ECD9-498F-2624-513D-1A33FDA64142}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3A7ECD9-498F-2624-513D-1A33FDA64142}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,8 +52,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4394C9A4-4983-4233-9D78-820C797F5547}
 	EndGlobalSection
 EndGlobal
