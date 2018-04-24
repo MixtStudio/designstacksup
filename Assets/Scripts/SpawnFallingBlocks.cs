@@ -81,9 +81,6 @@ public class SpawnFallingBlocks {
 
 		//To be used for Color alternate
 		int index = 1;
-		
-		//To be used for Color alternate
-		int index = 1;
 
 		// Loop through category list
 		foreach (Category c in categoryList) {

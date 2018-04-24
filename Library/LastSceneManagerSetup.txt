@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Scene1test.unity
-=======
-- path: Assets/Scenes/DSU_SCN1_textDisplay.unity
->>>>>>> 20-TextGraphs
+- path: Assets/Scenes/Scene1.unity
   isLoaded: 1
   isActive: 1
