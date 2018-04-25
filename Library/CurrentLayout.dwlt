@@ -30,6 +30,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 1
+<<<<<<< HEAD
+=======
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 817
+    y: 0
+    width: 365
+    height: 573
+  m_MinSize: {x: 204, y: 221}
+  m_MaxSize: {x: 4004, y: 4021}
+  m_ActualView: {fileID: 18}
+  m_Panes:
+  - {fileID: 18}
+  m_Selected: 0
+  m_LastSelected: 0
+--- !u!114 &3
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+>>>>>>> 34-Graphs-built-randomly
   m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -45,8 +73,13 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 342}
   m_MaxSize: {x: 12008, y: 8042}
   vertical: 0
+<<<<<<< HEAD
   controlID: 118
 --- !u!114 &3
+=======
+  controlID: 123
+--- !u!114 &4
+>>>>>>> 34-Graphs-built-randomly
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -66,7 +99,11 @@ MonoBehaviour:
     height: 947
   m_MinSize: {x: 277, y: 71}
   m_MaxSize: {x: 4002, y: 4021}
+<<<<<<< HEAD
   m_ActualView: {fileID: 14}
+=======
+  m_ActualView: {fileID: 15}
+>>>>>>> 34-Graphs-built-randomly
   m_Panes:
   - {fileID: 14}
   m_Selected: 0
@@ -114,9 +151,15 @@ MonoBehaviour:
     y: 573
     width: 1531
     height: 374
+<<<<<<< HEAD
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
+=======
+  m_MinSize: {x: 102, y: 121}
+  m_MaxSize: {x: 4002, y: 4021}
+  m_ActualView: {fileID: 19}
+>>>>>>> 34-Graphs-built-randomly
   m_Panes:
   - {fileID: 13}
   - {fileID: 18}
@@ -209,8 +252,13 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 342}
   m_MaxSize: {x: 8006, y: 8042}
   vertical: 1
+<<<<<<< HEAD
   controlID: 49
 --- !u!114 &10
+=======
+  controlID: 124
+--- !u!114 &11
+>>>>>>> 34-Graphs-built-randomly
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -233,8 +281,13 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
+<<<<<<< HEAD
   controlID: 50
 --- !u!114 &11
+=======
+  controlID: 125
+--- !u!114 &12
+>>>>>>> 34-Graphs-built-randomly
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -252,9 +305,15 @@ MonoBehaviour:
     y: 0
     width: 1152
     height: 573
+<<<<<<< HEAD
   m_MinSize: {x: 204, y: 221}
   m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 16}
+=======
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 17}
+>>>>>>> 34-Graphs-built-randomly
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
@@ -334,9 +393,15 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
     m_SelectedIDs: 98380000
     m_LastClickedID: 14488
     m_ExpandedIDs: 00000000c23100009e35000098380000e63b0000ac3e0000024200001a4400000c46000000ca9a3bffffff7f
+=======
+    m_SelectedIDs: ee540000
+    m_LastClickedID: 21742
+    m_ExpandedIDs: 00000000923d00002c3e0000743e00003c44000086470000484a00006c4a00008c4d0000ac4e0000b04e00009e4f0000c24f000058560000
+>>>>>>> 34-Graphs-built-randomly
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -361,10 +426,17 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
+<<<<<<< HEAD
     scrollPos: {x: 0, y: 172}
     m_SelectedIDs: 76560000
     m_LastClickedID: 0
     m_ExpandedIDs: 00000000c23100009e35000098380000e63b0000ac3e0000024200001a4400000c460000
+=======
+    scrollPos: {x: 0, y: 1140}
+    m_SelectedIDs: fc0b0000
+    m_LastClickedID: 3068
+    m_ExpandedIDs: 00000000923d00002c3e0000743e00003c44000086470000484a00006c4a00008c4d0000ac4e0000b04e00009e4f0000c24f000058560000
+>>>>>>> 34-Graphs-built-randomly
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: DSU_SCN1_textDisplay
@@ -482,7 +554,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 06a8ffff00c6ffffb6ebffffdef4ffff00000000
+=======
+    m_ExpandedIDs: f4f9ffff00000000
+>>>>>>> 34-Graphs-built-randomly
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -537,9 +613,15 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< HEAD
     m_Target: {x: 0, y: 0, z: 0}
     speed: 2
     m_Value: {x: 0, y: 0, z: 0}
+=======
+    m_Target: {x: 0.726357, y: 3.4753919, z: 1.5264509}
+    speed: 2
+    m_Value: {x: 0.726357, y: 3.4753919, z: 1.5264509}
+>>>>>>> 34-Graphs-built-randomly
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -567,6 +649,7 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
+<<<<<<< HEAD
     m_Target: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
     speed: 2
     m_Value: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
@@ -574,6 +657,15 @@ MonoBehaviour:
     m_Target: 10
     speed: 2
     m_Value: 10
+=======
+    m_Target: {x: -0.026757896, y: -0.97290784, z: 0.14884286, w: -0.17492154}
+    speed: 2
+    m_Value: {x: -0.026757663, y: -0.9728994, z: 0.14884156, w: -0.17492002}
+  m_Size:
+    m_Target: 15.770283
+    speed: 2
+    m_Value: 15.770283
+>>>>>>> 34-Graphs-built-randomly
   m_Ortho:
     m_Target: 0
     speed: 2

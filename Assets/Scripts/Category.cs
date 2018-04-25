@@ -12,6 +12,7 @@ public class Category
     public Vector3 Position { get; set; }
     public float Sum { get; set; }
 	public GameObject CategoryContainer { get; set; }
+	public bool Exists { get; set; }
 	
 
     public Category(string categoryName) {
