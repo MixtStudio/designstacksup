@@ -75,11 +75,11 @@ public class SpawnFallingBlocks {
 			//layer = LayerMask.NameToLayer("Gaze")
 		};
 
-		if(GameObject.FindObjectOfType<TransitionManager>() != null)
+		if (GameObject.FindObjectOfType<TransitionManager>() != null)
 			GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(barsHolder);
-		else 
+		else
 			GameObject.FindObjectOfType<TransitionManagerScaling>().SetBarsHolder(barsHolder);
-		
+
 		//Change to SliderHandDragConstraint to limit the axis movement
 
 		//To trace how many columns are left to spawn 
@@ -88,7 +88,7 @@ public class SpawnFallingBlocks {
 		//Allows a random fall of blocks
 		while (index != 0) {
 			Category c = categoryList[Random.Range(0, categoryList.Count)];
-			if(c.Exists != true) {
+			if (c.Exists != true) {
 				c.CategoryContainer = new GameObject() {
 					name = c.Name,
 				};
@@ -100,19 +100,20 @@ public class SpawnFallingBlocks {
 				float sum = c.Sum * 20 / maxCategorySum;
 
 
-			for (var i = 0; i < sum; i++) {
-				SpawnBlock(c, 20+i, index);
-				yield return wait;
+				for (var i = 0; i < sum; i++) {
+					SpawnBlock(c, 20 + i, index);
+					yield return wait;
 
-				AddTextDisplay(c);
-				index--;
-				c.Exists = true;		
+					AddTextDisplay(c);
+					index--;
+					c.Exists = true;
 
+				}
+
+				Debug.Log(" I am not out");
 			}
-
-			Debug.Log(" I am not out");
+			yield break;
 		}
-		yield break;
 	}
 
 
