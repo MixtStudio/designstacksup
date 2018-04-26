@@ -19,31 +19,6 @@ public class SpawnObjectsController: MonoBehaviour{
 		}
 	}
 
-	
-	/// <summary>
-	/// Select which column to classify by
-	/// </summary>
-	public enum ClassificationLevel { MarketVerticals, DesignDisciplines, DoubleDimond, DesignProcess }
-	[SerializeField]
-	private ClassificationLevel _level;
-	public ClassificationLevel Level {
-		get {
-			return _level;
-		}
-	}
-
-	/// <summary>
-	/// Select the column of values
-	/// </summary>
-	public enum DataValues { GVA, GDP, TotalSales, AvailableSales }
-	[SerializeField]
-	private DataValues _dataRep;
-	public DataValues DataRep {
-		get {
-			return _dataRep;
-		}
-	}
-
 	[SerializeField]
 	private Color _color1;
 	public Color Color1  {
@@ -84,7 +59,6 @@ public class SpawnObjectsController: MonoBehaviour{
 			return _textContainerTransform;
 		}
 	}
-
 
 
 	[SerializeField]
@@ -139,52 +113,6 @@ public class SpawnObjectsController: MonoBehaviour{
 		sFBx.CreateBlocks(categoryList);
 	}
 
-	
-
-	/// <summary>
-	/// Returns the name of the columns according to user input
-	/// </summary>
-	private string[] GetColumnsName(ClassificationLevel level, DataValues dataRep) {
-		string[] columnsName = new string[2];
-
-		switch (level) {
-			case ClassificationLevel.MarketVerticals:
-				columnsName[0] = "Level 2";
-				break;
-			case ClassificationLevel.DesignDisciplines:
-				columnsName[0] = "Level 3";
-				break;
-			case ClassificationLevel.DoubleDimond:
-				columnsName[0] = "Level 4";
-				break;
-			case ClassificationLevel.DesignProcess:
-				columnsName[0] = "Level 5";
-				break;
-			default:
-				columnsName[0] = "Level 2";
-				break;
-		}
-
-		switch (dataRep) {
-			case DataValues.GVA:
-				columnsName[1] = "GVA";
-				break;
-			case DataValues.GDP:
-				columnsName[1] = "GDP";
-				break;
-			case DataValues.TotalSales:
-				columnsName[1] = "Total Sales $m";
-				break;
-			case DataValues.AvailableSales:
-				columnsName[1] = "Available Sales $m";
-				break;
-			default:
-				columnsName[1] = "GDP";
-				break;
-		}
-
-		return columnsName;
-	}
 
 	/// <summary>
 	/// Loops through pointList to find the categories.
@@ -192,11 +120,11 @@ public class SpawnObjectsController: MonoBehaviour{
 	/// <returns>A list of Category objects from the "categoryColumnName" column in pointList.</returns>
 	private List<Category> GetCategories() {
 		List<Category> categories = new List<Category>();
-		string[] columnsName = GetColumnsName(Level, DataRep);
+		//string[] columnsName = GetColumnsName();
 
 		List<string> nameList = new List<string>();
 		for (var i = 0; i < valueList.Count; i++) {
-			string aString = System.Convert.ToString(valueList[i][columnsName[0]]);
+			string aString = System.Convert.ToString(valueList[i]["Level 2"]);
 			if (aString != "No Data") {
 				if (!nameList.Contains(aString)) {
 
@@ -204,7 +132,7 @@ public class SpawnObjectsController: MonoBehaviour{
 					nameList.Add(aString);
 				}
 				categories[FindCategoryWithName(aString, categories)].Sum +=
-														System.Convert.ToSingle(valueList[i][columnsName[1]]);
+														System.Convert.ToSingle(valueList[i]["GDP"]);
 			}
 		}
 
