@@ -1,5 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+<<<<<<< HEAD
 # Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designstacksup", "designstacksup.csproj", "{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}"
 EndProject
@@ -16,6 +17,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designstacksup.Plugins", "d
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designstacksup.Plugins.Player", "designstacksup.Plugins.Player.csproj", "{6AF55871-D06C-46E1-A64B-41D6AEE63D19}"
 >>>>>>> 47-CleanSpawnObjectController
+=======
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designstacksup", "designstacksup.csproj", "{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designstacksup.Player", "designstacksup.Player.csproj", "{3F414C0C-FD3C-42CB-A64C-365FC3408076}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designstacksup.Plugins", "designstacksup.Plugins.csproj", "{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designstacksup.Plugins.Player", "designstacksup.Plugins.Player.csproj", "{289FF0D5-BA11-4119-9CE1-27F0DEF006A8}"
+>>>>>>> 42-24-Growing-Trees
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "designstacksup.Editor", "designstacksup.Editor.csproj", "{F3A7ECD9-498F-2624-513D-1A33FDA64142}"
 EndProject
@@ -34,6 +47,7 @@ Global
 		{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}.Release|Any CPU.Build.0 = Release|Any CPU
 <<<<<<< HEAD
+<<<<<<< HEAD
 		{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -48,10 +62,17 @@ Global
 		{3B4BC4CC-28DF-497E-AC8D-DF1E1AE97C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B4BC4CC-28DF-497E-AC8D-DF1E1AE97C2A}.Release|Any CPU.Build.0 = Release|Any CPU
 >>>>>>> 47-CleanSpawnObjectController
+=======
+		{3F414C0C-FD3C-42CB-A64C-365FC3408076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F414C0C-FD3C-42CB-A64C-365FC3408076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F414C0C-FD3C-42CB-A64C-365FC3408076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F414C0C-FD3C-42CB-A64C-365FC3408076}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> 42-24-Growing-Trees
 		{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 		{6AF55871-D06C-46E1-A64B-41D6AEE63D19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -59,6 +80,12 @@ Global
 		{6AF55871-D06C-46E1-A64B-41D6AEE63D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AF55871-D06C-46E1-A64B-41D6AEE63D19}.Release|Any CPU.Build.0 = Release|Any CPU
 >>>>>>> 47-CleanSpawnObjectController
+=======
+		{289FF0D5-BA11-4119-9CE1-27F0DEF006A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{289FF0D5-BA11-4119-9CE1-27F0DEF006A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{289FF0D5-BA11-4119-9CE1-27F0DEF006A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{289FF0D5-BA11-4119-9CE1-27F0DEF006A8}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> 42-24-Growing-Trees
 		{F3A7ECD9-498F-2624-513D-1A33FDA64142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F3A7ECD9-498F-2624-513D-1A33FDA64142}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3A7ECD9-498F-2624-513D-1A33FDA64142}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -76,9 +103,12 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A8E533B4-D434-464E-A036-BFC34B1A1936}
 	EndGlobalSection
 >>>>>>> 47-CleanSpawnObjectController
+=======
+>>>>>>> 42-24-Growing-Trees
 EndGlobal
