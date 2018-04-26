@@ -14,7 +14,6 @@ public class SpawnFallingBlocks {
 	private GameObject TextContainer;
 	private GameObject TextContainerTransform;
 	private float maxCategorySum;
-
 	private Color[] colors;
 
 	/// <summary>
@@ -72,20 +71,18 @@ public class SpawnFallingBlocks {
 			//layer = LayerMask.NameToLayer("Gaze")
 		};
 
-		if (GameObject.FindObjectOfType<TransitionManager>() != null)
-			GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(barsHolder);
-		else
-			GameObject.FindObjectOfType<TransitionManagerScaling>().SetBarsHolder(barsHolder);
-
-		//Change to SliderHandDragConstraint to limit the axis movement
+		GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(barsHolder);
+	
+		//To be used for Color alternate
+		int index = 1;
 
 		//To trace how many columns are left to spawn 
-		int index = categoryList.Count;
+		int columnsIndex = categoryList.Count;
 
 		//Allows a random fall of blocks
-		while (index != 0) {
+		while (columnsIndex != 0) {
 			Category c = categoryList[Random.Range(0, categoryList.Count)];
-			if (c.Exists != true) {
+			if(c.Exists != true) {
 				c.CategoryContainer = new GameObject() {
 					name = c.Name,
 				};
@@ -96,21 +93,20 @@ public class SpawnFallingBlocks {
 
 				float sum = c.Sum * 20 / maxCategorySum;
 
-
 				for (var i = 0; i < sum; i++) {
 					SpawnBlock(c, 20 + i, index);
 					yield return wait;
-
-					AddTextDisplay(c);
-					index--;
-					c.Exists = true;
-
 				}
 
-				Debug.Log(" I am not out");
+				AddTextDisplay(c);
+				index++;
+				columnsIndex--;
+				c.Exists = true;		
 			}
-			yield break;
+
+			Debug.Log(" I am not out");
 		}
+		yield break;
 	}
 
 
@@ -129,13 +125,13 @@ public class SpawnFallingBlocks {
 /// </summary>
 /// <param name="position">Position of the block.</param>
 /// <param name="size">Size of the block.</param>
-void SpawnBlock(Category c, float posY, int index) {
+void SpawnBlock(Category c, float posY,int index) {
 		GameObject o = Object.Instantiate(FallingBlock, c.CategoryContainer.transform, false);
 		o.transform.localEulerAngles = Vector3.zero;
 		o.transform.localPosition = Vector3.up * posY;
 		o.transform.localScale *= prefabSize;
 		if (index % 2 == 0) 
-			 o.GetComponent<Renderer>().material.color = colors[0];
+			 o.GetComponent<Renderer>().material.color=colors[0];
 		else 
 			o.GetComponent<Renderer>().material.color = colors[1];
 	}
