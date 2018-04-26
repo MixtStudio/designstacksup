@@ -5,7 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
+<<<<<<< HEAD
     <ProjectGuid>{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}</ProjectGuid>
+=======
+    <ProjectGuid>{6AF55871-D06C-46E1-A64B-41D6AEE63D19}</ProjectGuid>
+>>>>>>> 47-CleanSpawnObjectController
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp-firstpass-player</AssemblyName>
     <FileAlignment>512</FileAlignment>
