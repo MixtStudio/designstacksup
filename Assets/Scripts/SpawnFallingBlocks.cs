@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using HoloToolkit.Unity.InputModule.Tests;
+using System;
 
 /// <summary>
 /// Creates the positions for the blocks and text to spawn at, and spawns them in.
@@ -29,6 +30,10 @@ public class SpawnFallingBlocks {
 		TextContainerTransform = SOC.TextContainerTransform;
 		colors = new Color[] { SOC.Color1, SOC.Color2 };
 	}
+
+	public delegate void GraphCompletedEventHandler(object source, EventArgs args);
+
+	public event GraphCompletedEventHandler GraphCompleted;
 
 	/// <summary>
 	/// Sets the position for each category in categoryList, equally spaced around a circle.
@@ -63,25 +68,19 @@ public class SpawnFallingBlocks {
 	/// Creates the blocks according to their category's position, and spreads 'em out a bit.
 	/// </summary>
 	private IEnumerator CreateBlocksCR(List<Category> categoryList) {
-		var wait = new WaitForSeconds(.1f);
+		var wait = new WaitForSeconds(.05f);
 
 		GameObject barsHolder = new GameObject() {
 			name = "BarsHolder",
-			//tag="BarsHolder",
-			//layer = LayerMask.NameToLayer("Gaze")
 		};
 
 		GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(barsHolder);
-	
-		//To be used for Color alternate
-		int index = 1;
 
-		//To trace how many columns are left to spawn 
-		int columnsIndex = categoryList.Count;
+		int index = categoryList.Count;
 
 		//Allows a random fall of blocks
-		while (columnsIndex != 0) {
-			Category c = categoryList[Random.Range(0, categoryList.Count)];
+		while (index != 0) {
+			Category c = categoryList[UnityEngine.Random.Range(0, categoryList.Count)];
 			if(c.Exists != true) {
 				c.CategoryContainer = new GameObject() {
 					name = c.Name,
@@ -99,16 +98,18 @@ public class SpawnFallingBlocks {
 				}
 
 				AddTextDisplay(c);
-				index++;
-				columnsIndex--;
-				c.Exists = true;		
+				c.Exists = true;
+				index--;
 			}
-
-			Debug.Log(" I am not out");
 		}
+		OnGraphCompleted();
 		yield break;
 	}
 
+	protected virtual void OnGraphCompleted() {
+		if (GraphCompleted != null)
+			GraphCompleted(this, EventArgs.Empty);
+	}
 
 
 	private void AddTextDisplay(Category c) {
@@ -126,7 +127,7 @@ public class SpawnFallingBlocks {
 /// <param name="position">Position of the block.</param>
 /// <param name="size">Size of the block.</param>
 void SpawnBlock(Category c, float posY,int index) {
-		GameObject o = Object.Instantiate(FallingBlock, c.CategoryContainer.transform, false);
+		GameObject o = UnityEngine.Object.Instantiate(FallingBlock, c.CategoryContainer.transform, false);
 		o.transform.localEulerAngles = Vector3.zero;
 		o.transform.localPosition = Vector3.up * posY;
 		o.transform.localScale *= prefabSize;

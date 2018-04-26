@@ -94,6 +94,8 @@ public class SpawnObjectsController: MonoBehaviour{
 	/// </summary>
 	public float MaxCategorySum = 0;
 
+	public SpawnFallingBlocks FallingBlocksInstance { get; private set; }
+
 	private void Awake() {
 		instance = this;
 		categoryList = new List<Category>();
@@ -107,10 +109,10 @@ public class SpawnObjectsController: MonoBehaviour{
 		categoryList = new List<Category>();
 		categoryList = GetCategories(); // 2. Fills categoryList
 		MaxCategorySum = GetMaxCategorySum();
-		SpawnFallingBlocks sFBx = new SpawnFallingBlocks();
+		FallingBlocksInstance = new SpawnFallingBlocks();
 
 		//3.Uses data to create objects
-		sFBx.CreateBlocks(categoryList);
+		FallingBlocksInstance.CreateBlocks(categoryList);
 	}
 
 

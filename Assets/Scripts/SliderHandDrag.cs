@@ -19,12 +19,14 @@ namespace HoloToolkit.Unity.InputModule {
 		private float timeCounter;
 		private TransitionManager transitionManager;
 		private bool pedastalCheck = false;
+		private bool graphCompleted= false;
 
 
 		protected override void Start() {
 			base.Start();
 			transitionManager = FindObjectOfType<TransitionManager>();
 			HostTransform.position = new Vector3(HostTransform.position.x, minHeight, HostTransform.position.z);
+			SpawnObjectsController.instance.FallingBlocksInstance.GraphCompleted += OnGraphCompleted;
 
 			if (percentageThreshold > 1.0f)
 				percentageThreshold = 1.0f;
@@ -54,7 +56,8 @@ namespace HoloToolkit.Unity.InputModule {
 		protected override void StartDragging(Vector3 initialDraggingPosition) {
 			base.StartDragging(initialDraggingPosition);
 			ConstraintCheck();
-			ChangeScale();
+			if (graphCompleted)
+				ChangeScale();
 		}
 
 
@@ -62,14 +65,16 @@ namespace HoloToolkit.Unity.InputModule {
 			//HostTransform.Rotate(Vector3.up, speed * Time.deltaTime);
 			base.UpdateDragging();
 			ConstraintCheck();
-			ChangeScale();
+			if (graphCompleted)
+				ChangeScale();
 		}
 
 
 		protected override void StopDragging() {
 			base.StopDragging();
 			ConstraintCheck();
-			ChangeScale();
+			if (graphCompleted)
+				ChangeScale();
 		}
 
 		private void ConstraintCheck() {
@@ -93,6 +98,11 @@ namespace HoloToolkit.Unity.InputModule {
 			barsHolder.transform.localScale = new Vector3(barsHolder.transform.localScale.x, (scaleFactor*scaleNum)+1, barsHolder.transform.localScale.z);
 		}
 
+		public void OnGraphCompleted(object source, EventArgs e) {
+			Debug.Log("Completed on slider");
+			graphCompleted = true;
+		}
+
 		public void BeginFalling() {
 			Rigidbody rg = GetComponent<Rigidbody>();
 			rg.isKinematic = false;
@@ -100,6 +110,8 @@ namespace HoloToolkit.Unity.InputModule {
 			rg.GetComponent<BoxCollider>().enabled = false;
 			GetComponent<SliderHandDrag>().enabled = false;
 		}
+
+
 
 	}
 }
