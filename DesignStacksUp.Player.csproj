@@ -5,15 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-<<<<<<< HEAD
-<<<<<<< HEAD
     <ProjectGuid>{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}</ProjectGuid>
-=======
-    <ProjectGuid>{3B4BC4CC-28DF-497E-AC8D-DF1E1AE97C2A}</ProjectGuid>
->>>>>>> 47-CleanSpawnObjectController
-=======
-    <ProjectGuid>{3F414C0C-FD3C-42CB-A64C-365FC3408076}</ProjectGuid>
->>>>>>> 42-24-Growing-Trees
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp-player</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -1567,7 +1559,9 @@
     <Compile Include="Assets\Scripts\CubeCollision.cs" />
     <Compile Include="Assets\Scripts\DestroyOnTrigger.cs" />
     <Compile Include="Assets\Scripts\Disappear.cs" />
+    <Compile Include="Assets\Scripts\Grow.cs" />
     <Compile Include="Assets\Scripts\Hide.cs" />
+    <Compile Include="Assets\Scripts\LeavesVarience.cs" />
     <Compile Include="Assets\Scripts\LoadManager.cs" />
     <Compile Include="Assets\Scripts\Pedastal.cs" />
     <Compile Include="Assets\Scripts\RatTrap.cs" />

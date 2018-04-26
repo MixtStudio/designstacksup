@@ -999,7 +999,9 @@
     <Compile Include="Assets\Scripts\CubeCollision.cs" />
     <Compile Include="Assets\Scripts\DestroyOnTrigger.cs" />
     <Compile Include="Assets\Scripts\Disappear.cs" />
+    <Compile Include="Assets\Scripts\Grow.cs" />
     <Compile Include="Assets\Scripts\Hide.cs" />
+    <Compile Include="Assets\Scripts\LeavesVarience.cs" />
     <Compile Include="Assets\Scripts\LoadManager.cs" />
     <Compile Include="Assets\Scripts\Pedastal.cs" />
     <Compile Include="Assets\Scripts\RatTrap.cs" />
