@@ -998,8 +998,11 @@
     <Compile Include="Assets\Scripts\CSVReader.cs" />
     <Compile Include="Assets\Scripts\CubeCollision.cs" />
     <Compile Include="Assets\Scripts\DestroyOnTrigger.cs" />
+    <Compile Include="Assets\Scripts\Disappear.cs" />
+    <Compile Include="Assets\Scripts\Hide.cs" />
+    <Compile Include="Assets\Scripts\LoadManager.cs" />
     <Compile Include="Assets\Scripts\Pedastal.cs" />
-    <Compile Include="Assets\Scripts\Reveal.cs" />
+    <Compile Include="Assets\Scripts\RatTrap.cs" />
     <Compile Include="Assets\Scripts\RevealManager.cs" />
     <Compile Include="Assets\Scripts\ScaleChanger.cs" />
     <Compile Include="Assets\Scripts\Screenshot.cs" />
@@ -1009,6 +1012,7 @@
     <Compile Include="Assets\Scripts\SpawnObjectsController.cs" />
     <Compile Include="Assets\Scripts\TextDisplay.cs" />
     <Compile Include="Assets\Scripts\TransitionManager.cs" />
+    <Compile Include="Assets\Scripts\TransitionManagerScaling.cs" />
     <Compile Include="Assets\Volumetric Lights\Scripts\VolumetricLight.cs" />
     <Compile Include="Assets\Volumetric Lights\Scripts\VolumetricLightRenderer.cs" />
   </ItemGroup>
