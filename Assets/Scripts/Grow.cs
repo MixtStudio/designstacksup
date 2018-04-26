@@ -15,10 +15,25 @@ public class Grow : MonoBehaviour {
 	void OnEnable() {
 		//startScale = new Vector3(transform.localScale.x, 0.0f, transform.localScale.z);
 		startScale = new Vector3(0.0f, 0.0f, 0.0f);
-		endScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+
+		//random varience in size
+		//endScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+		endScale = new Vector3(transform.localScale.x + Random.Range(-0.2f * transform.localScale.x, 0.2f * transform.localScale.x),
+							   transform.localScale.y + Random.Range(-0.2f * transform.localScale.y, 0.2f * transform.localScale.y), 
+							   transform.localScale.z + Random.Range(-0.2f * transform.localScale.z, 0.2f * transform.localScale.z) );
+
+		//random varience in colour
+		foreach (MeshRenderer mr in GetComponentsInChildren<MeshRenderer>()) {
+			Material newMat = new Material(mr.material);
+			Color colour = mr.material.color;
+			colour = new Color(colour.r + Random.Range(0.0f, 0.5f),
+							   colour.g + Random.Range(-0.3f, 0.0f),
+						       colour.b + Random.Range(0.0f, 0.5f));
+			newMat.color = colour;
+			mr.material = newMat;
+		}
 
 		transform.localScale = startScale;
-		
 	}
 
 	void Update() {
