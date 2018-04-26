@@ -15,11 +15,8 @@ public class SpawnFallingBlocks {
 	private GameObject TextContainerTransform;
 	private float maxCategorySum;
 
-<<<<<<< HEAD
 	private Color[] colors;
 
-=======
->>>>>>> 34-Graphs-built-randomly
 	/// <summary>
 	/// Constructor to bring in the variables from SpawnObjectsController.
 	/// </summary>

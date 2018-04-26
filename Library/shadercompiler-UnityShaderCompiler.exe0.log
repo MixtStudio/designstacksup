@@ -1,17 +1,11 @@
 Base path: C:/Program Files/Unity 2018.1.0b12/Editor/Data
 Cmd: initializeCompiler
-<<<<<<< HEAD
-=======
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
->>>>>>> 42-24-Growing-Trees
-Cmd: initializeCompiler
-Cmd: initializeCompiler
-Cmd: initializeCompiler
+Cmd: preprocess
+  insize=8772 outsize=1869 ok=1
+Cmd: preprocess
+  insize=2676 outsize=1947 ok=1
+Cmd: preprocess
+  insize=16669 outsize=3298 ok=1
+Cmd: preprocess
+  insize=20705 outsize=3084 ok=1
 Cmd: initializeCompiler
