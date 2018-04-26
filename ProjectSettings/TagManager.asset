@@ -7,6 +7,7 @@ TagManager:
   - Detector
   - Hidden
   - Floor
+  - Tree
   layers:
   - Default
   - TransparentFX

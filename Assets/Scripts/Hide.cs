@@ -5,7 +5,9 @@ using UnityEngine;
 public class Hide : MonoBehaviour {
 
 	void OnEnable() {
-		GetComponent<MeshRenderer>().enabled = false;
+		foreach (MeshRenderer mr in GetComponentsInChildren<MeshRenderer>()) {
+			mr.enabled = false;
+		}
 	}
 
 }

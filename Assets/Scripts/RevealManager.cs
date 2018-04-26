@@ -11,6 +11,7 @@ public class RevealManager : MonoBehaviour {
 
 	private int revealNum = 0;
 	private GameObject[] hiddenObjs;
+	List<GameObject> treeList;
 	private GameObject floor;
 
 	private void Start() {
@@ -19,24 +20,50 @@ public class RevealManager : MonoBehaviour {
 
 	public IEnumerator ScanHidden () {
 		yield return new WaitForSeconds(0.1f);
-		hiddenObjs = GameObject.FindGameObjectsWithTag("Hidden");
-		Debug.Log(hiddenObjs.Length + " Hidden objects detected");
+		hiddenObjs = GameObject.FindGameObjectsWithTag("Tree");
+		treeList = new List<GameObject>(hiddenObjs);
+		Debug.Log(hiddenObjs.Length + " Trees detected");
 	}	
 	
 	public GameObject[] GetHiddenObjects() { return hiddenObjs; }
 
-	public void IncrementRevealNum() {
+	public void IncrementRevealNum(Vector3 revealPosition, float revealRadius) {
 		revealNum++;
 		//ColourLerp();
 		ColourChange();
-		ThresholdCheck();
+		ThresholdCheck(revealPosition, revealRadius);
 	}	
 
-	private void ThresholdCheck() {
-		if(revealNum >= revealNumThreshold) {
+	private void ThresholdCheck(Vector3 revealPosition, float revealRadius) {
+		Debug.Log("Reveal Number "+revealNum);
+		if (revealNum == 1) {
+			Debug.Log("First Reveal");
+			for (int i = 0; i < 24; i++) {
+				GameObject closest = FindClosest(treeList, revealPosition);
+				closest.GetComponent<Grow>().BeginGrowing(i);
+				treeList.Remove(closest);
+			}
+		} else if(revealNum >= revealNumThreshold) {
 			Debug.Log("Revealing Everything");
-			foreach (GameObject obj in hiddenObjs)
-				obj.GetComponent<MeshRenderer>().enabled = true;
+			int i = 0;
+			foreach (GameObject obj in treeList) {
+				//obj.GetComponent<MeshRenderer>().enabled = true;
+				GameObject closest = FindClosest(treeList, revealPosition);
+				closest.GetComponent<Grow>().BeginGrowing(i);
+				treeList.Remove(closest);
+				i++;
+			}
+		} else {
+			Debug.Log("Reveal");
+			int i = 0;
+			foreach (GameObject obj in treeList) {
+				if (Vector3.Distance(revealPosition, obj.transform.position) <= revealRadius) {
+					Debug.Log("Revealing Obj");
+					//obj.GetComponent<MeshRenderer>().enabled = true;
+					obj.GetComponent<Grow>().BeginGrowing(i);
+					i++;
+				}
+			}
 		}
 	}
 
@@ -59,4 +86,18 @@ public class RevealManager : MonoBehaviour {
 		//Debug.Log("Colour After: " + floor.GetComponent<MeshRenderer>().material.color);
 	}
 	*/
+	GameObject FindClosest(List<GameObject> objList, Vector3 revealPosition) {
+		float minDist = Mathf.Infinity;
+		GameObject minObj =  new GameObject();
+
+		foreach(GameObject obj in objList) {
+			float distance = Vector3.Distance(revealPosition, obj.transform.position);
+			if (distance < minDist) {
+				minDist = distance;
+				minObj = obj;
+			}
+		}
+
+		return minObj;
+	}
 }

@@ -18,34 +18,35 @@ public class Grow : MonoBehaviour {
 
 		//random varience in size
 		//endScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
-		endScale = new Vector3(transform.localScale.x + Random.Range(-0.2f * transform.localScale.x, 0.2f * transform.localScale.x),
-							   transform.localScale.y + Random.Range(-0.2f * transform.localScale.y, 0.2f * transform.localScale.y), 
-							   transform.localScale.z + Random.Range(-0.2f * transform.localScale.z, 0.2f * transform.localScale.z) );
+		endScale = new Vector3(transform.localScale.x + Random.Range(-0.25f * transform.localScale.x, 0.25f * transform.localScale.x),
+							   transform.localScale.y + Random.Range(-0.25f * transform.localScale.y, 0.25f * transform.localScale.y), 
+							   transform.localScale.z + Random.Range(-0.25f * transform.localScale.z, 0.25f * transform.localScale.z) );
 
-		//random varience in colour
-		foreach (MeshRenderer mr in GetComponentsInChildren<MeshRenderer>()) {
-			Material newMat = new Material(mr.material);
-			Color colour = mr.material.color;
-			colour = new Color(colour.r + Random.Range(0.0f, 0.5f),
-							   colour.g + Random.Range(-0.3f, 0.0f),
-						       colour.b + Random.Range(0.0f, 0.5f));
-			newMat.color = colour;
-			mr.material = newMat;
-		}
+		//varience in scaleSpeed
+
+		//varience in rotation
+		transform.rotation = Quaternion.AngleAxis(Random.Range(0.0f, 360.0f), Vector3.up);
 
 		transform.localScale = startScale;
 	}
 
 	void Update() {
 		if(Input.GetKeyDown(KeyCode.K))
-			BeginGrowing();
+			BeginGrowing(0);
 
 		if (scaling && !scalingDone)
 			Scale();
 	}
 
-	public void BeginGrowing() {
+	public void BeginGrowing(int indexScale) {
 		scaling = true;
+		if (indexScale >= 5 && indexScale <= 14)
+			scaleSpeed *= 0.5f;
+		if (indexScale >= 15)
+			scaleSpeed *= 0.25f;
+
+		//varience
+		scaleSpeed *= Random.Range(0.75f, 1.25f); 
 	}
 
 	private void Scale() {
