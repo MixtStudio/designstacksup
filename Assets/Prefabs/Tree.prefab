@@ -223,3 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcfcd0178b77f7a459530323ef82ae7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetColor: {r: 1, g: 0, b: 0, a: 1}
+  colourSpeed: 0.2
+  spreadSpeed: 0.2
+  bleedThreshold: 0.45

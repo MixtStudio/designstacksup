@@ -28,6 +28,8 @@ public class Grow : MonoBehaviour {
 		transform.rotation = Quaternion.AngleAxis(Random.Range(0.0f, 360.0f), Vector3.up);
 
 		transform.localScale = startScale;
+
+		BeginGrowing(0);
 	}
 
 	void Update() {

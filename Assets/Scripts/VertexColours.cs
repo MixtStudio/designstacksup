@@ -9,6 +9,7 @@ public class VertexColours : MonoBehaviour {
 
 	public float colourSpeed = 0.25f;
 	public float spreadSpeed = 0.25f;
+	public float bleedThreshold = 0.1f;
 
 	private float[] deltas;
 	private bool scaling = false;
@@ -38,21 +39,20 @@ public class VertexColours : MonoBehaviour {
 	}
 
 	private void ColourBleed() {
-
+		if (uvThreshold <= bleedThreshold)
+			uvThreshold += Time.deltaTime * spreadSpeed;
 		for (int i = 0; i < uv.Length; i++) {
 			if (uv[i].x <= uvThreshold) {
 				deltas[i] += Time.deltaTime * colourSpeed;
 				colors[i] = Color.Lerp(startColor, targetColor, deltas[i]);
-			} else
-				colors[i] = startColor;
+			}
 		}
 
 		mesh.colors = colors;
-
+		/*
 		if (deltas[deltas.Length-1] >= 1.0f) {
 			changingDone = true;
 		}
-
-		uvThreshold += Time.deltaTime * spreadSpeed;
+		*/
 	}
 }
