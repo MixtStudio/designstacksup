@@ -1,5 +1,6 @@
 Base path: C:/Program Files/Unity 2018.1.0b12/Editor/Data
 Cmd: initializeCompiler
+<<<<<<< HEAD
 Cmd: preprocess
   insize=8416 outsize=1775 ok=1
 Cmd: preprocess
@@ -8,6 +9,10 @@ Cmd: preprocess
   insize=16143 outsize=3177 ok=1
 Cmd: preprocess
   insize=20029 outsize=2977 ok=1
+=======
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+>>>>>>> 44-Partial-Tree-Colour-change
 Cmd: initializeCompiler
 Cmd: initializeCompiler
 Cmd: initializeCompiler
