@@ -72,6 +72,7 @@ public class SpawnFallingBlocks {
 
 		GameObject barsHolder = new GameObject() {
 			name = "BarsHolder",
+			tag = "Gaze"
 		};
 
 		GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(barsHolder);

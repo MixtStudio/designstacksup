@@ -40,6 +40,7 @@ public class RatTrap : MonoBehaviour {
 				GameObject.FindObjectOfType<TransitionManagerScaling>().BeginDisappear();
 
 			fallingCheck = true;
+			//rg.isKinematic = false;
 		}
 	}
 
@@ -47,6 +48,19 @@ public class RatTrap : MonoBehaviour {
 		if(col.collider.gameObject.tag == "Floor") {
 			hiddenObjs = revealManager.GetHiddenObjects();
 			RevealArea();
+		}
+	}
+
+	void OnCollisionExit(Collision col) {
+		if (col.collider.gameObject.tag == "Pedastal") {
+			if (!fallingCheck) {
+				if (transitionManager != null)
+					transitionManager.BeginFalling();
+				else
+					GameObject.FindObjectOfType<TransitionManagerScaling>().BeginDisappear();
+
+				fallingCheck = true;
+			}
 		}
 	}
 
