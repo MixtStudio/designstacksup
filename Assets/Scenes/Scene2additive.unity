@@ -615,6 +615,11 @@ Prefab:
       propertyPath: m_Name
       value: Tree (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 114229771123178172, guid: d13c41b06ad67d74ea228d97218f3531,
+        type: 2}
+      propertyPath: targetColor.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d13c41b06ad67d74ea228d97218f3531, type: 2}
   m_IsPrefabParent: 0

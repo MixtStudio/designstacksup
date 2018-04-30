@@ -381,8 +381,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputFile: DataFinal
-  _level: 0
-  _dataRep: 1
   _color1: {r: 0.9918617, g: 1, b: 0.051886797, a: 0.5019608}
   _color2: {r: 0.90418875, g: 1, b: 0, a: 0.5019608}
   _fallingBlock: {fileID: 1758218082611958, guid: 03c2caa2d338540a1aa665863f756dbf,

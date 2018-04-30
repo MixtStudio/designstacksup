@@ -40,8 +40,6 @@ public class Leaves : MonoBehaviour {
 			colors[i] = startColor;
 		}
 		mesh.colors = colors;
-
-		BeginColourBleed();
 	}
 
 	void Update() {

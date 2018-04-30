@@ -37,7 +37,7 @@ public class RevealManager : MonoBehaviour {
 	private void ThresholdCheck(Vector3 revealPosition, float revealRadius) {
 		Debug.Log("Reveal Number "+revealNum);
 		if (revealNum == 1) {
-			Debug.Log("First Reveal");
+			Debug.Log("Reveal Closest 24");
 			for (int i = 0; i < 24; i++) {
 				GameObject closest = FindClosest(treeList, revealPosition);
 				closest.GetComponent<Grow>().BeginGrowing(i);
@@ -45,23 +45,21 @@ public class RevealManager : MonoBehaviour {
 			}
 		} else if(revealNum >= revealNumThreshold) {
 			Debug.Log("Revealing Everything");
-			int i = 0;
-			foreach (GameObject obj in treeList) {
+			for (int i = 0; i < treeList.Count; i++) {
 				//obj.GetComponent<MeshRenderer>().enabled = true;
 				GameObject closest = FindClosest(treeList, revealPosition);
 				closest.GetComponent<Grow>().BeginGrowing(i);
 				treeList.Remove(closest);
-				i++;
 			}
 		} else {
-			Debug.Log("Reveal");
-			int i = 0;
-			foreach (GameObject obj in treeList) {
-				if (Vector3.Distance(revealPosition, obj.transform.position) <= revealRadius) {
+			Debug.Log("Reveal Nearby");
+
+			for (int i = 0; i < treeList.Count; i++) {
+				if (Vector3.Distance(revealPosition, treeList[i].transform.position) <= revealRadius) {
 					Debug.Log("Revealing Obj");
 					//obj.GetComponent<MeshRenderer>().enabled = true;
-					obj.GetComponent<Grow>().BeginGrowing(i);
-					i++;
+					treeList[i].GetComponent<Grow>().BeginGrowing(i);
+					treeList.RemoveAt(i);
 				}
 			}
 		}
