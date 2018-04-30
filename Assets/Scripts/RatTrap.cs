@@ -42,11 +42,6 @@ public class RatTrap : MonoBehaviour {
 			fallingCheck = true;
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	void OnCollisionEnter(Collision col) {
 		if(col.collider.gameObject.tag == "Floor") {
@@ -57,15 +52,8 @@ public class RatTrap : MonoBehaviour {
 
 	private void RevealArea() {
 		Debug.Log("Revealing Area");
-		foreach(GameObject obj in hiddenObjs) {
-			if (Vector3.Distance(transform.position, obj.transform.position) <= revealRadius) {
-				Debug.Log("Revealing Obj");
-				obj.GetComponent<MeshRenderer>().enabled = true;
-			}
-		}
-		revealManager.IncrementRevealNum();
-
-		if(SpawnCount < number_of_Spawns)
+		revealManager.IncrementRevealNum(transform.position, revealRadius);
+		if (SpawnCount < number_of_Spawns)
 			Respawn();
 		else {
 			rg.isKinematic = true;

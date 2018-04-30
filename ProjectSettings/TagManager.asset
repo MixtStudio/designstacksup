@@ -7,7 +7,11 @@ TagManager:
   - Detector
   - Hidden
   - Floor
+<<<<<<< HEAD
   - Gaze
+=======
+  - Tree
+>>>>>>> master
   layers:
   - Default
   - TransparentFX

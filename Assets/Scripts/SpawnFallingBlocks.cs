@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using HoloToolkit.Unity.InputModule.Tests;
+using System;
 
 /// <summary>
 /// Creates the positions for the blocks and text to spawn at, and spawns them in.
@@ -14,7 +15,6 @@ public class SpawnFallingBlocks {
 	private GameObject TextContainer;
 	private GameObject TextContainerTransform;
 	private float maxCategorySum;
-
 	private Color[] colors;
 
 	/// <summary>
@@ -30,6 +30,10 @@ public class SpawnFallingBlocks {
 		TextContainerTransform = SOC.TextContainerTransform;
 		colors = new Color[] { SOC.Color1, SOC.Color2 };
 	}
+
+	public delegate void GraphCompletedEventHandler(object source, EventArgs args);
+
+	public event GraphCompletedEventHandler GraphCompleted;
 
 	/// <summary>
 	/// Sets the position for each category in categoryList, equally spaced around a circle.
@@ -64,24 +68,17 @@ public class SpawnFallingBlocks {
 	/// Creates the blocks according to their category's position, and spreads 'em out a bit.
 	/// </summary>
 	private IEnumerator CreateBlocksCR(List<Category> categoryList) {
-		var wait = new WaitForSeconds(.1f);
+		var wait = new WaitForSeconds(.05f);
 
 		GameObject barsHolder = new GameObject() {
 			name = "BarsHolder",
-			//tag="BarsHolder",
-			//layer = LayerMask.NameToLayer("Gaze")
 		};
 
-		if(GameObject.FindObjectOfType<TransitionManager>() != null)
-			GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(barsHolder);
-		else 
-			GameObject.FindObjectOfType<TransitionManagerScaling>().SetBarsHolder(barsHolder);
-		
-		//Change to SliderHandDragConstraint to limit the axis movement
+		GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(barsHolder);
 
-		//To be used for Color alternate
-		int index = 1;
+		int index = categoryList.Count;
 
+<<<<<<< HEAD
 		// Loop through category list
 		foreach (Category c in categoryList) {
 			c.CategoryContainer = new GameObject() {
@@ -89,38 +86,41 @@ public class SpawnFallingBlocks {
 				tag = "Gaze"
 				//layer = LayerMask.NameToLayer("Gaze")
 			};
+=======
+		//Allows a random fall of blocks
+		while (index != 0) {
+			Category c = categoryList[UnityEngine.Random.Range(0, categoryList.Count)];
+			if(c.Exists != true) {
+				c.CategoryContainer = new GameObject() {
+					name = c.Name,
+				};
+>>>>>>> master
 
-			c.CategoryContainer.transform.parent = barsHolder.transform;
-			c.CategoryContainer.transform.localPosition = c.Position;
-			c.CategoryContainer.transform.localRotation = Quaternion.Euler(0, -c.Angle, 0);
+				c.CategoryContainer.transform.parent = barsHolder.transform;
+				c.CategoryContainer.transform.localPosition = c.Position;
+				c.CategoryContainer.transform.localRotation = Quaternion.Euler(0, -c.Angle, 0);
 
-			float sum = c.Sum * 20 / maxCategorySum;
+				float sum = c.Sum * 20 / maxCategorySum;
 
-			for (var i = 0; i < sum; i++) {
-				SpawnBlock(c, 20+i, index);
-				yield return wait;
+				for (var i = 0; i < sum; i++) {
+					SpawnBlock(c, 20 + i, index);
+					yield return wait;
+				}
+
+				AddTextDisplay(c);
+				c.Exists = true;
+				index--;
 			}
-
-			AddTextDisplay(c);
-			index++;
-			yield return wait;	
 		}
-
-		//foreach( Category c in categoryList) {
-		//	//AddCollider(c);
-		//	//CreateText(c);
-		//	//GazeInteraction(c);
-		//}
-
+		OnGraphCompleted();
 		yield break;
 	}
 
-	private BoxCollider AddCollider(Category c) {
-		BoxCollider col = c.CategoryContainer.AddComponent<BoxCollider>();
-		col.isTrigger = true;	
-		FitColliderToChildren(c.CategoryContainer);
-		return col;
+	protected virtual void OnGraphCompleted() {
+		if (GraphCompleted != null)
+			GraphCompleted(this, EventArgs.Empty);
 	}
+
 
 	private void AddTextDisplay(Category c) {
 		var focusEvt = c.CategoryContainer.AddComponent<OnFocusEvent>();
@@ -131,45 +131,24 @@ public class SpawnFallingBlocks {
 		textDisp.info = categoryInfo;
 	}
 
-	private void FitColliderToChildren(GameObject parentObject) {
-		BoxCollider bc = parentObject.GetComponent<BoxCollider>();
-		if (bc == null) { bc = parentObject.AddComponent<BoxCollider>(); }
-		Bounds bounds = new Bounds(Vector3.zero, Vector3.zero);
-		bool hasBounds = false;
-		Renderer[] renderers = parentObject.GetComponentsInChildren<Renderer>();
-		foreach (Renderer render in renderers) {
-			if (hasBounds) {
-				bounds.Encapsulate(render.bounds);
-			} else {
-				bounds = render.bounds;
-				hasBounds = true;
-			}
-		}
-		if (hasBounds) {
-			Vector3 targetCenter = bounds.center;
-			targetCenter.y = bounds.size.y / 2;
-			bc.center = targetCenter - parentObject.transform.position;
-			bc.size = bounds.size;
-		} else {
-			bc.size = bc.center = Vector3.zero;
-			bc.size = Vector3.zero;
-		}
-	}
-
-
 /// <summary>
 /// Instantiates a block of the defined size at the defined position, and sets its color.
 /// </summary>
 /// <param name="position">Position of the block.</param>
 /// <param name="size">Size of the block.</param>
+<<<<<<< HEAD
 void SpawnBlock(Category c, float posY, int index) {
 		GameObject o = Object.Instantiate(FallingBlock, c.CategoryContainer.transform, false);
 		o.tag = "Gaze";
+=======
+void SpawnBlock(Category c, float posY,int index) {
+		GameObject o = UnityEngine.Object.Instantiate(FallingBlock, c.CategoryContainer.transform, false);
+>>>>>>> master
 		o.transform.localEulerAngles = Vector3.zero;
 		o.transform.localPosition = Vector3.up * posY;
 		o.transform.localScale *= prefabSize;
 		if (index % 2 == 0) 
-			 o.GetComponent<Renderer>().material.color = colors[0];
+			 o.GetComponent<Renderer>().material.color=colors[0];
 		else 
 			o.GetComponent<Renderer>().material.color = colors[1];
 	}
