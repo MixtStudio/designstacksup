@@ -2,12 +2,14 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Class that attaches to a spawner object, gets the public variables and does things that are non-specific to the
 /// type of object.
 /// </summary>
-public class SpawnObjectsController: MonoBehaviour{
+public class SpawnObjectsController : MonoBehaviour {
+	[Header("Settings")]
 	/// <summary>
 	/// Exact file name of the csv file, must be in resources folder.
 	/// </summary>
@@ -20,8 +22,28 @@ public class SpawnObjectsController: MonoBehaviour{
 	}
 
 	[SerializeField]
+	private GameObject _fallingBlock;
+	public GameObject FallingBlock {
+		get {
+			return _fallingBlock;
+		}
+	}
+
+	[SerializeField]
+	private TMP_Text _textPrefab;
+	public TMP_Text TextPrefab => _textPrefab;
+
+	[SerializeField]
+	private float _radius = 5;
+	public float Radius {
+		get {
+			return _radius;
+		}
+	}
+
+	[SerializeField]
 	private Color _color1;
-	public Color Color1  {
+	public Color Color1 {
 		get {
 			return _color1;
 		}
@@ -36,47 +58,17 @@ public class SpawnObjectsController: MonoBehaviour{
 	}
 
 	[SerializeField]
-	private GameObject _fallingBlock;
-	public GameObject FallingBlock {
+	private Color _highlightColor;
+	public Color HighlightColor {
 		get {
-			return _fallingBlock;
+			return _highlightColor;
 		}
 	}
 
-	[SerializeField]
-	private GameObject _textContainer;
-	public GameObject TextContainer {
-		get {
-			return _textContainer;
-		}
-	}
+	[HideInInspector]
+	public float PrefabSize = 1f;
 
-
-	[SerializeField]
-	private GameObject _textContainerTransform;
-	public GameObject TextContainerTransform {
-		get {
-			return _textContainerTransform;
-		}
-	}
-
-
-	[SerializeField]
-	private float _radius = 5;
-	public float Radius {
-		get {
-			return _radius;
-		}
-	}
-
-	[SerializeField]
-	private float _prefabSize = 1f;
-	public float PrefabSize {
-		get {
-			return _prefabSize;
-		}
-	}
-
+	[HideInInspector]
 	public static SpawnObjectsController instance;
 
 	/// <summary>
@@ -89,12 +81,20 @@ public class SpawnObjectsController: MonoBehaviour{
 	/// </summary>
 	private static List<Category> categoryList;
 
+	[HideInInspector]
 	/// <summary>
 	/// Largest sum from all categories.
 	/// </summary>
 	public float MaxCategorySum = 0;
 
+	[HideInInspector]
 	public SpawnFallingBlocks FallingBlocksInstance { get; private set; }
+
+	[HideInInspector]
+	public GameObject barsHolder { get; private set; }
+
+	[HideInInspector]
+	public GameObject textContainer { get; private set; }
 
 	private void Awake() {
 		instance = this;
@@ -105,6 +105,13 @@ public class SpawnObjectsController: MonoBehaviour{
 
 	private void CreateStatsBar() {
 
+		barsHolder = new GameObject() {
+			name = "BarsHolder",
+		};
+		textContainer = new GameObject() {
+			name = "TextContainer",
+		};
+
 		valueList = CSVReader.Read(InputFile); // 1. Fills valueList
 		categoryList = new List<Category>();
 		categoryList = GetCategories(); // 2. Fills categoryList
@@ -112,7 +119,7 @@ public class SpawnObjectsController: MonoBehaviour{
 		FallingBlocksInstance = new SpawnFallingBlocks();
 
 		//3.Uses data to create objects
-		FallingBlocksInstance.CreateBlocks(categoryList);
+		FallingBlocksInstance.CreateGraphs(categoryList);
 	}
 
 

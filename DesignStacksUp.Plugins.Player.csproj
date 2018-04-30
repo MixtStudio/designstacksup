@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1F6068EC-5E1F-4D7C-8AB5-C28695CB6C38}</ProjectGuid>
+    <ProjectGuid>{D17A32CD-FC40-B20B-C3C0-F404143CD2CD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp-firstpass-player</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -50,25 +50,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib">
-      <HintPath>C:\Program Files\Unity 2018.1.0b12\Editor\Data\Mono\lib\mono\4.6-api\mscorlib.dll</HintPath>
+      <HintPath>C:\Program Files\Unity 2018.1.0b12\Editor\Data\MonoBleedingEdge\lib\mono\4.6-api\mscorlib.dll</HintPath>
     </Reference>
     <Reference Include="System">
-      <HintPath>C:\Program Files\Unity 2018.1.0b12\Editor\Data\Mono\lib\mono\4.6-api\System.dll</HintPath>
+      <HintPath>C:\Program Files\Unity 2018.1.0b12\Editor\Data\MonoBleedingEdge\lib\mono\4.6-api\System.dll</HintPath>
     </Reference>
     <Reference Include="System.XML">
-      <HintPath>C:\Program Files\Unity 2018.1.0b12\Editor\Data\Mono\lib\mono\4.6-api\System.XML.dll</HintPath>
+      <HintPath>C:\Program Files\Unity 2018.1.0b12\Editor\Data\MonoBleedingEdge\lib\mono\4.6-api\System.XML.dll</HintPath>
     </Reference>
     <Reference Include="System.Core">
-      <HintPath>C:\Program Files\Unity 2018.1.0b12\Editor\Data\Mono\lib\mono\4.6-api\System.Core.dll</HintPath>
+      <HintPath>C:\Program Files\Unity 2018.1.0b12\Editor\Data\MonoBleedingEdge\lib\mono\4.6-api\System.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp">
-      <HintPath>C:\Program Files\Unity 2018.1.0b12\Editor\Data\Mono\lib\mono\4.6-api\Microsoft.CSharp.dll</HintPath>
+      <HintPath>C:\Program Files\Unity 2018.1.0b12\Editor\Data\MonoBleedingEdge\lib\mono\4.6-api\Microsoft.CSharp.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization">
-      <HintPath>C:\Program Files\Unity 2018.1.0b12\Editor\Data\Mono\lib\mono\4.6-api\System.Runtime.Serialization.dll</HintPath>
+      <HintPath>C:\Program Files\Unity 2018.1.0b12\Editor\Data\MonoBleedingEdge\lib\mono\4.6-api\System.Runtime.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq">
-      <HintPath>C:\Program Files\Unity 2018.1.0b12\Editor\Data\Mono\lib\mono\4.6-api\System.Xml.Linq.dll</HintPath>
+      <HintPath>C:\Program Files\Unity 2018.1.0b12\Editor\Data\MonoBleedingEdge\lib\mono\4.6-api\System.Xml.Linq.dll</HintPath>
     </Reference>
     <Reference Include="MetroSupport/Managed/il2cpp/UnityEngine">
       <HintPath>C:\Program Files\Unity 2018.1.0b12\Editor\Data\PlaybackEngines\MetroSupport/Managed/il2cpp/UnityEngine.dll</HintPath>
@@ -264,6 +264,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Assets/HoloToolkit/Utilities/Scripts/GLTF/Plugins/JsonNet/WSA/Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="TextMeshPro-2017.3-1.0.56-Runtime">
+      <HintPath>Assets/TextMesh Pro/Plugins/Runtime DLL/TextMeshPro-2017.3-1.0.56-Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/ProgramData/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
@@ -970,6 +973,26 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\UberSecondPass.cginc" />
     <None Include="Assets\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\NotoSans - License.txt" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald Bold - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Volumetric Lights\Shaders\BilateralBlur.shader" />
     <None Include="Assets\Volumetric Lights\Shaders\BlitAdd.shader" />
     <None Include="Assets\Volumetric Lights\Shaders\VolumetricLight.shader" />

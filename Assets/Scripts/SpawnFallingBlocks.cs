@@ -8,12 +8,10 @@ using System;
 /// <summary>
 /// Creates the positions for the blocks and text to spawn at, and spawns them in.
 /// </summary>
-public class SpawnFallingBlocks {
+public class SpawnFallingBlocks: MonoBehaviour {
 	private static SpawnObjectsController SOC;
 	private float radius, prefabSize;
 	private GameObject FallingBlock;
-	private GameObject TextContainer;
-	private GameObject TextContainerTransform;
 	private float maxCategorySum;
 	private Color[] colors;
 
@@ -25,9 +23,7 @@ public class SpawnFallingBlocks {
 		radius = SOC.Radius;
 		prefabSize = SOC.PrefabSize;
 		FallingBlock = SOC.FallingBlock;
-		TextContainer = SOC.TextContainer;
 		maxCategorySum = SOC.MaxCategorySum;
-		TextContainerTransform = SOC.TextContainerTransform;
 		colors = new Color[] { SOC.Color1, SOC.Color2 };
 	}
 
@@ -59,7 +55,7 @@ public class SpawnFallingBlocks {
 	/// Starts the CreateBlocks coroutine using SpawnObjectsController because you can't start a coroutine without a
 	/// MonoBehavior.
 	/// </summary>
-	public void CreateBlocks(List<Category> categoryList) {
+	public void CreateGraphs(List<Category> categoryList) {
 		BlockCategoryPositions(categoryList);
 		SOC.StartCoroutine(CreateBlocksCR(categoryList));
 	}
@@ -70,11 +66,7 @@ public class SpawnFallingBlocks {
 	private IEnumerator CreateBlocksCR(List<Category> categoryList) {
 		var wait = new WaitForSeconds(.05f);
 
-		GameObject barsHolder = new GameObject() {
-			name = "BarsHolder",
-		};
-
-		GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(barsHolder);
+		GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(SOC.barsHolder);
 
 		int index = categoryList.Count;
 
@@ -86,7 +78,7 @@ public class SpawnFallingBlocks {
 					name = c.Name,
 				};
 
-				c.CategoryContainer.transform.parent = barsHolder.transform;
+				c.CategoryContainer.transform.parent = SOC.barsHolder.transform;
 				c.CategoryContainer.transform.localPosition = c.Position;
 				c.CategoryContainer.transform.localRotation = Quaternion.Euler(0, -c.Angle, 0);
 
@@ -97,7 +89,7 @@ public class SpawnFallingBlocks {
 					yield return wait;
 				}
 
-				AddTextDisplay(c);
+				AddGraphInteraction(c);
 				c.Exists = true;
 				index--;
 			}
@@ -112,13 +104,12 @@ public class SpawnFallingBlocks {
 	}
 
 
-	private void AddTextDisplay(Category c) {
+	private void AddGraphInteraction(Category c) {
 		var focusEvt = c.CategoryContainer.AddComponent<OnFocusEvent>();
-		TextDisplay textDisp = c.CategoryContainer.AddComponent<TextDisplay>();
-		textDisp.textContainerTransform = TextContainerTransform.transform;
-		textDisp._textContainer = TextContainer;
-		string categoryInfo = c.Name + " " + c.Sum.ToString();
-		textDisp.info = categoryInfo;
+		GraphInteraction textDisp = c.CategoryContainer.AddComponent<GraphInteraction>();
+		textDisp.TextPrefab = SOC.TextPrefab;
+		string categoryInfo = c.Name;
+		textDisp.industryName = categoryInfo;
 	}
 
 /// <summary>
