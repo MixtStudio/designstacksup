@@ -78,15 +78,6 @@ public class SpawnFallingBlocks {
 
 		int index = categoryList.Count;
 
-<<<<<<< HEAD
-		// Loop through category list
-		foreach (Category c in categoryList) {
-			c.CategoryContainer = new GameObject() {
-				name = c.Name,
-				tag = "Gaze"
-				//layer = LayerMask.NameToLayer("Gaze")
-			};
-=======
 		//Allows a random fall of blocks
 		while (index != 0) {
 			Category c = categoryList[UnityEngine.Random.Range(0, categoryList.Count)];
@@ -94,7 +85,6 @@ public class SpawnFallingBlocks {
 				c.CategoryContainer = new GameObject() {
 					name = c.Name,
 				};
->>>>>>> master
 
 				c.CategoryContainer.transform.parent = barsHolder.transform;
 				c.CategoryContainer.transform.localPosition = c.Position;
@@ -136,14 +126,8 @@ public class SpawnFallingBlocks {
 /// </summary>
 /// <param name="position">Position of the block.</param>
 /// <param name="size">Size of the block.</param>
-<<<<<<< HEAD
-void SpawnBlock(Category c, float posY, int index) {
-		GameObject o = Object.Instantiate(FallingBlock, c.CategoryContainer.transform, false);
-		o.tag = "Gaze";
-=======
 void SpawnBlock(Category c, float posY,int index) {
 		GameObject o = UnityEngine.Object.Instantiate(FallingBlock, c.CategoryContainer.transform, false);
->>>>>>> master
 		o.transform.localEulerAngles = Vector3.zero;
 		o.transform.localPosition = Vector3.up * posY;
 		o.transform.localScale *= prefabSize;
