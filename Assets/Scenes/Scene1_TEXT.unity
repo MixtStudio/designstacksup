@@ -388,7 +388,7 @@ MonoBehaviour:
   _radius: 5
   _color1: {r: 0.9918617, g: 1, b: 0.051886797, a: 0.5019608}
   _color2: {r: 0.9037957, g: 1, b: 0, a: 0.5019608}
-  _highlightColor: {r: 1, g: 1, b: 1, a: 0.69803923}
+  _highlightColor: {r: 1, g: 0, b: 0.6652646, a: 1}
   PrefabSize: 1
   MaxCategorySum: 3932.0996
 --- !u!4 &695336415
