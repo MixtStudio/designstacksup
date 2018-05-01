@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 29a0bf7889e613643a4c06e82f46aa08
+guid: 0888c7ec8c6dcaf43af30d5ccd42b075
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Pyramid2_Pyramid_Pyramid_Pyramid2_Pyramid_polySurface1_Pyramid2_polySurface1
-    100002: //RootNode
-    400000: Pyramid2_Pyramid_Pyramid_Pyramid2_Pyramid_polySurface1_Pyramid2_polySurface1
-    400002: //RootNode
-    2100000: Pyramid2_Pyramid_Pyramid_Pyramid2_Pyramid_polySurface1_Pyramid2_polySurface1Mat
-    2300000: Pyramid2_Pyramid_Pyramid_Pyramid2_Pyramid_polySurface1_Pyramid2_polySurface1
-    3300000: Pyramid2_Pyramid_Pyramid_Pyramid2_Pyramid_polySurface1_Pyramid2_polySurface1
-    4300000: Pyramid2_Pyramid_Pyramid_Pyramid2_Pyramid_polySurface1_Pyramid2_polySurface1
+    100000: //RootNode
+    100002: Pyramid_Pyramid_Pyramid_polySurface1
+    400000: //RootNode
+    400002: Pyramid_Pyramid_Pyramid_polySurface1
+    2100000: Pyramid_Pyramid_Pyramid_polySurface1Mat
+    2300000: Pyramid_Pyramid_Pyramid_polySurface1
+    3300000: Pyramid_Pyramid_Pyramid_polySurface1
+    4300000: Pyramid_Pyramid_Pyramid_polySurface1
   externalObjects: {}
   materials:
     importMaterials: 1
