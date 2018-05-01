@@ -17,6 +17,7 @@ public class RatTrap : MonoBehaviour {
 	private HandDraggable handDraggable;
 	private bool fallingCheck = false;
 	private Rigidbody rg;
+	private bool allowMultipleSpawn = true;
 
 	public void SetSpawnPosition(Vector3 pos) { spawnPos = pos; }
 
@@ -27,6 +28,7 @@ public class RatTrap : MonoBehaviour {
 		transitionManager = FindObjectOfType<TransitionManager>();
 		handDraggable = GetComponent<HandDraggable>();
 		handDraggable.StartedDragging += DraggingStart;
+		handDraggable.StoppedDragging += DraggingStopped;
 		spawnRot = transform.rotation;
 		rg = GetComponent<Rigidbody>();
 	}
@@ -41,6 +43,12 @@ public class RatTrap : MonoBehaviour {
 
 			fallingCheck = true;
 		}
+	}
+
+	
+	private void DraggingStopped() {
+		if (SpawnCount==2 && allowMultipleSpawn)
+			SpawnMultiple();
 	}
 
 	void OnCollisionEnter(Collision col) {
@@ -67,14 +75,41 @@ public class RatTrap : MonoBehaviour {
 		copyObj.transform.position = transform.position;
 		copyObj.transform.rotation = transform.rotation;
 		copyObj.GetComponent<Rigidbody>().isKinematic = true;
-
 		Destroy(copyObj.GetComponent<HandDraggable>());
 		Destroy(copyObj.GetComponent<RatTrap>());
-
 		rg.velocity = Vector3.zero;
 		rg.angularVelocity = Vector3.zero;
 		transform.position = spawnPos;
 		transform.rotation = spawnRot;
 		SpawnCount++;
+		Debug.Log(SpawnCount);
 	}
+
+	private void SpawnMultiple() {
+
+
+		for (int i = 0; i < 100; i++) {
+			GameObject copyObj = Instantiate(gameObject);
+			copyObj.transform.position = handDraggable.HostTransform.position;
+			copyObj.transform.rotation = handDraggable.HostTransform.rotation;
+			copyObj.GetComponent<Renderer>().material.color = Color.red;
+			//float vx = Random.Range(.1f,.3f);
+			//float vy = Random.Range(.1f, .3f);
+			//float vz = Random.Range(.1f, .3f);
+			//float vw = Random.Range(20,30);
+			rg.AddForce(Vector3.up*30);
+			rg.useGravity = false;
+			rg.velocity= new Vector3(0,-0.5f,0); 
+
+			//rg.velocity = new Vector3(vx, vy, vz);
+
+			//rg.velocity = new Vector3(vx, vy, vz);
+			//rg.angularVelocity = new Vector3(vx, vy, vz);
+			Destroy(copyObj.GetComponent<HandDraggable>());
+			Destroy(copyObj.GetComponent<RatTrap>());
+		}
+
+		allowMultipleSpawn = false;
+	}
+
 }
