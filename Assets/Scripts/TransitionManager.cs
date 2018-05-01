@@ -23,12 +23,6 @@ public class TransitionManager : MonoBehaviour {
 		loadManager = FindObjectOfType<LoadManager>();
 		revealManager = FindObjectOfType<RevealManager>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown(KeyCode.K))
-			BeginFalling();
-	}
 
 	public void RaisePedastal() {
 		Debug.Log("Raise the Pedastal");
@@ -39,7 +33,7 @@ public class TransitionManager : MonoBehaviour {
 		if (fallCheck) return;
 
 		Debug.Log("Begin Falling");
-		
+
 		sliderHandDrag.BeginFalling();
 
 		columns = new List<Transform>();

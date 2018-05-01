@@ -104,6 +104,7 @@ namespace HoloToolkit.Unity.InputModule {
 		}
 
 		public void BeginFalling() {
+			SetDragging(false);
 			Rigidbody rg = GetComponent<Rigidbody>();
 			rg.isKinematic = false;
 			rg.useGravity = true;
