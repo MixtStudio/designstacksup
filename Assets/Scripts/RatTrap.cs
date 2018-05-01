@@ -28,7 +28,7 @@ public class RatTrap : MonoBehaviour {
 		transitionManager = FindObjectOfType<TransitionManager>();
 		handDraggable = GetComponent<HandDraggable>();
 		handDraggable.StartedDragging += DraggingStart;
-		handDraggable.StoppedDragging += DraggingStopped;
+		//handDraggable.StoppedDragging += DraggingStopped;
 		spawnRot = transform.rotation;
 		rg = GetComponent<Rigidbody>();
 	}
@@ -46,15 +46,22 @@ public class RatTrap : MonoBehaviour {
 		}
 	}
 
-	
+	/*
 	private void DraggingStopped() {
-		if (SpawnCount==2 && allowMultipleSpawn)
+		if (SpawnCount == 2 && allowMultipleSpawn) {
 			SpawnMultiple();
+			//Respawn();
+		}
 	}
+	*/
 
 	void OnCollisionEnter(Collision col) {
 		if(col.collider.gameObject.tag == "Floor") {
-			hiddenObjs = revealManager.GetHiddenObjects();
+			if(hiddenObjs == null)
+				hiddenObjs = revealManager.GetHiddenObjects();
+			if (SpawnCount == 2 && allowMultipleSpawn) {
+				SpawnMultiple(transform.position, transform.rotation);
+			}
 			RevealArea();
 		}
 	}
@@ -96,24 +103,24 @@ public class RatTrap : MonoBehaviour {
 		transform.position = spawnPos;
 		transform.rotation = spawnRot;
 		SpawnCount++;
-		Debug.Log(SpawnCount);
+		Debug.Log("SpawnCount: "+SpawnCount);
 	}
 
-	private void SpawnMultiple() {
-
+	private void SpawnMultiple(Vector3 spawnPoint, Quaternion spawnRotation) {
 
 		for (int i = 0; i < 100; i++) {
 			GameObject copyObj = Instantiate(gameObject);
-			copyObj.transform.position = handDraggable.HostTransform.position;
-			copyObj.transform.rotation = handDraggable.HostTransform.rotation;
+			copyObj.transform.position = spawnPoint;
+			copyObj.transform.rotation = spawnRotation;
 			copyObj.GetComponent<Renderer>().material.color = Color.red;
 			//float vx = Random.Range(.1f,.3f);
 			//float vy = Random.Range(.1f, .3f);
 			//float vz = Random.Range(.1f, .3f);
 			//float vw = Random.Range(20,30);
-			rg.AddForce(Vector3.up*30);
-			rg.useGravity = false;
-			rg.velocity= new Vector3(0,-0.5f,0); 
+			Rigidbody copyRG = copyObj.GetComponent<Rigidbody>();
+			copyRG.AddForce(Vector3.up*30);
+			//copyRG.useGravity = false;
+			//copyRG.velocity= new Vector3(0,-0.5f,0); 
 
 			//rg.velocity = new Vector3(vx, vy, vz);
 

@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Scene1_TEXT.unity
-=======
-- path: Assets/Scenes/Scene2Test.unity
->>>>>>> 20-Graph-Text
+- path: Assets/Scenes/MAIN.unity
   isLoaded: 1
   isActive: 1

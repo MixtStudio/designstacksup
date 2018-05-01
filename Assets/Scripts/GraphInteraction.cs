@@ -20,7 +20,7 @@ namespace HoloToolkit.Unity.InputModule.Tests {
 			normalColor = transform.GetChild(0).GetComponent<Renderer>().material.color;
 			highlightColor = SpawnObjectsController.instance.HighlightColor;
 			textComp = Instantiate(TextPrefab);
-			textComp.transform.parent = SpawnObjectsController.instance.textContainer.transform;
+			textComp.transform.SetParent(SpawnObjectsController.instance.textContainer.transform);
 			textComp.name = "Text " + industryName;
 			//Sets the initial Text Transform
 			Ray direction = new Ray(Vector3.zero, transform.position.normalized);
