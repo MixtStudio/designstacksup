@@ -28,7 +28,6 @@ public class RatTrap : MonoBehaviour {
 		transitionManager = FindObjectOfType<TransitionManager>();
 		handDraggable = GetComponent<HandDraggable>();
 		handDraggable.StartedDragging += DraggingStart;
-		//handDraggable.StoppedDragging += DraggingStopped;
 		spawnRot = transform.rotation;
 		rg = GetComponent<Rigidbody>();
 	}
@@ -42,18 +41,8 @@ public class RatTrap : MonoBehaviour {
 				GameObject.FindObjectOfType<TransitionManagerScaling>().BeginDisappear();
 
 			fallingCheck = true;
-			//rg.isKinematic = false;
 		}
 	}
-
-	/*
-	private void DraggingStopped() {
-		if (SpawnCount == 2 && allowMultipleSpawn) {
-			SpawnMultiple();
-			//Respawn();
-		}
-	}
-	*/
 
 	void OnCollisionEnter(Collision col) {
 		if(col.collider.gameObject.tag == "Floor") {

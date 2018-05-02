@@ -14,6 +14,13 @@ public class RevealManager : MonoBehaviour {
 	List<GameObject> treeList;
 	private GameObject floor;
 
+	private float colourChangeSpeed = 1.0f; // may need to implement a failsafe if the user triggers the reveals too fast (the colour change speed is too fast atm for that to happen)
+	private float delta;
+	private bool colourTransition = false;
+	private bool transitionDone = false;
+	private Color startFloorColour;
+	private Color startBackgroundColour;
+
 	private void Start() {
 		floor = GameObject.FindGameObjectWithTag("Floor");
 	}
@@ -27,9 +34,13 @@ public class RevealManager : MonoBehaviour {
 	
 	public GameObject[] GetHiddenObjects() { return hiddenObjs; }
 
+	private void Update() {
+		if (colourTransition)
+			ColourTransition();
+	}
+
 	public void IncrementRevealNum(Vector3 revealPosition, float revealRadius) {
 		revealNum++;
-		//ColourLerp();
 		ColourChange();
 		ThresholdCheck(revealPosition, revealRadius);
 	}	
@@ -46,7 +57,6 @@ public class RevealManager : MonoBehaviour {
 		} else if(revealNum >= revealNumThreshold) {
 			Debug.Log("Revealing Everything");
 			for (int i = 0; i < treeList.Count; i++) {
-				//obj.GetComponent<MeshRenderer>().enabled = true;
 				GameObject closest = FindClosest(treeList, revealPosition);
 				closest.GetComponent<Grow>().BeginGrowing(i);
 				treeList.Remove(closest);
@@ -57,7 +67,6 @@ public class RevealManager : MonoBehaviour {
 			for (int i = 0; i < treeList.Count; i++) {
 				if (Vector3.Distance(revealPosition, treeList[i].transform.position) <= revealRadius) {
 					Debug.Log("Revealing Obj");
-					//obj.GetComponent<MeshRenderer>().enabled = true;
 					treeList[i].GetComponent<Grow>().BeginGrowing(i);
 					treeList.RemoveAt(i);
 				}
@@ -66,24 +75,26 @@ public class RevealManager : MonoBehaviour {
 	}
 
 	private void ColourChange() {
-		floor.GetComponent<MeshRenderer>().material.color = FloorColourArray[revealNum-1];
-		Camera.main.backgroundColor = BackgroundColourArray[revealNum - 1];
+		startFloorColour = floor.GetComponent<MeshRenderer>().material.color;
+		startBackgroundColour = Camera.main.backgroundColor;
+		colourTransition = true;
+		transitionDone = false;
+		delta = 0.0f;
 	}
 
-	/*
-	private void ColourLerp() {
-		//Debug.Log("Colour Change");
-		if (floor == null)
-			floor = GameObject.FindGameObjectWithTag("Floor");
+	private void ColourTransition() {
+		delta += Time.deltaTime * colourChangeSpeed;
 
-		if (startColour == null)
-			startColour = floor.GetComponent<MeshRenderer>().material.color;
+		floor.GetComponent<MeshRenderer>().material.color = Color.Lerp(startFloorColour, FloorColourArray[revealNum - 1], delta);
 
-		//Debug.Log("Colour Before: " + floor.GetComponent<MeshRenderer>().material.color);
-		floor.GetComponent<MeshRenderer>().material.color = Color.Lerp(startColour, targetColour, ((float)revealNum / (float)revealNumThreshold) );
-		//Debug.Log("Colour After: " + floor.GetComponent<MeshRenderer>().material.color);
+		Camera.main.backgroundColor = Color.Lerp(startBackgroundColour, BackgroundColourArray[revealNum - 1], delta);
+
+		if (delta >= 1.0f) {
+			colourTransition = false;
+			transitionDone = true;
+		}
 	}
-	*/
+
 	GameObject FindClosest(List<GameObject> objList, Vector3 revealPosition) {
 		float minDist = Mathf.Infinity;
 		GameObject minObj =  new GameObject();
