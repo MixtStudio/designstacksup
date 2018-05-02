@@ -12,6 +12,7 @@ public class TransitionManager : MonoBehaviour {
 	private SliderHandDrag sliderHandDrag;
 	private LoadManager loadManager;
 	private RevealManager revealManager;
+	private AudioManager audioManager;
 
 	public void SetBarsHolder(GameObject obj) { barsHolder = obj; }
 	public GameObject GetBarsHolder() { return barsHolder; }
@@ -22,17 +23,21 @@ public class TransitionManager : MonoBehaviour {
 		sliderHandDrag = FindObjectOfType<SliderHandDrag>();
 		loadManager = FindObjectOfType<LoadManager>();
 		revealManager = FindObjectOfType<RevealManager>();
+		audioManager = FindObjectOfType<AudioManager>();
 	}
 
 	public void RaisePedastal() {
 		Debug.Log("Raise the Pedastal");
 		pedastal.BeginRaising();
+		audioManager.NowPlay(AudioManager.Audio.Warping02);
 	}
 
 	public void BeginFalling() {
 		if (fallCheck) return;
 
 		Debug.Log("Begin Falling");
+
+		audioManager.NowPlay(AudioManager.Audio.TrapSection, true, false);
 
 		sliderHandDrag.BeginFalling();
 
