@@ -14,14 +14,7 @@ namespace HoloToolkit.Unity.InputModule.Tests {
 		private TMP_Text textComp;
 			
 		private void Start() {
-<<<<<<< HEAD
-			normalColor = transform.GetChild(0).GetComponent<Renderer>().material.color;
-			highlightColor = SpawnObjectsController.instance.HighlightColor;
-			textComp = Instantiate(TextPrefab);
-			textComp.transform.SetParent(SpawnObjectsController.instance.textContainer.transform);
-=======
 			textComp = Instantiate(TextPrefab, SpawnObjectsController.instance.TextContainer.transform);
->>>>>>> GraphsPolish
 			textComp.name = "Text " + industryName;
 
 			//Sets the initial Text Transform
