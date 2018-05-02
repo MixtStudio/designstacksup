@@ -26,14 +26,14 @@ public class CubeCollision : MonoBehaviour {
 		yield return new WaitForSeconds(2);
 		rb.constraints = RigidbodyConstraints.FreezeAll;
 		rb.isKinematic = true;
-		rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+		rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 		yield break;
 	}
 
 	public void Unfreeze() {
-		//rb.constraints = RigidbodyConstraints.None;
-		rb.constraints =	RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ
-						  | RigidbodyConstraints.FreezePositionX                                        | RigidbodyConstraints.FreezePositionZ;
+		rb.constraints = RigidbodyConstraints.None;
+		rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ
+						  | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
 		rb.isKinematic = false;
 	}
 }

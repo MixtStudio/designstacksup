@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Scene1_TEXT.unity
+- path: Assets/Scenes/Scene1_SCALE.unity
   isLoaded: 1
   isActive: 1

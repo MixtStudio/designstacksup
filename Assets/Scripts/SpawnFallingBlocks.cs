@@ -12,6 +12,7 @@ public class SpawnFallingBlocks: MonoBehaviour {
 	private static SpawnObjectsController SOC;
 	private float radius, prefabSize;
 	private GameObject FallingBlock;
+	private GameObject InvestBlock;
 	private float maxCategorySum;
 	private Color[] colors;
 
@@ -22,7 +23,8 @@ public class SpawnFallingBlocks: MonoBehaviour {
 		SOC = SpawnObjectsController.instance;
 		radius = SOC.Radius;
 		prefabSize = SOC.PrefabSize;
-		FallingBlock = SOC.FallingBlock;
+		FallingBlock = SOC.NormalBlock;
+		InvestBlock = SOC.InvestBlock;
 		maxCategorySum = SOC.MaxCategorySum;
 		colors = new Color[] { SOC.Color1, SOC.Color2 };
 	}
@@ -55,9 +57,9 @@ public class SpawnFallingBlocks: MonoBehaviour {
 	/// Starts the CreateBlocks coroutine using SpawnObjectsController because you can't start a coroutine without a
 	/// MonoBehavior.
 	/// </summary>
-	public void CreateGraphs(List<Category> categoryList) {
-		BlockCategoryPositions(categoryList);
-		SOC.StartCoroutine(CreateBlocksCR(categoryList));
+	public void CreateGraphs() {
+		BlockCategoryPositions(SpawnObjectsController.CategoryList);
+		SOC.StartCoroutine(CreateBlocksCR(SpawnObjectsController.CategoryList));
 	}
 
 	/// <summary>
@@ -66,7 +68,7 @@ public class SpawnFallingBlocks: MonoBehaviour {
 	private IEnumerator CreateBlocksCR(List<Category> categoryList) {
 		var wait = new WaitForSeconds(.05f);
 
-		GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(SOC.barsHolder);
+		GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(SOC.BarsHolder);
 
 		int index = categoryList.Count;
 
@@ -78,53 +80,83 @@ public class SpawnFallingBlocks: MonoBehaviour {
 					name = c.Name,
 				};
 
-				c.CategoryContainer.transform.parent = SOC.barsHolder.transform;
+				c.CategoryContainer.transform.parent = SOC.BarsHolder.transform;
 				c.CategoryContainer.transform.localPosition = c.Position;
 				c.CategoryContainer.transform.localRotation = Quaternion.Euler(0, -c.Angle, 0);
 
 				float sum = c.Sum * 20 / maxCategorySum;
 
+				//Creates the multiple blocks in the category
 				for (var i = 0; i < sum; i++) {
-					SpawnBlock(c, 20 + i, index);
+					GameObject block = SpawnBlock(c, 20 + i,true);
+					block.GetComponent<Renderer>().material.color = AssignColor(index);
 					yield return wait;
 				}
 
+				//We create the invest block
+				GameObject investBlock = SpawnBlock(c, 20 + sum + SOC.PrefabSize,false);
+				SOC.InvestBlocks.Add(investBlock);
+				//investBlock.layer = 11;
+				investBlock.GetComponentInChildren<Renderer>().material.color = SOC.InvestColor;
+			
+		
+				//Adds the interaction to category and block
 				AddGraphInteraction(c);
 				c.Exists = true;
 				index--;
 			}
 		}
+		//To wait for all blocks to fall, to improve in the future
+		wait = new WaitForSeconds(3);
+		yield return wait;
 		OnGraphCompleted();
 		yield break;
 	}
 
 	protected virtual void OnGraphCompleted() {
-		if (GraphCompleted != null)
+		if (GraphCompleted != null) { }
 			GraphCompleted(this, EventArgs.Empty);
 	}
 
-
+	
 	private void AddGraphInteraction(Category c) {
 		var focusEvt = c.CategoryContainer.AddComponent<OnFocusEvent>();
-		GraphInteraction textDisp = c.CategoryContainer.AddComponent<GraphInteraction>();
-		textDisp.TextPrefab = SOC.TextPrefab;
-		string categoryInfo = c.Name;
-		textDisp.industryName = categoryInfo;
+		c.CategoryContainer.AddComponent<OnFocusEvent>();
+		string industryName = c.Name;
+
+		GraphInteraction graph_interaction = c.CategoryContainer.AddComponent<GraphInteraction>();
+		graph_interaction.TextPrefab = SOC.TextPrefab;
+		graph_interaction.industryName = industryName;
+	}
+
+	Color  AssignColor(int index) {
+		if (index % 2 == 0)
+			return  colors[0];
+		else
+			return colors[1];
 	}
 
 /// <summary>
-/// Instantiates a block of the defined size at the defined position, and sets its color.
+/// Instantiates a block of the defined size at the defined position, if block type is true spawns normal block
 /// </summary>
 /// <param name="position">Position of the block.</param>
 /// <param name="size">Size of the block.</param>
-void SpawnBlock(Category c, float posY,int index) {
-		GameObject o = UnityEngine.Object.Instantiate(FallingBlock, c.CategoryContainer.transform, false);
+GameObject SpawnBlock(Category c, float posY, bool blockType) {
+
+		GameObject o;
+		//If block is true then is normal 
+		if (blockType) {
+			o = UnityEngine.Object.Instantiate(FallingBlock, c.CategoryContainer.transform,false);
+		} 
+		else {
+			o = UnityEngine.Object.Instantiate(InvestBlock, c.CategoryContainer.transform,false);
+			//o.transform.localScale = Vector3.one;
+		}
+
 		o.transform.localEulerAngles = Vector3.zero;
 		o.transform.localPosition = Vector3.up * posY;
 		o.transform.localScale *= prefabSize;
-		if (index % 2 == 0) 
-			 o.GetComponent<Renderer>().material.color=colors[0];
-		else 
-			o.GetComponent<Renderer>().material.color = colors[1];
+		return o;
 	}
+
 }

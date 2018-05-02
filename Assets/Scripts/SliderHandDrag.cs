@@ -9,12 +9,11 @@ namespace HoloToolkit.Unity.InputModule {
 
 		public float maxHeight = 3.0f;
 		public float minHeight = 1.0f;
-		public float scaleFactor = 3.0f;
-		public Camera VR_camera;
+		public float scaleFactor = 5f;
 		public float percentageThreshold = 0.9f;
 		public float timeThreshold = 3.0f;
-
 		private GameObject barsHolder;
+		private List<GameObject> investBlocks;
 		private float distanceCam;
 		private float timeCounter;
 		private TransitionManager transitionManager;
@@ -78,8 +77,7 @@ namespace HoloToolkit.Unity.InputModule {
 		}
 
 		private void ConstraintCheck() {
-			distanceCam = Vector3.Distance(HostTransform.position, VR_camera.transform.position);
-			//Debug.Log("Distance of " + VR_camera.name + "is "+ distanceCam);
+			//distanceCam = Vector3.Distance(HostTransform.position, VR_camera.transform.position);
 			if (HostTransform.position.y > maxHeight)
 				HostTransform.position = new Vector3(HostTransform.position.x, maxHeight, HostTransform.position.z);
 
@@ -88,19 +86,25 @@ namespace HoloToolkit.Unity.InputModule {
 		}
 
 		public void ChangeScale() {
-			if (barsHolder == null)
-				barsHolder = transitionManager.GetBarsHolder();
-
-			if (barsHolder == null)
-				barsHolder = GameObject.FindObjectOfType<TransitionManagerScaling>().GetBarsHolder();
-
 			float scaleNum = Mathf.InverseLerp(minHeight, maxHeight, HostTransform.position.y);
-			barsHolder.transform.localScale = new Vector3(barsHolder.transform.localScale.x, (scaleFactor*scaleNum)+1, barsHolder.transform.localScale.z);
+
+			foreach (GameObject IB in SpawnObjectsController.instance.InvestBlocks) {
+				IB.transform.localScale = new Vector3(IB.transform.localScale.x, scaleFactor * scaleNum , IB.transform.localScale.z);
+			}
 		}
 
 		public void OnGraphCompleted(object source, EventArgs e) {
-			Debug.Log("Completed on slider");
+			MakeInvestBlocksReady();
 			graphCompleted = true;
+		}
+
+		public void MakeInvestBlocksReady() {
+
+			foreach(GameObject IB in SpawnObjectsController.instance.InvestBlocks) {
+				Renderer rend =IB.GetComponentInChildren<Renderer>();
+				rend.enabled=true;
+				IB.transform.localScale = new Vector3(IB.transform.localScale.x, 0, IB.transform.localScale.z);
+			}
 		}
 
 		public void BeginFalling() {
@@ -110,9 +114,6 @@ namespace HoloToolkit.Unity.InputModule {
 			rg.GetComponent<BoxCollider>().enabled = false;
 			GetComponent<SliderHandDrag>().enabled = false;
 		}
-
-
-
 	}
 }
 

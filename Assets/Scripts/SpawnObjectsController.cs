@@ -22,10 +22,18 @@ public class SpawnObjectsController : MonoBehaviour {
 	}
 
 	[SerializeField]
-	private GameObject _fallingBlock;
-	public GameObject FallingBlock {
+	private GameObject _normalBlock;
+	public GameObject NormalBlock {
 		get {
-			return _fallingBlock;
+			return _normalBlock;
+		}
+	}
+
+	[SerializeField]
+	private GameObject _investBlock;
+	public GameObject InvestBlock {
+		get {
+			return _investBlock;
 		}
 	}
 
@@ -58,6 +66,14 @@ public class SpawnObjectsController : MonoBehaviour {
 	}
 
 	[SerializeField]
+	private Color _investColor;
+	public Color InvestColor {
+		get {
+			return _investColor;
+		}
+	}
+
+	[SerializeField]
 	private Color _highlightColor;
 	public Color HighlightColor {
 		get {
@@ -65,7 +81,7 @@ public class SpawnObjectsController : MonoBehaviour {
 		}
 	}
 
-	[HideInInspector]
+	//[HideInInspector]
 	public float PrefabSize = 1f;
 
 	[HideInInspector]
@@ -79,7 +95,10 @@ public class SpawnObjectsController : MonoBehaviour {
 	/// <summary>
 	/// List of categories of data according to categoryColumnName.
 	/// </summary>
-	private static List<Category> categoryList;
+	public static List<Category> CategoryList{ private set; get; }
+
+	[HideInInspector]
+	public List<GameObject> InvestBlocks { get; set; }
 
 	[HideInInspector]
 	/// <summary>
@@ -87,39 +106,39 @@ public class SpawnObjectsController : MonoBehaviour {
 	/// </summary>
 	public float MaxCategorySum = 0;
 
-	[HideInInspector]
 	public SpawnFallingBlocks FallingBlocksInstance { get; private set; }
 
-	[HideInInspector]
-	public GameObject barsHolder { get; private set; }
+	public GameObject BarsHolder { get; private set; }
 
-	[HideInInspector]
-	public GameObject textContainer { get; private set; }
+	public GameObject TextContainer { get; private set; }
 
 	private void Awake() {
 		instance = this;
-		categoryList = new List<Category>();
+		CategoryList = new List<Category>();
+		InvestBlocks = new List<GameObject>();
 		CreateStatsBar();
 	}
 
 
 	private void CreateStatsBar() {
 
-		barsHolder = new GameObject() {
+		BarsHolder = new GameObject() {
 			name = "BarsHolder",
 		};
-		textContainer = new GameObject() {
+
+	
+		TextContainer = new GameObject() {
 			name = "TextContainer",
 		};
 
 		valueList = CSVReader.Read(InputFile); // 1. Fills valueList
-		categoryList = new List<Category>();
-		categoryList = GetCategories(); // 2. Fills categoryList
+		CategoryList = new List<Category>();
+		CategoryList = GetCategories(); // 2. Fills categoryList
 		MaxCategorySum = GetMaxCategorySum();
 		FallingBlocksInstance = new SpawnFallingBlocks();
 
 		//3.Uses data to create objects
-		FallingBlocksInstance.CreateGraphs(categoryList);
+		FallingBlocksInstance.CreateGraphs();
 	}
 
 
@@ -169,7 +188,7 @@ public class SpawnObjectsController : MonoBehaviour {
 	/// <returns>The max sum.</returns>
 	private float GetMaxCategorySum() {
 		float max = 0;
-		foreach (var c in categoryList) {
+		foreach (var c in CategoryList) {
 			if (c.Sum > max) {
 				max = c.Sum;
 			}
