@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/TEST.unity
+=======
+- path: Assets/Scenes/Scene1_SCALE.unity
+>>>>>>> GraphsPolish
   isLoaded: 1
   isActive: 1

@@ -12,16 +12,18 @@ namespace HoloToolkit.Unity.InputModule.Tests {
 		public string industryName { get; set; }			
 		public TMP_Text TextPrefab { get; set; }
 		private TMP_Text textComp;
-		private Color normalColor;
-		private Color highlightColor;
-
-		
+			
 		private void Start() {
+<<<<<<< HEAD
 			normalColor = transform.GetChild(0).GetComponent<Renderer>().material.color;
 			highlightColor = SpawnObjectsController.instance.HighlightColor;
 			textComp = Instantiate(TextPrefab);
 			textComp.transform.SetParent(SpawnObjectsController.instance.textContainer.transform);
+=======
+			textComp = Instantiate(TextPrefab, SpawnObjectsController.instance.TextContainer.transform);
+>>>>>>> GraphsPolish
 			textComp.name = "Text " + industryName;
+
 			//Sets the initial Text Transform
 			Ray direction = new Ray(Vector3.zero, transform.position.normalized);
 			textComp.transform.position = direction.GetPoint(SpawnObjectsController.instance.Radius * .8f);
@@ -48,19 +50,24 @@ namespace HoloToolkit.Unity.InputModule.Tests {
 		}
 
 		private void ChangeMaterial(Color color) {
-			foreach (Transform child in transform) {
-				Debug.Log(child.name);
-				child.GetComponent<Renderer>().material.color = color;
+			foreach (Renderer rend in GetComponentsInChildren<Renderer>()) {
+				rend.material.color = color ;
 			}
 		}
 
 		public void OnFocusEnter() {
-			ChangeMaterial(highlightColor);
+			ChangeMaterial(SpawnObjectsController.instance.HighlightColor);
 			textComp.gameObject.SetActive(true);
 		}
 
 		public void OnFocusExit() {
-			ChangeMaterial(normalColor);
+			ChangeMaterial(SpawnObjectsController.instance.Color1);
+
+			foreach (GameObject IB in SpawnObjectsController.instance.InvestBlocks) {
+				Renderer rend = IB.GetComponentInChildren<Renderer>();
+				rend.material.color= SpawnObjectsController.instance.InvestColor;
+			}
+
 			textComp.gameObject.SetActive(false);
 		}
 	}
