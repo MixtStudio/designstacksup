@@ -9,7 +9,7 @@ namespace HoloToolkit.Unity.InputModule {
 
 		public float maxHeight = 3.0f;
 		public float minHeight = 1.0f;
-		public float scaleFactor = 5f;
+		public float scaleFactor = 10f;
 		public float percentageThreshold = 0.9f;
 		public float timeThreshold = 3.0f;
 		private GameObject barsHolder;
@@ -56,7 +56,8 @@ namespace HoloToolkit.Unity.InputModule {
 			base.StartDragging(initialDraggingPosition);
 			ConstraintCheck();
 			if (graphCompleted)
-				ChangeScale();
+				StartCoroutine(ChangeScale());
+			//ChangeScale();
 		}
 
 
@@ -65,7 +66,8 @@ namespace HoloToolkit.Unity.InputModule {
 			base.UpdateDragging();
 			ConstraintCheck();
 			if (graphCompleted)
-				ChangeScale();
+				StartCoroutine(ChangeScale());
+			//ChangeScale();
 		}
 
 
@@ -73,7 +75,8 @@ namespace HoloToolkit.Unity.InputModule {
 			base.StopDragging();
 			ConstraintCheck();
 			if (graphCompleted)
-				ChangeScale();
+				StartCoroutine(ChangeScale());
+				//ChangeScale();
 		}
 
 		private void ConstraintCheck() {
@@ -85,13 +88,27 @@ namespace HoloToolkit.Unity.InputModule {
 				HostTransform.position = new Vector3(HostTransform.position.x, minHeight, HostTransform.position.z);
 		}
 
-		public void ChangeScale() {
+		private IEnumerator ChangeScale() {
+			var wait = new WaitForSeconds(.01f);
 			float scaleNum = Mathf.InverseLerp(minHeight, maxHeight, HostTransform.position.y);
 
 			foreach (GameObject IB in SpawnObjectsController.instance.InvestBlocks) {
-				IB.transform.localScale = new Vector3(IB.transform.localScale.x, scaleFactor * scaleNum , IB.transform.localScale.z);
+				IB.transform.localScale = new Vector3(IB.transform.localScale.x, scaleFactor * scaleNum, IB.transform.localScale.z);
+				yield return wait;
 			}
+
+			yield break;
 		}
+
+		//Change scale without delay
+		//public void ChangeScale() {
+		//	var wait = new WaitForSeconds(.05f);
+		//	float scaleNum = Mathf.InverseLerp(minHeight, maxHeight, HostTransform.position.y);
+
+		//	foreach (GameObject IB in SpawnObjectsController.instance.InvestBlocks) {
+		//		IB.transform.localScale = new Vector3(IB.transform.localScale.x, scaleFactor * scaleNum, IB.transform.localScale.z);
+		//	}
+		//}
 
 		public void OnGraphCompleted(object source, EventArgs e) {
 			MakeInvestBlocksReady();
