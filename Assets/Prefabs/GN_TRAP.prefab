@@ -21,11 +21,11 @@ GameObject:
   - component: {fileID: 4812069338964876}
   - component: {fileID: 33984742685547786}
   - component: {fileID: 23258528853246246}
-  - component: {fileID: 65928789327996836}
-  - component: {fileID: 54746454320942654}
-  - component: {fileID: 114962068709582230}
-  - component: {fileID: 114196070854111456}
-  m_Layer: 0
+  - component: {fileID: 65165388654821644}
+  - component: {fileID: 54863257455183644}
+  - component: {fileID: 114801784692383168}
+  - component: {fileID: 114756368584620542}
+  m_Layer: 8
   m_Name: GN_TRAP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,13 +38,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1195325995825786}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0007787347, y: -0.00019021034, z: 0.00013029098}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.5568437, y: 1.231, z: 0.5410705}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!23 &23258528853246246
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -60,12 +60,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 7d1e96d789685144d9314034bda2a0a3, type: 2}
-  - {fileID: 2100000, guid: dc92dd19cd7097d45a45208b2de3eccd, type: 2}
-  - {fileID: 2100000, guid: 0a67cb02d2f5b2442937b7acaa7d628d, type: 2}
-  - {fileID: 2100000, guid: 69435f9b9db04454086acba9f7a98d19, type: 2}
-  - {fileID: 2100000, guid: f832c7fe898f3fd4ab2741b0835f20ad, type: 2}
-  - {fileID: 2100000, guid: 3505c0db318c2024191bac82b4add22d, type: 2}
+  - {fileID: 2100000, guid: 5d0fe4dd3f49532448d29d5373fa20a1, type: 2}
+  - {fileID: 2100000, guid: dafc9cedb7ce3b145af954a3ff6ebb1a, type: 2}
+  - {fileID: 2100000, guid: eb8dbe0ed13b90d46b85af26e8e96c92, type: 2}
+  - {fileID: 2100000, guid: c3f273f957d14834fbfe6729d4e6005b, type: 2}
+  - {fileID: 2100000, guid: e9ff2391966f2c84ab3a52e011f1d495, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91,8 +90,8 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1195325995825786}
-  m_Mesh: {fileID: 4300000, guid: 83116e46df9b71045aad09ba953ee3ab, type: 3}
---- !u!54 &54746454320942654
+  m_Mesh: {fileID: 4300000, guid: 75031f9799536a546b8c5e7dd74ace29, type: 3}
+--- !u!54 &54863257455183644
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -107,7 +106,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65928789327996836
+--- !u!65 &65165388654821644
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -117,31 +116,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.15123355, y: 0.4082083, z: 0.38723633}
+  m_Size: {x: 0.29077008, y: 0.3064452, z: 0.112185866}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114196070854111456
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1195325995825786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 596e153aafb9fd4438afb7226dd60ed3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HostTransform: {fileID: 0}
-  DistanceScale: 2
-  RotationMode: 0
-  PositionLerpSpeed: 0.2
-  RotationLerpSpeed: 0.2
-  IsDraggingEnabled: 1
-  maxHeight: 3
-  minHeight: 1
-  scaleFactor: 10
-  percentageThreshold: 0.9
-  timeThreshold: 3
---- !u!114 &114962068709582230
+--- !u!114 &114756368584620542
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -153,3 +130,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   revealRadius: 3
+  rotationSpeed: 0.5
+--- !u!114 &114801784692383168
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1195325995825786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d5a0a60fbe897549ad0bfe2039f12b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HostTransform: {fileID: 0}
+  DistanceScale: 2
+  RotationMode: 0
+  PositionLerpSpeed: 0.2
+  RotationLerpSpeed: 0.2
+  IsDraggingEnabled: 1

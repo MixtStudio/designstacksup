@@ -1569,6 +1569,7 @@
     <Compile Include="Assets\Scripts\Leaves.cs" />
     <Compile Include="Assets\Scripts\LoadManager.cs" />
     <Compile Include="Assets\Scripts\Pedastal.cs" />
+    <Compile Include="Assets\Scripts\Prompts.cs" />
     <Compile Include="Assets\Scripts\RatTrap.cs" />
     <Compile Include="Assets\Scripts\RevealManager.cs" />
     <Compile Include="Assets\Scripts\ScaleChanger.cs" />

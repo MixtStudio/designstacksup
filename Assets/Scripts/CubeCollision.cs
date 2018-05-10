@@ -23,7 +23,7 @@ public class CubeCollision : MonoBehaviour {
 	}
 
 	IEnumerator Freeze() {
-		yield return new WaitForSeconds(2);
+		yield return new WaitForSeconds(4.5f);
 		rb.constraints = RigidbodyConstraints.FreezeAll;
 		rb.isKinematic = true;
 		rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;

@@ -6,7 +6,9 @@ using HoloToolkit.Unity.InputModule;
 public class RatTrap : MonoBehaviour {
 
 	public float revealRadius = 3.0f;
-
+	[SerializeField]
+	private float rotationSpeed;
+	
 	private int number_of_Spawns;
 	private int SpawnCount = 1;
 	private Vector3 spawnPos = Vector3.zero;
@@ -18,6 +20,7 @@ public class RatTrap : MonoBehaviour {
 	private bool fallingCheck = false;
 	private Rigidbody rg;
 	private bool allowMultipleSpawn = true;
+	private bool canRotate=true;
 
 	public void SetSpawnPosition(Vector3 pos) { spawnPos = pos; }
 
@@ -32,6 +35,11 @@ public class RatTrap : MonoBehaviour {
 		rg = GetComponent<Rigidbody>();
 	}
 
+	//private void Update() {
+	//	if (canRotate)
+	//		transform.Rotate(0, rotationSpeed, 0);
+	//}
+
 	private void DraggingStart() {
 		Debug.Log("DraggingStart");
 		if (!fallingCheck) {
@@ -39,8 +47,8 @@ public class RatTrap : MonoBehaviour {
 				transitionManager.BeginFalling();
 			else
 				GameObject.FindObjectOfType<TransitionManagerScaling>().BeginDisappear();
-
 			fallingCheck = true;
+			canRotate = false;
 		}
 	}
 
@@ -93,6 +101,7 @@ public class RatTrap : MonoBehaviour {
 		transform.rotation = spawnRot;
 		SpawnCount++;
 		Debug.Log("SpawnCount: "+SpawnCount);
+		canRotate = true;
 	}
 
 	private void SpawnMultiple(Vector3 spawnPoint, Quaternion spawnRotation) {

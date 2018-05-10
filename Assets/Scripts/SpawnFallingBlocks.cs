@@ -107,7 +107,7 @@ public class SpawnFallingBlocks: MonoBehaviour {
 			}
 		}
 		//To wait for all blocks to fall, to improve in the future
-		wait = new WaitForSeconds(3);
+		wait = new WaitForSeconds(4);
 		yield return wait;
 		OnGraphCompleted();
 		yield break;
@@ -122,11 +122,11 @@ public class SpawnFallingBlocks: MonoBehaviour {
 	private void AddGraphInteraction(Category c) {
 		var focusEvt = c.CategoryContainer.AddComponent<OnFocusEvent>();
 		c.CategoryContainer.AddComponent<OnFocusEvent>();
-		string industryName = c.Name;
+		string industryInfo = c.Name + "\n$"+c.Sum+"m" ;
 
 		GraphInteraction graph_interaction = c.CategoryContainer.AddComponent<GraphInteraction>();
 		graph_interaction.TextPrefab = SOC.TextPrefab;
-		graph_interaction.industryName = industryName;
+		graph_interaction.industryInfo = industryInfo;
 	}
 
 	Color  AssignColor(int index) {

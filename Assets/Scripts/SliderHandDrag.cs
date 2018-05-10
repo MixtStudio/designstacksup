@@ -91,6 +91,11 @@ namespace HoloToolkit.Unity.InputModule {
 		private IEnumerator ChangeScale() {
 			var wait = new WaitForSeconds(.01f);
 			float scaleNum = Mathf.InverseLerp(minHeight, maxHeight, HostTransform.position.y);
+			//Scales the numbers
+			foreach(Category c in SpawnObjectsController.CategoryList) {
+				c.Sum *= scaleNum + 1;
+			}
+
 
 			foreach (GameObject IB in SpawnObjectsController.instance.InvestBlocks) {
 				IB.transform.localScale = new Vector3(IB.transform.localScale.x, scaleFactor * scaleNum, IB.transform.localScale.z);
@@ -112,6 +117,7 @@ namespace HoloToolkit.Unity.InputModule {
 
 		public void OnGraphCompleted(object source, EventArgs e) {
 			MakeInvestBlocksReady();
+
 			graphCompleted = true;
 		}
 
