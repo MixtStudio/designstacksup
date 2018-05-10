@@ -9,13 +9,13 @@ namespace HoloToolkit.Unity.InputModule.Tests {
 
 	public class GraphInteraction:MonoBehaviour,IFocusable {
 
-		public string industryName { get; set; }			
+		public string industryInfo { get; set; }			
 		public TMP_Text TextPrefab { get; set; }
 		private TMP_Text textComp;
 			
 		private void Start() {
 			textComp = Instantiate(TextPrefab, SpawnObjectsController.instance.TextContainer.transform);
-			textComp.name = "Text " + industryName;
+			textComp.name = "Text " + industryInfo;
 
 			//Sets the initial Text Transform
 			Ray direction = new Ray(Vector3.zero, transform.position.normalized);
@@ -23,7 +23,7 @@ namespace HoloToolkit.Unity.InputModule.Tests {
 			Quaternion rot = transform.rotation;
 			rot *= Quaternion.Euler(0, 90, 0);
 			textComp.transform.rotation = rot;
-			textComp.text = industryName;
+			textComp.text = industryInfo;
 			textComp.gameObject.SetActive(false);
 		}
 
@@ -67,7 +67,7 @@ namespace HoloToolkit.Unity.InputModule.Tests {
 		//	yield return null;
 		//}
 
-		
+
 
 		public void OnFocusEnter() {
 			//StartCoroutine(ChangeMaterial(SpawnObjectsController.instance.HighlightColor));
