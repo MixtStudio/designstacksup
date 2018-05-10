@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba645735d712ed41a57e5d1c0068ec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPrefab: {fileID: 1470379913342780, guid: b2ce4e4757a614ed5a0abc8aa80bc65b,
+  spawnPrefab: {fileID: 1195325995825786, guid: adc2d9a02c123f54e937ab3b7ff79bd6,
     type: 2}
   SpawnPoint: {fileID: 1176434437}
   riseSpeed: 0.25

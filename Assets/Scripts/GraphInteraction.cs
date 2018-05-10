@@ -44,17 +44,40 @@ namespace HoloToolkit.Unity.InputModule.Tests {
 
 		private void ChangeMaterial(Color color) {
 			foreach (Renderer rend in GetComponentsInChildren<Renderer>()) {
-				rend.material.color = color ;
+				rend.material.color = color;
 			}
 		}
 
+		//private IEnumerator ChangeMaterial(Color color) {
+
+		//	float duration = 5; // This will be your time in seconds.
+		//	float smoothness = 0.1f; // This will determine the smoothness of the lerp. Smaller values are smoother. Really it's the time between updates.
+
+		//	float progress = 0; //This float will serve as the 3rd parameter of the lerp function.
+		//	float increment = smoothness / duration; //The amount of change to apply.
+		//	while (progress < 1) {
+		//		foreach (Renderer rend in GetComponentsInChildren<Renderer>()) {
+
+		//			rend.material.color = Color.Lerp(rend.material.color, color, progress);
+		//		}
+		//		progress += increment;
+		//		yield return new WaitForSeconds(smoothness);
+		//	}
+
+		//	yield return null;
+		//}
+
+		
+
 		public void OnFocusEnter() {
+			//StartCoroutine(ChangeMaterial(SpawnObjectsController.instance.HighlightColor));
 			ChangeMaterial(SpawnObjectsController.instance.HighlightColor);
 			textComp.gameObject.SetActive(true);
 		}
 
 		public void OnFocusExit() {
 			ChangeMaterial(SpawnObjectsController.instance.Color1);
+			//StartCoroutine(ChangeMaterial(SpawnObjectsController.instance.Color1));
 
 			foreach (GameObject IB in SpawnObjectsController.instance.InvestBlocks) {
 				Renderer rend = IB.GetComponentInChildren<Renderer>();

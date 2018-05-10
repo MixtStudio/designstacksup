@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0D72A425-3D01-4F94-B238-4B3E91314BBB}</ProjectGuid>
+    <ProjectGuid>{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp-player</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -1557,6 +1557,7 @@
     <Compile Include="Assets\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
     <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
+    <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Category.cs" />
     <Compile Include="Assets\Scripts\CSVReader.cs" />
     <Compile Include="Assets\Scripts\CubeCollision.cs" />
@@ -1565,12 +1566,13 @@
     <Compile Include="Assets\Scripts\GraphInteraction.cs" />
     <Compile Include="Assets\Scripts\Grow.cs" />
     <Compile Include="Assets\Scripts\Hide.cs" />
-    <Compile Include="Assets\Scripts\LeavesVarience.cs" />
+    <Compile Include="Assets\Scripts\Leaves.cs" />
     <Compile Include="Assets\Scripts\LoadManager.cs" />
     <Compile Include="Assets\Scripts\Pedastal.cs" />
     <Compile Include="Assets\Scripts\RatTrap.cs" />
     <Compile Include="Assets\Scripts\RevealManager.cs" />
     <Compile Include="Assets\Scripts\ScaleChanger.cs" />
+    <Compile Include="Assets\Scripts\Scene2Start.cs" />
     <Compile Include="Assets\Scripts\Screenshot.cs" />
     <Compile Include="Assets\Scripts\SliderHandDrag.cs" />
     <Compile Include="Assets\Scripts\SliderHandDragConstraint.cs" />
@@ -1578,6 +1580,7 @@
     <Compile Include="Assets\Scripts\SpawnObjectsController.cs" />
     <Compile Include="Assets\Scripts\TransitionManager.cs" />
     <Compile Include="Assets\Scripts\TransitionManagerScaling.cs" />
+    <Compile Include="Assets\Scripts\VertexColours.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
