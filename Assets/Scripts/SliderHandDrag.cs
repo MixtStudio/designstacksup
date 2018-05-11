@@ -19,10 +19,14 @@ namespace HoloToolkit.Unity.InputModule {
 		private TransitionManager transitionManager;
 		private bool pedastalCheck = false;
 		private bool graphCompleted= false;
+		private AudioManager audioManager;
+		private float[] thresholds;
+		private List<float> thresholdCheck;
 
 
 		protected override void Start() {
 			base.Start();
+			audioManager = FindObjectOfType<AudioManager>();
 			transitionManager = FindObjectOfType<TransitionManager>();
 			HostTransform.position = new Vector3(HostTransform.position.x, minHeight, HostTransform.position.z);
 			SpawnObjectsController.instance.FallingBlocksInstance.GraphCompleted += OnGraphCompleted;
@@ -34,6 +38,13 @@ namespace HoloToolkit.Unity.InputModule {
 
 			if (timeThreshold <= 0.0f)
 				timeThreshold = 0.1f;
+
+			thresholds = new float[5];
+			float increment = percentageThreshold / (thresholds.Length+1);
+			for (int i = 0; i < thresholds.Length; i++) {
+				thresholds[i] = increment * (i + 1);
+			}
+			thresholdCheck = new List<float>(); 
 		}
 
 		protected override void Update() {
@@ -41,8 +52,9 @@ namespace HoloToolkit.Unity.InputModule {
 			if (!pedastalCheck) {
 				if (HostTransform.position.y >= (percentageThreshold * maxHeight))
 					timeCounter += Time.deltaTime;
-
+				AudioCheck();
 				if (timeCounter >= timeThreshold) {
+					//audioManager.NowPlay(AudioManager.Audio.StatStepFinal);
 					if (transitionManager != null)
 						transitionManager.RaisePedastal();
 					else
@@ -50,6 +62,42 @@ namespace HoloToolkit.Unity.InputModule {
 					pedastalCheck = true;
 				}
 			}
+		}
+
+		private void AudioCheck() {
+			//Debug.Log("AudioCheck");
+			float heightRatio = Mathf.InverseLerp(minHeight, maxHeight, HostTransform.position.y);
+			//Debug.Log("heightRatio: "+ heightRatio);
+			if (heightRatio >= thresholds[0] && !thresholdCheck.Contains(thresholds[0])) {
+				Debug.Log("Now Playing 1");
+				audioManager.NowPlay(AudioManager.Audio.StatStep1);
+				thresholdCheck.Add(thresholds[0]);
+			}
+			else if (heightRatio >= thresholds[1] && !thresholdCheck.Contains(thresholds[1])) {
+				Debug.Log("Now Playing 2");
+				audioManager.NowPlay(AudioManager.Audio.StatStep2);
+				thresholdCheck.Add(thresholds[1]);
+			}
+			else if (heightRatio >= thresholds[2] && !thresholdCheck.Contains(thresholds[2])) {
+				Debug.Log("Now Playing 3");
+				audioManager.NowPlay(AudioManager.Audio.StatStep3);
+				thresholdCheck.Add(thresholds[2]);
+			}
+			else if (heightRatio >= thresholds[3] && !thresholdCheck.Contains(thresholds[3])) {
+				Debug.Log("Now Playing 4");
+				audioManager.NowPlay(AudioManager.Audio.StatStep4);
+				thresholdCheck.Add(thresholds[3]);
+			}
+			else if (heightRatio >= thresholds[4] && !thresholdCheck.Contains(thresholds[4])) {
+				Debug.Log("Now Playing 5");
+				audioManager.NowPlay(AudioManager.Audio.StatStep5);
+				thresholdCheck.Add(thresholds[4]);
+			} else if (heightRatio >= percentageThreshold && !thresholdCheck.Contains(percentageThreshold)) {
+				Debug.Log("Now Playing Final");
+				audioManager.NowPlay(AudioManager.Audio.StatStepFinal);
+				thresholdCheck.Add(percentageThreshold);
+			}
+
 		}
 
 		protected override void StartDragging(Vector3 initialDraggingPosition) {

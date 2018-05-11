@@ -20,9 +20,11 @@ public class RevealManager : MonoBehaviour {
 	private bool transitionDone = false;
 	private Color startFloorColour;
 	private Color startBackgroundColour;
+	private AudioManager audioManager;
 
 	private void Start() {
 		floor = GameObject.FindGameObjectWithTag("Floor");
+		audioManager = FindObjectOfType<AudioManager>();
 	}
 
 	public IEnumerator ScanHidden () {
@@ -52,6 +54,8 @@ public class RevealManager : MonoBehaviour {
 			for (int i = 0; i < 24; i++) {
 				GameObject closest = FindClosest(treeList, revealPosition);
 				closest.GetComponent<Grow>().BeginGrowing(i);
+				if (!audioManager.IsAudioPlaying(AudioManager.Audio.TreesGrowing))
+					audioManager.NowPlay(AudioManager.Audio.TreesGrowing);
 				treeList.Remove(closest);
 			}
 		} else if(revealNum >= revealNumThreshold) {
@@ -59,6 +63,8 @@ public class RevealManager : MonoBehaviour {
 			for (int i = 0; i < treeList.Count; i++) {
 				GameObject closest = FindClosest(treeList, revealPosition);
 				closest.GetComponent<Grow>().BeginGrowing(i);
+				if (!audioManager.IsAudioPlaying(AudioManager.Audio.TreesGrowing))
+					audioManager.NowPlay(AudioManager.Audio.TreesGrowing);
 				treeList.Remove(closest);
 			}
 		} else {
@@ -68,6 +74,8 @@ public class RevealManager : MonoBehaviour {
 				if (Vector3.Distance(revealPosition, treeList[i].transform.position) <= revealRadius) {
 					Debug.Log("Revealing Obj");
 					treeList[i].GetComponent<Grow>().BeginGrowing(i);
+					if (!audioManager.IsAudioPlaying(AudioManager.Audio.TreesGrowing))
+						audioManager.NowPlay(AudioManager.Audio.TreesGrowing);
 					treeList.RemoveAt(i);
 				}
 			}
