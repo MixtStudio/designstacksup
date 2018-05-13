@@ -8,14 +8,19 @@ using TMPro;
 namespace HoloToolkit.Unity.InputModule.Tests {
 
 	public class GraphInteraction:MonoBehaviour,IFocusable {
-
-		public string industryInfo { get; set; }			
+		
+		private string industryInfo { get; set; }			
 		public TMP_Text TextPrefab { get; set; }
 		private TMP_Text textComp;
+		public int categoryIndex { get; set; }
+		private Category c;
+		
 			
 		private void Start() {
 			textComp = Instantiate(TextPrefab, SpawnObjectsController.instance.TextContainer.transform);
-			textComp.name = "Text " + industryInfo;
+			c = SpawnObjectsController.CategoryList[categoryIndex];
+			industryInfo = string.Format("<size=220%>${0}m</size>\n<line-height=130%><size=30%>{1}</line-height></size>\n{2}", c.Sum, "Design-related economic activity within the", c.Name);
+			textComp.name = "Text " + SpawnObjectsController.CategoryList[categoryIndex].Name;
 
 			//Sets the initial Text Transform
 			Ray direction = new Ray(Vector3.zero, transform.position.normalized);
@@ -33,6 +38,8 @@ namespace HoloToolkit.Unity.InputModule.Tests {
 			if (!textComp.gameObject.activeInHierarchy) {
 				return;
 			}
+			c = SpawnObjectsController.CategoryList[categoryIndex];
+			industryInfo = string.Format("<size=220%><uppercase>${0}</uppercase>m</size>\n<line-height=130%><size=30%>{1}</line-height></size>\n{2}", c.Sum, "Design-related economic activity within the", c.Name);
 			UpdateTextPosition();
 		}
 		

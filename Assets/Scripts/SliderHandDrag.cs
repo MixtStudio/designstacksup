@@ -57,7 +57,6 @@ namespace HoloToolkit.Unity.InputModule {
 			ConstraintCheck();
 			if (graphCompleted)
 				StartCoroutine(ChangeScale());
-			//ChangeScale();
 		}
 
 
@@ -67,7 +66,6 @@ namespace HoloToolkit.Unity.InputModule {
 			ConstraintCheck();
 			if (graphCompleted)
 				StartCoroutine(ChangeScale());
-			//ChangeScale();
 		}
 
 
@@ -76,7 +74,6 @@ namespace HoloToolkit.Unity.InputModule {
 			ConstraintCheck();
 			if (graphCompleted)
 				StartCoroutine(ChangeScale());
-				//ChangeScale();
 		}
 
 		private void ConstraintCheck() {
@@ -93,7 +90,9 @@ namespace HoloToolkit.Unity.InputModule {
 			float scaleNum = Mathf.InverseLerp(minHeight, maxHeight, HostTransform.position.y);
 			//Scales the numbers
 			foreach(Category c in SpawnObjectsController.CategoryList) {
-				c.Sum *= scaleNum + 1;
+				
+				c.Sum = c.Sum*(scaleNum + 1);
+				Debug.Log("Scale number is: "+ scaleNum +" "+ c.Name + " " +c.Sum);
 			}
 
 
@@ -104,16 +103,6 @@ namespace HoloToolkit.Unity.InputModule {
 
 			yield break;
 		}
-
-		//Change scale without delay
-		//public void ChangeScale() {
-		//	var wait = new WaitForSeconds(.05f);
-		//	float scaleNum = Mathf.InverseLerp(minHeight, maxHeight, HostTransform.position.y);
-
-		//	foreach (GameObject IB in SpawnObjectsController.instance.InvestBlocks) {
-		//		IB.transform.localScale = new Vector3(IB.transform.localScale.x, scaleFactor * scaleNum, IB.transform.localScale.z);
-		//	}
-		//}
 
 		public void OnGraphCompleted(object source, EventArgs e) {
 			MakeInvestBlocksReady();

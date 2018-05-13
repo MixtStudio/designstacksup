@@ -220,10 +220,10 @@ public class SpawnObjectsController : MonoBehaviour {
 		categories.Add(new Category("Logistics Industry", 445));
 		categories.Add(new Category("Retail Industry", 432));
 		categories.Add(new Category("Other Public Sector", 428));
-		categories.Add(new Category("Food and Beverage\n Industry", 378));
+		categories.Add(new Category("Food and Beverage\nIndustry", 378));
 		categories.Add(new Category("Defence Industry", 298));
 		categories.Add(new Category("Engineering Industry\n(excluding Civils)", 269));
-		categories.Add(new Category("Digital and Creative\n Industry", 261));
+		categories.Add(new Category("Digital and Creative\nIndustry", 261));
 		categories.Add(new Category("Process Industry", 257));
 		categories.Add(new Category("Utilities", 231));
 		categories.Add(new Category("Marine Industry", 173));
@@ -231,7 +231,7 @@ public class SpawnObjectsController : MonoBehaviour {
 		categories.Add(new Category("Communications Industry", 157));
 		categories.Add(new Category("Education", 133));
 		categories.Add(new Category("Leisure Industry less tourism", 124));
-		categories.Add(new Category("Public & Private Transport Industry(not Freight)", 58));
+		categories.Add(new Category("Public & Private Transport\nIndustry(not Freight)", 58));
 		categories.Add(new Category("Aerospace Industry", 46));
 		categories.Add(new Category("Automotive Industry", 42));
 		categories.Add(new Category("Tourism", 40));
