@@ -145,6 +145,7 @@ public class SpawnObjectsController : MonoBehaviour {
 
 		BarsHolder = new GameObject() {
 			name = "BarsHolder",
+			layer = LayerMask.NameToLayer("Gaze"),
 		};
 
 

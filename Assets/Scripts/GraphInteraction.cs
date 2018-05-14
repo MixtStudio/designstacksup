@@ -5,23 +5,23 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
 
-namespace HoloToolkit.Unity.InputModule.Tests {
-
-	public class GraphInteraction:MonoBehaviour,IFocusable {
+public class GraphInteraction: MonoBehaviour {
 		
-		private string industryInfo { get; set; }			
-		public TMP_Text TextPrefab { get; set; }
-		private TMP_Text textComp;
+		public TMP_Text TextPrefab { get; set; }		
 		public int categoryIndex { get; set; }
-		private Category c;
 		
+		private string industryInfo { get; set; }
+		private Category c;
+		private TMP_Text textComp;
+		private GazeFinder gazeFinder;
 			
 		private void Start() {
 			textComp = Instantiate(TextPrefab, SpawnObjectsController.instance.TextContainer.transform);
 			c = SpawnObjectsController.CategoryList[categoryIndex];
 			industryInfo = string.Format("<size=220%>${0}m</size>\n<line-height=130%><size=30%>{1}</line-height></size>\n{2}", c.Sum, "Design-related economic activity within the", c.Name);
 			textComp.name = "Text " + SpawnObjectsController.CategoryList[categoryIndex].Name;
-
+			gazeFinder = FindObjectOfType<GazeFinder>();
+			
 			//Sets the initial Text Transform
 			Ray direction = new Ray(Vector3.zero, transform.position.normalized);
 			textComp.transform.position = direction.GetPoint(SpawnObjectsController.instance.Radius * .8f);
@@ -44,7 +44,7 @@ namespace HoloToolkit.Unity.InputModule.Tests {
 		}
 		
 		private void UpdateTextPosition() {
-			Vector3 hit = GazeManager.Instance.HitInfo.point;
+			Vector3 hit = gazeFinder.GetRayCastHit().point;
 			Vector3 position = textComp.transform.position;
 			textComp.transform.position = new Vector3(position.x, hit.y, position.z);
 		}
@@ -76,13 +76,15 @@ namespace HoloToolkit.Unity.InputModule.Tests {
 
 
 
-		public void OnFocusEnter() {
+		public void OnGazeEnter() {
 			//StartCoroutine(ChangeMaterial(SpawnObjectsController.instance.HighlightColor));
+			Debug.Log("OnGazeEnter");			
 			ChangeMaterial(SpawnObjectsController.instance.HighlightColor);
 			textComp.gameObject.SetActive(true);
 		}
 
-		public void OnFocusExit() {
+		public void OnGazeExit() {
+			Debug.Log("OnGazeExit");
 			ChangeMaterial(SpawnObjectsController.instance.Color1);
 			//StartCoroutine(ChangeMaterial(SpawnObjectsController.instance.Color1));
 
@@ -93,5 +95,5 @@ namespace HoloToolkit.Unity.InputModule.Tests {
 
 			textComp.gameObject.SetActive(false);
 		}
-	}
 }
+
