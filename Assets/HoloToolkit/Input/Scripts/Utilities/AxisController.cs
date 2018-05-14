@@ -538,9 +538,7 @@ namespace HoloToolkit.Unity.InputModule
             }
         }
 
-#if UNITY_EDITOR && UNITY_WSA
-
-
+#if UNITY_EDITOR
         [System.Runtime.InteropServices.DllImport("kernel32.dll")]
         private static extern uint GetCurrentProcessId();
 
