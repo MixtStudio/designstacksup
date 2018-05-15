@@ -14,9 +14,12 @@ public class Ascend : MonoBehaviour {
 	private Vector3 startPos;
 	private Vector3 endPos;
 	private bool ascending = false;
+	private DesignDial designDial;
 
 	void OnEnable() {
 		CloudEffect.SetActive(false);
+		designDial = FindObjectOfType<DesignDial>();
+		GameObject.FindGameObjectWithTag("MainCamera").transform.SetParent(transform, true);
 	}
 	
 	public void StartAscending() {
@@ -24,6 +27,9 @@ public class Ascend : MonoBehaviour {
 		endPos = startPos + (Vector3.up * 10);
 		ascending = true;
 		delta = 0.0f;
+		
+		designDial.Despawn();
+		designDial.gameObject.SetActive(false);
 
 		ascendCount++;
 		if (ascendCount == cloudTrigger)
@@ -41,6 +47,8 @@ public class Ascend : MonoBehaviour {
 
 		if (delta >= 1.0f) {
 			ascending = false;
+			designDial.gameObject.SetActive(true);
+			designDial.Respawn();
 		}
 	}
 }

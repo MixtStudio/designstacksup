@@ -22,8 +22,6 @@ public class Grow : MonoBehaviour {
 							   transform.localScale.y + Random.Range(-0.25f * transform.localScale.y, 0.25f * transform.localScale.y), 
 							   transform.localScale.z + Random.Range(-0.25f * transform.localScale.z, 0.25f * transform.localScale.z) );
 
-		//varience in scaleSpeed
-
 		//varience in rotation
 		transform.rotation = Quaternion.AngleAxis(Random.Range(0.0f, 360.0f), Vector3.up);
 

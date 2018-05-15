@@ -7,6 +7,7 @@ TagManager:
   - Floor
   - Tree
   - DesignDial
+  - ForestFloor
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Gaze
   - 
   - 
   - 

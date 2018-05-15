@@ -140,7 +140,7 @@ namespace HoloToolkit.Unity.InputModule {
 			foreach(Category c in SpawnObjectsController.CategoryList) {
 				
 				c.Sum = c.Sum*(scaleNum + 1);
-				Debug.Log("Scale number is: "+ scaleNum +" "+ c.Name + " " +c.Sum);
+				//Debug.Log("Scale number is: "+ scaleNum +" "+ c.Name + " " +c.Sum);
 			}
 
 
