@@ -5,25 +5,39 @@ using UnityEngine;
 public class Ascend : MonoBehaviour {
 
 	public float ascendSpeed = 1.0f;
+	public GameObject CloudEffect;
+
+	private int cloudTrigger = 2;
+	private int ascendCount;
 
 	private float delta = 0.0f;
 	private Vector3 startPos;
 	private Vector3 endPos;
 	private bool ascending = false;
-	private bool ascendDone = false;
+	private DesignDial designDial;
 
-	// Use this for initialization
-	void Start () {
-		startPos = transform.position;
-		endPos = startPos + (Vector3.up * 10);
+	void OnEnable() {
+		CloudEffect.SetActive(false);
+		designDial = FindObjectOfType<DesignDial>();
+		GameObject.FindGameObjectWithTag("MainCamera").transform.SetParent(transform, true);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown(KeyCode.K))
-			ascending = true;
+	public void StartAscending() {
+		startPos = transform.position;
+		endPos = startPos + (Vector3.up * 10);
+		ascending = true;
+		delta = 0.0f;
+		
+		designDial.Despawn();
+		designDial.gameObject.SetActive(false);
 
-		if (ascending && !ascendDone)
+		ascendCount++;
+		if (ascendCount == cloudTrigger)
+			CloudEffect.SetActive(true);
+	}
+
+	void Update () {
+		if (ascending)
 			Ascending();
 	}
 
@@ -32,7 +46,9 @@ public class Ascend : MonoBehaviour {
 		transform.position = Vector3.Lerp(startPos, endPos, delta);
 
 		if (delta >= 1.0f) {
-			ascendDone = true;
+			ascending = false;
+			designDial.gameObject.SetActive(true);
+			designDial.Respawn();
 		}
 	}
 }
