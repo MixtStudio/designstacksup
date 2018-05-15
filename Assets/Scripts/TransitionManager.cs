@@ -29,7 +29,7 @@ public class TransitionManager : MonoBehaviour {
 	public void RaisePedastal() {
 		Debug.Log("Raise the Pedastal");
 		pedastal.BeginRaising();
-		audioManager.NowPlay(AudioManager.Audio.Warping);
+		audioManager.NowPlay(AudioManager.Audio.RisingPlatform);
 	}
 
 	public void BeginFalling() {

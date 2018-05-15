@@ -52,7 +52,7 @@ public class AudioManager : MonoBehaviour {
 			case Audio.TextPopUp:
 				return audioSources[3];
 
-			case Audio.Warping:
+			case Audio.RisingPlatform:
 				return audioSources[4];
 		
 			case Audio.UserControl:
@@ -118,7 +118,7 @@ public class AudioManager : MonoBehaviour {
 		FallingImpact,
 		StatSlider,
 		TextPopUp,
-		Warping,
+		RisingPlatform,
 		UserControl,
 		UserControlLong,
 		ForestAmbience,
