@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 65923845635356814}
   - component: {fileID: 54783133457394364}
   - component: {fileID: 114240840484290020}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: InvestBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4666101410088810}
   - component: {fileID: 33186393677668504}
   - component: {fileID: 23431625856199466}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NormalBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class CubeCollision : MonoBehaviour {
 
-	Rigidbody rb;
+	private Rigidbody rb;
+	private AudioManager audioManager;
 
 	void Awake() {
 		rb = GetComponent<Rigidbody>();
+		audioManager = FindObjectOfType<AudioManager>();
 		StartCoroutine(TurnOnCollider());
 	}
 
@@ -19,11 +21,14 @@ public class CubeCollision : MonoBehaviour {
     }
 
 	private void OnCollisionEnter(Collision collision) {
+		//float randNum = Random.Range(0.0f, 1.0f);
+		//if(randNum <= 0.75f)
+		audioManager.NowPlay(AudioManager.Audio.BlockLanding);
 		StartCoroutine(Freeze());
 	}
 
 	IEnumerator Freeze() {
-		yield return new WaitForSeconds(2);
+		yield return new WaitForSeconds(4.5f);
 		rb.constraints = RigidbodyConstraints.FreezeAll;
 		rb.isKinematic = true;
 		rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;

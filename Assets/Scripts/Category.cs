@@ -19,4 +19,9 @@ public class Category
         Name = categoryName;
         Sum = 0;
     }
+
+	public Category (string categoryName, int sum) {
+		Name = categoryName;
+		Sum = sum;
+	}
 }

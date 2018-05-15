@@ -116,11 +116,12 @@ public class SpawnObjectsController : MonoBehaviour {
 		instance = this;
 		CategoryList = new List<Category>();
 		InvestBlocks = new List<GameObject>();
-		CreateStatsBar();
+		//CreateStatsBar();
+		CreateHarcodeBar();
 	}
 
 
-	private void CreateStatsBar() {
+	private void CreateHarcodeBar() {
 
 		BarsHolder = new GameObject() {
 			name = "BarsHolder",
@@ -131,11 +132,37 @@ public class SpawnObjectsController : MonoBehaviour {
 			name = "TextContainer",
 		};
 
+		CategoryList = new List<Category>();
+		CategoryList = GetHardCodeList();// 2. Fills categoryList
+		MaxCategorySum = GetMaxCategorySum();
+		FallingBlocksInstance = new SpawnFallingBlocks();
+		
+		//3.Uses data to create objects
+		FallingBlocksInstance.CreateGraphs();
+	}
+
+	private void CreateStatsBar() {
+
+		BarsHolder = new GameObject() {
+			name = "BarsHolder",
+			layer = LayerMask.NameToLayer("Gaze"),
+		};
+
+
+		TextContainer = new GameObject() {
+			name = "TextContainer",
+		};
+
 		valueList = CSVReader.Read(InputFile); // 1. Fills valueList
 		CategoryList = new List<Category>();
 		CategoryList = GetCategories(); // 2. Fills categoryList
 		MaxCategorySum = GetMaxCategorySum();
 		FallingBlocksInstance = new SpawnFallingBlocks();
+		foreach (Category c in CategoryList) {
+			Debug.Log("Category name: " + c.Name + ", Money: " + c.Sum);
+		}
+
+
 
 		//3.Uses data to create objects
 		FallingBlocksInstance.CreateGraphs();
@@ -181,6 +208,42 @@ public class SpawnObjectsController : MonoBehaviour {
 		}
 		return -1;
 	}
+
+	private List<Category>  GetHardCodeList() {
+		List<Category> categories = new List<Category>();
+
+		categories.Add(new Category("Manufacturing Industry", 2691));
+		categories.Add(new Category("Human Health", 895));
+		categories.Add(new Category("Financial", 757));
+		categories.Add(new Category("Environmental Industry", 651));
+		categories.Add(new Category("Construction", 607));
+		categories.Add(new Category("Agriculture", 467));
+		categories.Add(new Category("Logistics Industry", 445));
+		categories.Add(new Category("Retail Industry", 432));
+		categories.Add(new Category("Other Public Sector", 428));
+		categories.Add(new Category("Food and Beverage\nIndustry", 378));
+		categories.Add(new Category("Defence Industry", 298));
+		categories.Add(new Category("Engineering Industry\n(excluding Civils)", 269));
+		categories.Add(new Category("Digital and Creative\nIndustry", 261));
+		categories.Add(new Category("Process Industry", 257));
+		categories.Add(new Category("Utilities", 231));
+		categories.Add(new Category("Marine Industry", 173));
+		categories.Add(new Category("Designer Fashion", 172));
+		categories.Add(new Category("Communications Industry", 157));
+		categories.Add(new Category("Education", 133));
+		categories.Add(new Category("Leisure Industry less tourism", 124));
+		categories.Add(new Category("Public & Private Transport\nIndustry(not Freight)", 58));
+		categories.Add(new Category("Aerospace Industry", 46));
+		categories.Add(new Category("Automotive Industry", 42));
+		categories.Add(new Category("Tourism", 40));
+		categories.Add(new Category("Security & Cyber", 30));
+		categories.Add(new Category("Commercial Travel Industry", 27));
+		categories.Add(new Category("Animal Health", 13));
+		categories.Add(new Category("Civil Engineering Industry", 12));
+		categories.Add(new Category("Data Services", 3));
+		return categories;
+	}
+
 
 	/// <summary>
 	/// Finds largest sum from all categories.

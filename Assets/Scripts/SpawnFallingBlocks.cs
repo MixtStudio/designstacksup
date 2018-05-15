@@ -36,7 +36,8 @@ public class SpawnFallingBlocks: MonoBehaviour {
 	/// <summary>
 	/// Sets the position for each category in categoryList, equally spaced around a circle.
 	/// </summary>
-	public void BlockCategoryPositions(List<Category> categoryList) {
+	public void BlockCategoryPositions() {
+		List<Category> categoryList = SpawnObjectsController.CategoryList;
 		int count = categoryList.Count;
 		float spacing = 360f / count;
 
@@ -58,14 +59,16 @@ public class SpawnFallingBlocks: MonoBehaviour {
 	/// MonoBehavior.
 	/// </summary>
 	public void CreateGraphs() {
-		BlockCategoryPositions(SpawnObjectsController.CategoryList);
-		SOC.StartCoroutine(CreateBlocksCR(SpawnObjectsController.CategoryList));
+		BlockCategoryPositions();
+		SOC.StartCoroutine(CreateBlocksCR());
 	}
 
 	/// <summary>
 	/// Creates the blocks according to their category's position, and spreads 'em out a bit.
 	/// </summary>
-	private IEnumerator CreateBlocksCR(List<Category> categoryList) {
+	private IEnumerator CreateBlocksCR() {
+		List<Category> categoryList= SpawnObjectsController.CategoryList;
+
 		var wait = new WaitForSeconds(.05f);
 
 		GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(SOC.BarsHolder);
@@ -74,7 +77,9 @@ public class SpawnFallingBlocks: MonoBehaviour {
 
 		//Allows a random fall of blocks
 		while (index != 0) {
-			Category c = categoryList[UnityEngine.Random.Range(0, categoryList.Count)];
+			//To always know the index of the category in the SOC CategoryList
+			int categoryIndex = UnityEngine.Random.Range(0, categoryList.Count);
+			Category c = categoryList[categoryIndex];
 			if(c.Exists != true) {
 				c.CategoryContainer = new GameObject() {
 					name = c.Name,
@@ -101,13 +106,13 @@ public class SpawnFallingBlocks: MonoBehaviour {
 			
 		
 				//Adds the interaction to category and block
-				AddGraphInteraction(c);
+				AddGraphInteraction(categoryIndex);
 				c.Exists = true;
 				index--;
 			}
 		}
 		//To wait for all blocks to fall, to improve in the future
-		wait = new WaitForSeconds(3);
+		wait = new WaitForSeconds(4);
 		yield return wait;
 		OnGraphCompleted();
 		yield break;
@@ -119,14 +124,13 @@ public class SpawnFallingBlocks: MonoBehaviour {
 	}
 
 	
-	private void AddGraphInteraction(Category c) {
+	private void AddGraphInteraction(int categoryIndex) {
+		Category c = SpawnObjectsController.CategoryList[categoryIndex];
 		var focusEvt = c.CategoryContainer.AddComponent<OnFocusEvent>();
 		c.CategoryContainer.AddComponent<OnFocusEvent>();
-		string industryName = c.Name;
-
 		GraphInteraction graph_interaction = c.CategoryContainer.AddComponent<GraphInteraction>();
 		graph_interaction.TextPrefab = SOC.TextPrefab;
-		graph_interaction.industryName = industryName;
+		graph_interaction.categoryIndex = categoryIndex;
 	}
 
 	Color  AssignColor(int index) {
@@ -150,7 +154,6 @@ GameObject SpawnBlock(Category c, float posY, bool blockType) {
 		} 
 		else {
 			o = UnityEngine.Object.Instantiate(InvestBlock, c.CategoryContainer.transform,false);
-			//o.transform.localScale = Vector3.one;
 		}
 
 		o.transform.localEulerAngles = Vector3.zero;

@@ -29,7 +29,7 @@ public class TransitionManager : MonoBehaviour {
 	public void RaisePedastal() {
 		Debug.Log("Raise the Pedastal");
 		pedastal.BeginRaising();
-		audioManager.NowPlay(AudioManager.Audio.Warping02);
+		audioManager.NowPlay(AudioManager.Audio.RisingPlatform);
 	}
 
 	public void BeginFalling() {
@@ -37,7 +37,7 @@ public class TransitionManager : MonoBehaviour {
 
 		Debug.Log("Begin Falling");
 
-		audioManager.NowPlay(AudioManager.Audio.TrapSection, true, false);
+		audioManager.NowPlay(AudioManager.Audio.ForestAmbience, true, false);
 
 		sliderHandDrag.BeginFalling();
 

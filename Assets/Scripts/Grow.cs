@@ -31,8 +31,8 @@ public class Grow : MonoBehaviour {
 	}
 
 	void Update() {
-		if(Input.GetKeyDown(KeyCode.K))
-			BeginGrowing(0);
+		//if(Input.GetKeyDown(KeyCode.K))
+			//BeginGrowing(0);
 
 		if (scaling && !scalingDone)
 			Scale();
