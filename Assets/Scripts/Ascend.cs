@@ -23,15 +23,38 @@ public class Ascend : MonoBehaviour {
 	}
 	
 	public void StartAscending() {
+		ascendCount++;
+		float height;
+		
+		switch(ascendCount){
+			case 1:
+				height = 10.0f;
+				break;
+				
+			case 2:
+				height = 50.0f;
+				break;
+				
+			case 3: 
+				height = 100.0f;
+				break;
+				
+			case 4:
+				height = 1000.0f;
+				break;
+				
+			default:
+				return;
+		}
+		
 		startPos = transform.position;
-		endPos = startPos + (Vector3.up * 10);
+		endPos = startPos + (Vector3.up * height);
 		ascending = true;
 		delta = 0.0f;
 		
 		designDial.Despawn();
 		designDial.gameObject.SetActive(false);
-
-		ascendCount++;
+		
 		if (ascendCount == cloudTrigger)
 			CloudEffect.SetActive(true);
 	}
