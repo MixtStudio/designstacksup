@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F7344EA1-D774-4624-8BB6-8A1004B73595}</ProjectGuid>
+    <ProjectGuid>{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp-player</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -1628,6 +1628,7 @@
     <Compile Include="Assets\Scripts\SliderHandDragConstraint.cs" />
     <Compile Include="Assets\Scripts\SpawnFallingBlocks.cs" />
     <Compile Include="Assets\Scripts\SpawnObjectsController.cs" />
+    <Compile Include="Assets\Scripts\TextAnimScript.cs" />
     <Compile Include="Assets\Scripts\TransitionManager.cs" />
     <Compile Include="Assets\Scripts\TransitionManagerScaling.cs" />
     <Compile Include="Assets\Scripts\VertexColours.cs" />

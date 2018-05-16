@@ -1402,6 +1402,7 @@
     <Compile Include="Assets\Scripts\SliderHandDragConstraint.cs" />
     <Compile Include="Assets\Scripts\SpawnFallingBlocks.cs" />
     <Compile Include="Assets\Scripts\SpawnObjectsController.cs" />
+    <Compile Include="Assets\Scripts\TextAnimScript.cs" />
     <Compile Include="Assets\Scripts\TransitionManager.cs" />
     <Compile Include="Assets\Scripts\TransitionManagerScaling.cs" />
     <Compile Include="Assets\Scripts\VertexColours.cs" />
