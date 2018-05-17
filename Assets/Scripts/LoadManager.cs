@@ -27,4 +27,14 @@ public class LoadManager : MonoBehaviour {
 		Debug.Log("sceneBuildIndex to load: " + sceneANumber);
 		SceneManager.LoadScene(sceneANumber, LoadSceneMode.Additive);
 	}
+	
+	public void LoadByName(string scenename) {
+		Debug.Log("sceneName to load: " + scenename);
+		SceneManager.LoadScene(scenename, LoadSceneMode.Single);
+	}
+	
+	public void LoadByIndex(int sceneANumber) {
+		Debug.Log("sceneBuildIndex to load: " + sceneANumber);
+		SceneManager.LoadScene(sceneANumber, LoadSceneMode.Single);
+	}
 }
