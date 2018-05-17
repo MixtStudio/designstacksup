@@ -9,15 +9,16 @@ public class CubeCollision : MonoBehaviour {
 
 	void Awake() {
 		rb = GetComponent<Rigidbody>();
+		rb.AddForce(-Vector3.up * 9f, ForceMode.Impulse);
 		audioManager = FindObjectOfType<AudioManager>();
 		StartCoroutine(TurnOnCollider());
 	}
 
 	IEnumerator TurnOnCollider()
     {
-        yield return new WaitForSeconds(.05f);
+        yield return new WaitForSeconds(.01f);
         GetComponent<Collider>().enabled = true;
-        yield break;
+        //yield break;
     }
 
 	private void OnCollisionEnter(Collision collision) {
@@ -28,11 +29,11 @@ public class CubeCollision : MonoBehaviour {
 	}
 
 	IEnumerator Freeze() {
-		yield return new WaitForSeconds(4.5f);
+		yield return new WaitForSeconds(6f);
 		rb.constraints = RigidbodyConstraints.FreezeAll;
 		rb.isKinematic = true;
 		rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-		yield break;
+		//yield break;
 	}
 
 	public void Unfreeze() {

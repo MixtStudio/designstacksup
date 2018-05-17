@@ -10,18 +10,14 @@ public class Category
     public string Name { get; set; }
     public float Angle { get; set; }
     public Vector3 Position { get; set; }
-    public float Sum { get; set; }
+    public int Sum { get; set; }
+	public int CurrentSum { get; set; }
 	public GameObject CategoryContainer { get; set; }
 	public bool Exists { get; set; }
 	
-
-    public Category(string categoryName) {
-        Name = categoryName;
-        Sum = 0;
-    }
-
 	public Category (string categoryName, int sum) {
 		Name = categoryName;
 		Sum = sum;
+		CurrentSum = sum;
 	}
 }
