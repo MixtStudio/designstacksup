@@ -6,18 +6,26 @@ using RenderHeads.Media.AVProVideo;
 public class MediaPlayerManager : MonoBehaviour {
 
 	private MediaPlayer mediaPlayer;
-
-	// Use this for initialization
-	void Start () {
-		mediaPlayer = GetComponent<MediaPlayer>();
-	}
+	private StartScene startScene;
 	
-	// Update is called once per frame
-	void Update () {
-		
+	void Start () {
+		startScene = FindObjectOfType<StartScene>();
+		mediaPlayer = GetComponent<MediaPlayer>();
+		mediaPlayer.Events.AddListener(OnVideoEvent);
 	}
 
 	public void Begin() {
 		mediaPlayer.Play();
+	}
+
+	public void OnVideoEvent(MediaPlayer mp, MediaPlayerEvent.EventType et, ErrorCode errorCode) {
+		Debug.Log("Event:   " + et.ToString());
+		switch (et) {
+			case MediaPlayerEvent.EventType.FinishedPlaying:
+				startScene.LoadScene1();
+				//Destroy(gameObject);
+				gameObject.SetActive(false);
+				break;
+		}
 	}
 }

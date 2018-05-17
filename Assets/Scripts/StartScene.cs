@@ -6,12 +6,14 @@ using UnityEngine.XR.WSA.Input;
 public class StartScene : MonoBehaviour {
 
 	private MediaPlayerManager mpManager;
+	private LoadManager loadManager;
 	private InteractionSourceState[] interactionSourceStates;
 	private bool begin;
 
 	// Use this for initialization
 	void Start () {
 		mpManager = FindObjectOfType<MediaPlayerManager>();
+		loadManager = FindObjectOfType<LoadManager>();
 	}
 	
 	// Update is called once per frame
@@ -26,5 +28,9 @@ public class StartScene : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	public void LoadScene1() {
+		loadManager.AdditiveLoadByName("Scene1additive");
 	}
 }
