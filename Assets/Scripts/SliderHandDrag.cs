@@ -65,9 +65,8 @@ namespace HoloToolkit.Unity.InputModule {
 		}
 
 		private void AudioCheck() {
-			//Debug.Log("AudioCheck");
 			float heightRatio = Mathf.InverseLerp(minHeight, maxHeight, HostTransform.position.y);
-			//Debug.Log("heightRatio: "+ heightRatio);
+
 			if (heightRatio >= thresholds[0] && !thresholdCheck.Contains(thresholds[0])) {
 				Debug.Log("Now Playing 1");
 				audioManager.NowPlay(AudioManager.Audio.StatStep1);
@@ -109,7 +108,6 @@ namespace HoloToolkit.Unity.InputModule {
 
 
 		protected override void UpdateDragging() {
-			//HostTransform.Rotate(Vector3.up, speed * Time.deltaTime);
 			base.UpdateDragging();
 			ConstraintCheck();
 			if (graphCompleted)
@@ -125,7 +123,6 @@ namespace HoloToolkit.Unity.InputModule {
 		}
 
 		private void ConstraintCheck() {
-			//distanceCam = Vector3.Distance(HostTransform.position, VR_camera.transform.position);
 			if (HostTransform.position.y > maxHeight)
 				HostTransform.position = new Vector3(HostTransform.position.x, maxHeight, HostTransform.position.z);
 
@@ -138,9 +135,8 @@ namespace HoloToolkit.Unity.InputModule {
 			float scaleNum = Mathf.InverseLerp(minHeight, maxHeight, HostTransform.position.y);
 			//Scales the numbers
 			foreach(Category c in SpawnObjectsController.CategoryList) {
-				
-				c.Sum = c.Sum*(scaleNum + 1);
-				//Debug.Log("Scale number is: "+ scaleNum +" "+ c.Name + " " +c.Sum);
+
+				c.CurrentSum = (int)Math.Round(c.Sum + (scaleNum*100));
 			}
 
 
@@ -163,7 +159,7 @@ namespace HoloToolkit.Unity.InputModule {
 			foreach(GameObject IB in SpawnObjectsController.instance.InvestBlocks) {
 				Renderer rend =IB.GetComponentInChildren<Renderer>();
 				rend.enabled=true;
-				IB.transform.localScale = new Vector3(IB.transform.localScale.x, 0, IB.transform.localScale.z);
+				IB.transform.localScale = new Vector3(IB.transform.localScale.x, 0.01f, IB.transform.localScale.z);
 			}
 		}
 
