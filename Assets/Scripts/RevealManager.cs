@@ -8,12 +8,12 @@ public class RevealManager : MonoBehaviour {
 	public int revealNumThreshold = 3;
 	public Color[] FloorColourArray;
 	public Color[] BackgroundColourArray;
+	public GameObject forestFloor;
 
 	private int revealNum = 0;
 	private GameObject[] hiddenObjs;
 	List<GameObject> treeList;
 	private GameObject floor;
-	private GameObject forestFloor;
 	private float colourChangeSpeed = 1.0f; // may need to implement a failsafe if the user triggers the reveals too fast (the colour change speed is too fast atm for that to happen)
 	private float delta;
 	private bool colourTransition = false;
@@ -29,8 +29,6 @@ public class RevealManager : MonoBehaviour {
 
 	private void Start() {
 		floor = GameObject.FindGameObjectWithTag("Floor");
-		forestFloor = GameObject.FindGameObjectWithTag("ForestFloor");
-		forestFloor.SetActive(false);
 		audioManager = FindObjectOfType<AudioManager>();
 		loadManager = FindObjectOfType<LoadManager>();		
 	}
@@ -71,7 +69,7 @@ public class RevealManager : MonoBehaviour {
 		} else if(revealNum >= revealNumThreshold) {
 			Debug.Log("Revealing Everything");
 			floor.SetActive(false);
-			forestFloor.SetActive(true);
+			Instantiate(forestFloor);
 			int i = 0;
 			while(treeList.Count != 0) { 
 				GameObject closest = FindClosest(treeList, revealPosition);
