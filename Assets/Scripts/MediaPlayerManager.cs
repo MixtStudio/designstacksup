@@ -23,7 +23,6 @@ public class MediaPlayerManager : MonoBehaviour {
 		switch (et) {
 			case MediaPlayerEvent.EventType.FinishedPlaying:
 				startScene.LoadScene1();
-				//Destroy(gameObject);
 				gameObject.SetActive(false);
 				break;
 		}

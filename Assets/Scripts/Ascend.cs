@@ -24,7 +24,7 @@ public class Ascend : MonoBehaviour {
 	
 	public void StartAscending() {
 		ascendCount++;
-		float height;
+		float height = 0.0f;
 		
 		switch(ascendCount){
 			case 1:
@@ -41,6 +41,10 @@ public class Ascend : MonoBehaviour {
 				
 			case 4:
 				height = 1000.0f;
+				break;
+				
+			case 5:
+				Transition();
 				break;
 				
 			default:
@@ -73,5 +77,9 @@ public class Ascend : MonoBehaviour {
 			designDial.gameObject.SetActive(true);
 			designDial.Respawn();
 		}
+	}
+	
+	private void Transition() {
+		FindObjectOfType<LoadManager>().LoadByName("NZRevealadditive");
 	}
 }
