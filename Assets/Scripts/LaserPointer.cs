@@ -39,7 +39,8 @@ public class LaserPointer : MonoBehaviour {
 	}
 	
 	private void Initialize(){
-		controller = transform.GetChild(0);
+		if(transform.childCount > 0)
+			controller = transform.GetChild(0);
 		if(controller != null)
 			LR.enabled = true;
 	}

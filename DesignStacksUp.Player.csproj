@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A0F896CA-B5FD-E0C9-A666-4BBB316965BF}</ProjectGuid>
+    <ProjectGuid>{E879BA99-926E-4205-8EC2-6A4C8ECBCB63}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp-player</AssemblyName>
     <FileAlignment>512</FileAlignment>
