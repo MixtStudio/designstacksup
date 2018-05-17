@@ -9,17 +9,6 @@ using TMPro;
 /// type of object.
 /// </summary>
 public class SpawnObjectsController : MonoBehaviour {
-	[Header("Settings")]
-	/// <summary>
-	/// Exact file name of the csv file, must be in resources folder.
-	/// </summary>
-	[SerializeField]
-	private string _inputFile;
-	public string InputFile {
-		get {
-			return _inputFile;
-		}
-	}
 
 	[SerializeField]
 	private GameObject _normalBlock;
@@ -87,10 +76,6 @@ public class SpawnObjectsController : MonoBehaviour {
 	[HideInInspector]
 	public static SpawnObjectsController instance;
 
-	/// <summary>
-	/// All the data values in the csv.
-	/// </summary>
-	private static List<Dictionary<string, object>> valueList;
 
 	/// <summary>
 	/// List of categories of data according to categoryColumnName.
@@ -116,7 +101,6 @@ public class SpawnObjectsController : MonoBehaviour {
 		instance = this;
 		CategoryList = new List<Category>();
 		InvestBlocks = new List<GameObject>();
-		//CreateStatsBar();
 		CreateHarcodeBar();
 	}
 
@@ -127,13 +111,13 @@ public class SpawnObjectsController : MonoBehaviour {
 			name = "BarsHolder",
 		};
 
-	
 		TextContainer = new GameObject() {
 			name = "TextContainer",
 		};
 
 		CategoryList = new List<Category>();
-		CategoryList = GetHardCodeList();// 2. Fills categoryList
+		// 2. Fills categoryList
+		CategoryList = GetHardCodeList();
 		MaxCategorySum = GetMaxCategorySum();
 		FallingBlocksInstance = new SpawnFallingBlocks();
 		
@@ -141,73 +125,8 @@ public class SpawnObjectsController : MonoBehaviour {
 		FallingBlocksInstance.CreateGraphs();
 	}
 
-	private void CreateStatsBar() {
-
-		BarsHolder = new GameObject() {
-			name = "BarsHolder",
-			layer = LayerMask.NameToLayer("Gaze"),
-		};
 
 
-		TextContainer = new GameObject() {
-			name = "TextContainer",
-		};
-
-		valueList = CSVReader.Read(InputFile); // 1. Fills valueList
-		CategoryList = new List<Category>();
-		CategoryList = GetCategories(); // 2. Fills categoryList
-		MaxCategorySum = GetMaxCategorySum();
-		FallingBlocksInstance = new SpawnFallingBlocks();
-		foreach (Category c in CategoryList) {
-			Debug.Log("Category name: " + c.Name + ", Money: " + c.Sum);
-		}
-
-
-
-		//3.Uses data to create objects
-		FallingBlocksInstance.CreateGraphs();
-	}
-
-
-	/// <summary>
-	/// Loops through pointList to find the categories.
-	/// </summary>
-	/// <returns>A list of Category objects from the "categoryColumnName" column in pointList.</returns>
-	private List<Category> GetCategories() {
-		List<Category> categories = new List<Category>();
-		//string[] columnsName = GetColumnsName();
-
-		List<string> nameList = new List<string>();
-		for (var i = 0; i < valueList.Count; i++) {
-			string aString = System.Convert.ToString(valueList[i]["Level 2"]);
-			if (aString != "No Data") {
-				if (!nameList.Contains(aString)) {
-
-					categories.Add(new Category(aString));
-					nameList.Add(aString);
-				}
-				categories[FindCategoryWithName(aString, categories)].Sum +=
-														System.Convert.ToSingle(valueList[i]["GDP"]);
-			}
-		}
-
-		return categories;
-	}
-
-	/// <summary>
-	/// Finds index of a category name in a list.
-	/// </summary>
-	/// <returns>The index of the inputed category.</returns>
-	/// <param name="searchedName">The category name that you want to find the index of.</param>
-	/// /// <param name="categoryList">The list of categories.</param>
-	public int FindCategoryWithName(string searchedName, List<Category> categoryList) {
-		foreach (var c in categoryList) {
-			if (c.Name.Equals(searchedName)) {
-				return categoryList.IndexOf(c);
-			}
-		}
-		return -1;
-	}
 
 	private List<Category>  GetHardCodeList() {
 		List<Category> categories = new List<Category>();
