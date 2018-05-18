@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
+
 
 namespace HoloToolkit.Unity.InputModule {
 
@@ -22,6 +24,7 @@ namespace HoloToolkit.Unity.InputModule {
 		private AudioManager audioManager;
 		private float[] thresholds;
 		private List<float> thresholdCheck;
+		private DynamicTextController textComp;
 
 
 		protected override void Start() {
@@ -29,7 +32,7 @@ namespace HoloToolkit.Unity.InputModule {
 			audioManager = FindObjectOfType<AudioManager>();
 			transitionManager = FindObjectOfType<TransitionManager>();
 			HostTransform.position = new Vector3(HostTransform.position.x, minHeight, HostTransform.position.z);
-			SpawnObjectsController.instance.FallingBlocksInstance.GraphCompleted += OnGraphCompleted;
+			SpawnObjectsController.Instance.FallingBlocksInstance.GraphCompleted += OnGraphCompleted;
 
 			if (percentageThreshold > 1.0f)
 				percentageThreshold = 1.0f;
@@ -142,7 +145,7 @@ namespace HoloToolkit.Unity.InputModule {
 			}
 
 
-			foreach (GameObject IB in SpawnObjectsController.instance.InvestBlocks) {
+			foreach (GameObject IB in SpawnObjectsController.Instance.InvestBlocks) {
 				IB.transform.localScale = new Vector3(IB.transform.localScale.x, scaleFactor * scaleNum, IB.transform.localScale.z);
 				yield return wait;
 			}
@@ -152,17 +155,22 @@ namespace HoloToolkit.Unity.InputModule {
 
 		public void OnGraphCompleted(object source, EventArgs e) {
 			MakeInvestBlocksReady();
-
+			DialUpDesignPrompt();
 			graphCompleted = true;
 		}
 
 		public void MakeInvestBlocksReady() {
 
-			foreach(GameObject IB in SpawnObjectsController.instance.InvestBlocks) {
+			foreach(GameObject IB in SpawnObjectsController.Instance.InvestBlocks) {
 				Renderer rend =IB.GetComponentInChildren<Renderer>();
 				rend.enabled=true;
 				IB.transform.localScale = new Vector3(IB.transform.localScale.x, 0.01f, IB.transform.localScale.z);
 			}
+		}
+
+		public void DialUpDesignPrompt() {
+			textComp = Prompts.GetPrompt(Prompts.PromptName.SCN1_DIAL_UP_DESIGN);
+			textComp.transform.position = HostTransform.position;
 		}
 
 		public void BeginFalling() {

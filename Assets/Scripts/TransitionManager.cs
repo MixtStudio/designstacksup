@@ -19,8 +19,8 @@ public class TransitionManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pedastal = FindObjectOfType<Pedastal>();
-		sliderHandDrag = FindObjectOfType<SliderHandDrag>();
+		//pedastal = FindObjectOfType<Pedastal>();
+		//sliderHandDrag = FindObjectOfType<SliderHandDrag>();
 		loadManager = FindObjectOfType<LoadManager>();
 		revealManager = FindObjectOfType<RevealManager>();
 		audioManager = FindObjectOfType<AudioManager>();
@@ -28,6 +28,8 @@ public class TransitionManager : MonoBehaviour {
 
 	public void RaisePedastal() {
 		Debug.Log("Raise the Pedastal");
+		if(pedastal == null)
+			pedastal = FindObjectOfType<Pedastal>();
 		pedastal.BeginRaising();
 		audioManager.NowPlay(AudioManager.Audio.RisingPlatform);
 	}
@@ -39,6 +41,8 @@ public class TransitionManager : MonoBehaviour {
 
 		audioManager.NowPlay(AudioManager.Audio.ForestAmbience, true, false);
 
+		if (sliderHandDrag == null)
+			sliderHandDrag = FindObjectOfType<SliderHandDrag>();
 		sliderHandDrag.BeginFalling();
 
 		columns = new List<Transform>();

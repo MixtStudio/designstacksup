@@ -1658,6 +1658,8 @@
     <Compile Include="Assets\Scripts\DesignDial.cs" />
     <Compile Include="Assets\Scripts\DestroyOnTrigger.cs" />
     <Compile Include="Assets\Scripts\Disappear.cs" />
+    <Compile Include="Assets\Scripts\DynamicTextContainer.cs" />
+    <Compile Include="Assets\Scripts\DynamicTextController.cs" />
     <Compile Include="Assets\Scripts\GazeFinder.cs" />
     <Compile Include="Assets\Scripts\GraphInteraction.cs" />
     <Compile Include="Assets\Scripts\Grow.cs" />
@@ -1672,6 +1674,7 @@
     <Compile Include="Assets\Scripts\ScaleChanger.cs" />
     <Compile Include="Assets\Scripts\Scene2Start.cs" />
     <Compile Include="Assets\Scripts\Shoe.cs" />
+    <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\SliderHandDrag.cs" />
     <Compile Include="Assets\Scripts\SliderHandDragConstraint.cs" />
     <Compile Include="Assets\Scripts\SpawnFallingBlocks.cs" />

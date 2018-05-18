@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
+using TMPro;
 
 public class RatTrap : MonoBehaviour {
 
@@ -22,6 +23,9 @@ public class RatTrap : MonoBehaviour {
 	private AudioManager audioManager;
 	private bool allowMultipleSpawn = true;
 	private bool canRotate = true;
+	private DynamicTextController textComp;
+	
+
 
 
 	public void SetSpawnPosition(Vector3 pos) { spawnPos = pos; }
@@ -36,6 +40,9 @@ public class RatTrap : MonoBehaviour {
 		handDraggable.StartedDragging += DraggingStart;
 		spawnRot = transform.rotation;
 		rg = GetComponent<Rigidbody>();
+		textComp = Prompts.GetPrompt(Prompts.PromptName.GN_INTRO);
+	
+		textComp.transform.position = new Vector3(2.055f,.691f,.492f);
 	}
 
 	//private void Update() {
