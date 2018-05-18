@@ -16,10 +16,6 @@ public class AudioManager : Mixt.Singleton<AudioManager> {
 
 	protected override void Init() {}	
 	
-	void Start () {
-		NowPlay(Audio.HubAmbience, true);
-	}
-	
 	public bool IsAudioPlaying(Audio audio){return Audio_To_AudioSource(audio).isPlaying;}
 
 	public void NowPlay(Audio audio, bool toLoop = false, bool toAdd = true) {
@@ -146,7 +142,7 @@ public class AudioManager : Mixt.Singleton<AudioManager> {
 		return audioSources[ randInt ];
 	}
 
-	private void StopAll() {
+	public void StopAll() {
 		foreach(AudioSource source in audioSources) {
 			if (source.isPlaying)
 				source.Stop();

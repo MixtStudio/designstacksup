@@ -79,6 +79,7 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 			}
 		} else {
 			Debug.Log("Reveal Nearby");
+			AudioManager.Instance.NowPlay(AudioManager.Audio.Birds);
 			for (int i = 0; i < treeList.Count; i++) {
 				if (Vector3.Distance(revealPosition, treeList[i].transform.position) <= revealRadius) {
 					Debug.Log("Revealing Obj");
