@@ -8020,12 +8020,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a43bf403b117c4958b3111aca62a3100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputFile: DataFinal
   _normalBlock: {fileID: 1758218082611958, guid: 03c2caa2d338540a1aa665863f756dbf,
     type: 2}
   _investBlock: {fileID: 1004949787218310, guid: 8e4aeeceeadd45f43a5efec898d99b43,
     type: 2}
-  _textPrefab: {fileID: 114039152227364354, guid: a9e61d36838fe5c44a3d909dffdbfb67,
+  _textPrefab: {fileID: 114039152227364354, guid: beda5203108c11c4a9664391d535114b,
+    type: 2}
+  _dynamicTextPrefab: {fileID: 114243717252898780, guid: c451594984c474f46bdf70709e9d42e1,
     type: 2}
   _radius: 5
   _color1: {r: 0.9918617, g: 1, b: 0.051886797, a: 0.5019608}

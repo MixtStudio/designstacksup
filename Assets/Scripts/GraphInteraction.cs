@@ -7,20 +7,22 @@ using TMPro;
 
 public class GraphInteraction : MonoBehaviour {
 
-	public TMP_Text TextPrefab { get; set; }
+	//public TMP_Text TextPrefab { get; set; }
+	public DynamicTextController TextPrefab { get; set; }
 	private string industryInfo { get; set; }
 	public Category c { get; set; }
-	private TMP_Text textComp;
+	//private TMP_Text textComp;
+	private DynamicTextController textComp;
 	private GazeFinder gazeFinder;
 
 	private void Start() {
-		textComp = Instantiate(TextPrefab, SpawnObjectsController.instance.TextContainer.transform);
+		textComp = Instantiate(TextPrefab, SpawnObjectsController.Instance.TextContainer.transform);
 		textComp.name = "Text " + c.Name;
 		gazeFinder = FindObjectOfType<GazeFinder>();
 
 		//Sets the initial Text Transform
 		Ray direction = new Ray(Vector3.zero, transform.position.normalized);
-		textComp.transform.position = direction.GetPoint(SpawnObjectsController.instance.Radius * .8f);
+		textComp.transform.position = direction.GetPoint(SpawnObjectsController.Instance.Radius * .8f);
 		Quaternion rot = transform.rotation;
 		rot *= Quaternion.Euler(0, 90, 0);
 		textComp.transform.rotation = rot;
@@ -29,8 +31,7 @@ public class GraphInteraction : MonoBehaviour {
 	}
 
 	private string GetSumString(Category c) {
-		//return string.Format("<size=220%><font=\"Helvetica\">${0}m</size>\n<line-height=130%><mark=#FF0000><size=30%> {1} </line-height></size>\n {2} ", c.CurrentSum, "Design-related economic activity within the", c.Name);
-		return string.Format("<size=220%><font=\"Helvetica\">${0}m</size>\n<size=30%>{1}</size>\n{2}", c.CurrentSum, "Design-related economic activity within the", c.Name);
+		return string.Format("<size=220%><font=\"Helvetica\">${0}m</size>\n<size=50%>{1}</size>\n{2}", c.CurrentSum, "Design-related economic activity within the", c.Name);
 	}
 
 	private void Update() {
@@ -79,18 +80,18 @@ public class GraphInteraction : MonoBehaviour {
 	public void OnGazeEnter() {
 		//StartCoroutine(ChangeMaterial(SpawnObjectsController.instance.HighlightColor));
 		Debug.Log("OnGazeEnter");
-		ChangeMaterial(SpawnObjectsController.instance.HighlightColor);
+		ChangeMaterial(SpawnObjectsController.Instance.HighlightColor);
 		textComp.gameObject.SetActive(true);
 	}
 
 	public void OnGazeExit() {
 		Debug.Log("OnGazeExit");
-		ChangeMaterial(SpawnObjectsController.instance.Color1);
+		ChangeMaterial(SpawnObjectsController.Instance.Color1);
 		//StartCoroutine(ChangeMaterial(SpawnObjectsController.instance.Color1));
 
-		foreach (GameObject IB in SpawnObjectsController.instance.InvestBlocks) {
+		foreach (GameObject IB in SpawnObjectsController.Instance.InvestBlocks) {
 			Renderer rend = IB.GetComponentInChildren<Renderer>();
-			rend.material.color = SpawnObjectsController.instance.InvestColor;
+			rend.material.color = SpawnObjectsController.Instance.InvestColor;
 		}
 
 		textComp.gameObject.SetActive(false);
