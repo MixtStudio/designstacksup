@@ -13,12 +13,10 @@ public class GraphInteraction : MonoBehaviour {
 	public Category c { get; set; }
 	//private TMP_Text textComp;
 	private DynamicTextController textComp;
-	private GazeFinder gazeFinder;
 
 	private void Start() {
 		textComp = Instantiate(TextPrefab, SpawnObjectsController.Instance.TextContainer.transform);
 		textComp.name = "Text " + c.Name;
-		gazeFinder = FindObjectOfType<GazeFinder>();
 
 		//Sets the initial Text Transform
 		Ray direction = new Ray(Vector3.zero, transform.position.normalized);
@@ -45,7 +43,7 @@ public class GraphInteraction : MonoBehaviour {
 	}
 
 	private void UpdateTextPosition() {
-		Vector3 hit = gazeFinder.GetRayCastHit().point;
+		Vector3 hit = GazeFinder.Instance.GetRayCastHit().point;
 		Vector3 position = textComp.transform.position;
 		textComp.transform.position = new Vector3(position.x, hit.y, position.z);
 	}

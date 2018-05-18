@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadManager : MonoBehaviour {
+public class LoadManager : Mixt.Singleton<LoadManager> {
+	
+	protected override void Init() {}
 
 	public void AdditiveLoadByName(string scenename) {
 		Debug.Log("sceneName to load: " + scenename);

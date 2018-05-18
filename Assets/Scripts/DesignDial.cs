@@ -7,7 +7,6 @@ public class DesignDial : MonoBehaviour {
 
 	private Vector3 spawnPos;
 	private HandDraggable handDraggable;
-	private AudioManager audioManager;
 
 	public void SetSpawnPos(Vector3 pos) { spawnPos = pos; }
 	public Vector3 GetSpawnPos() { return spawnPos; }
@@ -29,11 +28,11 @@ public class DesignDial : MonoBehaviour {
 	}
 	
 	private void PlayAudio() {
-		audioManager.NowPlay(AudioManager.Audio.UserControl, true, true);
+		AudioManager.Instance.NowPlay(AudioManager.Audio.UserControl, true, true);
 	}
 	
 	private void StopAudio() {
-		audioManager.NowPlay(AudioManager.Audio.UserControl);
+		AudioManager.Instance.NowPlay(AudioManager.Audio.UserControl);
 	}
 	
 }

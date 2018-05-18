@@ -15,13 +15,11 @@ public class Ascend : MonoBehaviour {
 	private Vector3 endPos;
 	private bool ascending = false;
 	private DesignDial designDial;
-	private AudioManager audioManager;
 
 	void OnEnable() {
 		CloudEffect.SetActive(false);
 		designDial = FindObjectOfType<DesignDial>();
 		GameObject.FindGameObjectWithTag("MainCamera").transform.SetParent(transform, true);
-		audioManager = FindObjectOfType<AudioManager>();
 	}
 	
 	public void StartAscending() {
@@ -31,7 +29,7 @@ public class Ascend : MonoBehaviour {
 		switch(ascendCount){
 			case 1:
 				height = 10.0f;
-				audioManager.NowPlay(AudioManager.Audio.AscendingTone, true, false);
+				AudioManager.Instance.NowPlay(AudioManager.Audio.AscendingTone, true, false);
 				break;
 				
 			case 2:
@@ -54,7 +52,7 @@ public class Ascend : MonoBehaviour {
 				return;
 		}
 		
-		audioManager.NowPlay(AudioManager.Audio.RisingPlatform, true, true);
+		AudioManager.Instance.NowPlay(AudioManager.Audio.RisingPlatform, true, true);
 		startPos = transform.position;
 		endPos = startPos + (Vector3.up * height);
 		ascending = true;
@@ -78,7 +76,7 @@ public class Ascend : MonoBehaviour {
 
 		if (delta >= 1.0f) {
 			ascending = false;
-			audioManager.NowStop(AudioManager.Audio.RisingPlatform);
+			AudioManager.Instance.NowStop(AudioManager.Audio.RisingPlatform);
 			designDial.gameObject.SetActive(true);
 			designDial.Respawn();
 		}

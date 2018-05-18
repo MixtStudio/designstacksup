@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour {
+public class AudioManager : Mixt.Singleton<AudioManager> {
 
 	public AudioSource[] audioSources;
 	
@@ -14,6 +14,8 @@ public class AudioManager : MonoBehaviour {
 	
 	public AudioSource[] trapImpact;	
 
+	protected override void Init() {}	
+	
 	void Start () {
 		NowPlay(Audio.HubAmbience, true);
 	}
