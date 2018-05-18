@@ -36,6 +36,18 @@ public class AudioManager : MonoBehaviour {
 		audioSources[audioIndex].loop = toLoop;
 		audioSources[audioIndex].Play();
 	}
+	
+	public void NowStop(Audio audio) {
+		AudioSource audioToPlay = Audio_To_AudioSource(audio);
+		
+		if (audioToPlay.isPlaying)
+			audioToPlay.Stop();
+	}
+
+	public void NowStop(int audioIndex) {
+		if (audioSources[audioIndex].isPlaying)
+				audioSources[audioIndex].Stop();
+	}
 
 	private AudioSource Audio_To_AudioSource(Audio audio) {
 		switch(audio)
@@ -66,6 +78,15 @@ public class AudioManager : MonoBehaviour {
 		
 			case Audio.TreesGrowing:
 				return audioSources[8];
+				
+			case Audio.AscendingTone:
+				return audioSources[9];
+				
+			case Audio.ShoeTheme:
+				return audioSources[10];
+				
+			case Audio.Wind:
+				return audioSources[11];
 				
 			case Audio.BlockLanding:
 				return RandomPick(blockLanding);
@@ -123,6 +144,9 @@ public class AudioManager : MonoBehaviour {
 		UserControlLong,
 		ForestAmbience,
 		TreesGrowing,
+		AscendingTone,
+		ShoeTheme,
+		Wind,
 		
 		BlockLanding,
 		TrapRattle,

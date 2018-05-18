@@ -105,6 +105,7 @@ namespace HoloToolkit.Unity.InputModule {
 		protected override void StartDragging(Vector3 initialDraggingPosition) {
 			base.StartDragging(initialDraggingPosition);
 			ConstraintCheck();
+			audioManager.NowPlay(AudioManager.Audio.UserControl,true, true);
 			if (graphCompleted)
 				StartCoroutine(ChangeScale());
 		}
@@ -113,6 +114,7 @@ namespace HoloToolkit.Unity.InputModule {
 		protected override void UpdateDragging() {
 			base.UpdateDragging();
 			ConstraintCheck();
+			audioManager.NowStop(AudioManager.Audio.UserControl);
 			if (graphCompleted)
 				StartCoroutine(ChangeScale());
 		}
