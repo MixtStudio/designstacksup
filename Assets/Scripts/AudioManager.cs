@@ -54,41 +54,50 @@ public class AudioManager : Mixt.Singleton<AudioManager> {
 	private AudioSource Audio_To_AudioSource(Audio audio) {
 		switch(audio)
 		{
+			case Audio.IntroText:
+				return FindAudio("IntroText");
+			
 			case Audio.HubAmbience:
-				return audioSources[0];
+				return FindAudio("HubAmbience");
 				
-			case Audio.FallingImpact:
-				return audioSources[1];
+			//case Audio.FallingImpact:
+			//	return FindAudio("FallingImpact");
 
 			case Audio.StatSlider:
-				return audioSources[2];
+				return FindAudio("StatSlider");
 
 			case Audio.TextPopUp:
-				return audioSources[3];
+				return FindAudio("TextPopUp");
 
 			case Audio.RisingPlatform:
-				return audioSources[4];
+				return FindAudio("RisingPlatform");
 		
 			case Audio.UserControl:
-				return audioSources[5];
+				return FindAudio("UserControl");
 		
 			case Audio.UserControlLong:
-				return audioSources[6];
+				return FindAudio("UserControlLong");
 		
 			case Audio.ForestAmbience:
-				return audioSources[7];
+				return FindAudio("ForestAmbience");
 		
 			case Audio.TreesGrowing:
-				return audioSources[8];
+				return FindAudio("TreesGrowing");
 				
 			case Audio.AscendingTone:
-				return audioSources[9];
+				return FindAudio("AscendingTone");
 				
 			case Audio.ShoeTheme:
-				return audioSources[10];
+				return FindAudio("ShoeTheme");
 				
 			case Audio.Wind:
-				return audioSources[11];
+				return FindAudio("Wind");
+				
+			case Audio.AboveNZ:
+				return FindAudio("AboveNZ");
+				
+			case Audio.Birds:
+				return FindAudio("Birds");
 				
 			case Audio.BlockLanding:
 				return RandomPick(blockLanding);
@@ -122,6 +131,14 @@ public class AudioManager : Mixt.Singleton<AudioManager> {
 		}		
 	}
 	
+	private AudioSource FindAudio(string nametoFind){
+		foreach(AudioSource audioSource in audioSources) {
+			if(audioSource.gameObject.name == nametoFind)
+				return audioSource;			
+		}
+		return new AudioSource();
+	}
+	
 	private AudioSource RandomPick(AudioSource[] audioSources){
 		int randInt = Random.Range(0, audioSources.Length);
 		//Debug.Log("audioSources.Length: "+audioSources.Length);
@@ -137,8 +154,9 @@ public class AudioManager : Mixt.Singleton<AudioManager> {
 	}
 
 	public enum Audio {
+		IntroText,
 		HubAmbience,
-		FallingImpact,
+		//FallingImpact,
 		StatSlider,
 		TextPopUp,
 		RisingPlatform,
@@ -149,6 +167,8 @@ public class AudioManager : Mixt.Singleton<AudioManager> {
 		AscendingTone,
 		ShoeTheme,
 		Wind,
+		AboveNZ,
+		Birds,
 		
 		BlockLanding,
 		TrapRattle,
