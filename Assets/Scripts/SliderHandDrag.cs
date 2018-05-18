@@ -18,10 +18,8 @@ namespace HoloToolkit.Unity.InputModule {
 		private List<GameObject> investBlocks;
 		private float distanceCam;
 		private float timeCounter;
-		private TransitionManager transitionManager;
 		private bool pedastalCheck = false;
 		private bool graphCompleted= false;
-		private AudioManager audioManager;
 		private float[] thresholds;
 		private List<float> thresholdCheck;
 		private DynamicTextController textComp;
@@ -29,8 +27,7 @@ namespace HoloToolkit.Unity.InputModule {
 
 		protected override void Start() {
 			base.Start();
-			audioManager = FindObjectOfType<AudioManager>();
-			transitionManager = FindObjectOfType<TransitionManager>();
+			Visiblity(false);
 			HostTransform.position = new Vector3(HostTransform.position.x, minHeight, HostTransform.position.z);
 			SpawnObjectsController.Instance.FallingBlocksInstance.GraphCompleted += OnGraphCompleted;
 
@@ -57,11 +54,7 @@ namespace HoloToolkit.Unity.InputModule {
 					timeCounter += Time.deltaTime;
 				AudioCheck();
 				if (timeCounter >= timeThreshold) {
-					//audioManager.NowPlay(AudioManager.Audio.StatStepFinal);
-					if (transitionManager != null)
-						transitionManager.RaisePedastal();
-					else
-						GameObject.FindObjectOfType<TransitionManagerScaling>().RaisePedastal();
+					TransitionManager.Instance.RaisePedastal();
 					pedastalCheck = true;
 				}
 			}
@@ -72,31 +65,31 @@ namespace HoloToolkit.Unity.InputModule {
 
 			if (heightRatio >= thresholds[0] && !thresholdCheck.Contains(thresholds[0])) {
 				Debug.Log("Now Playing 1");
-				audioManager.NowPlay(AudioManager.Audio.StatStep1);
+				AudioManager.Instance.NowPlay(AudioManager.Audio.StatStep1);
 				thresholdCheck.Add(thresholds[0]);
 			}
 			else if (heightRatio >= thresholds[1] && !thresholdCheck.Contains(thresholds[1])) {
 				Debug.Log("Now Playing 2");
-				audioManager.NowPlay(AudioManager.Audio.StatStep2);
+				AudioManager.Instance.NowPlay(AudioManager.Audio.StatStep2);
 				thresholdCheck.Add(thresholds[1]);
 			}
 			else if (heightRatio >= thresholds[2] && !thresholdCheck.Contains(thresholds[2])) {
 				Debug.Log("Now Playing 3");
-				audioManager.NowPlay(AudioManager.Audio.StatStep3);
+				AudioManager.Instance.NowPlay(AudioManager.Audio.StatStep3);
 				thresholdCheck.Add(thresholds[2]);
 			}
 			else if (heightRatio >= thresholds[3] && !thresholdCheck.Contains(thresholds[3])) {
 				Debug.Log("Now Playing 4");
-				audioManager.NowPlay(AudioManager.Audio.StatStep4);
+				AudioManager.Instance.NowPlay(AudioManager.Audio.StatStep4);
 				thresholdCheck.Add(thresholds[3]);
 			}
 			else if (heightRatio >= thresholds[4] && !thresholdCheck.Contains(thresholds[4])) {
 				Debug.Log("Now Playing 5");
-				audioManager.NowPlay(AudioManager.Audio.StatStep5);
+				AudioManager.Instance.NowPlay(AudioManager.Audio.StatStep5);
 				thresholdCheck.Add(thresholds[4]);
 			} else if (heightRatio >= percentageThreshold && !thresholdCheck.Contains(percentageThreshold)) {
 				Debug.Log("Now Playing Final");
-				audioManager.NowPlay(AudioManager.Audio.StatStepFinal);
+				AudioManager.Instance.NowPlay(AudioManager.Audio.StatStepFinal);
 				thresholdCheck.Add(percentageThreshold);
 			}
 
@@ -105,7 +98,7 @@ namespace HoloToolkit.Unity.InputModule {
 		protected override void StartDragging(Vector3 initialDraggingPosition) {
 			base.StartDragging(initialDraggingPosition);
 			ConstraintCheck();
-			audioManager.NowPlay(AudioManager.Audio.UserControl,true, true);
+			AudioManager.Instance.NowPlay(AudioManager.Audio.UserControl,true, true);
 			if (graphCompleted)
 				StartCoroutine(ChangeScale());
 		}
@@ -114,7 +107,7 @@ namespace HoloToolkit.Unity.InputModule {
 		protected override void UpdateDragging() {
 			base.UpdateDragging();
 			ConstraintCheck();
-			audioManager.NowStop(AudioManager.Audio.UserControl);
+			AudioManager.Instance.NowStop(AudioManager.Audio.UserControl);
 			if (graphCompleted)
 				StartCoroutine(ChangeScale());
 		}
@@ -140,7 +133,6 @@ namespace HoloToolkit.Unity.InputModule {
 			float scaleNum = Mathf.InverseLerp(minHeight, maxHeight, HostTransform.position.y);
 			//Scales the numbers
 			foreach(Category c in SpawnObjectsController.CategoryList) {
-
 				c.CurrentSum = (int)Math.Round(c.Sum + (scaleNum*100));
 			}
 
@@ -154,9 +146,16 @@ namespace HoloToolkit.Unity.InputModule {
 		}
 
 		public void OnGraphCompleted(object source, EventArgs e) {
+			Visiblity(true);
 			MakeInvestBlocksReady();
 			DialUpDesignPrompt();
 			graphCompleted = true;
+		}
+
+		private void Visiblity(bool visible) {
+			GetComponent<SphereCollider>().enabled = visible;
+			for(int i = 0; i < transform.childCount; i++)
+				transform.GetChild(i).gameObject.SetActive(visible);			
 		}
 
 		public void MakeInvestBlocksReady() {

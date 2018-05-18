@@ -83,6 +83,6 @@ public class Ascend : MonoBehaviour {
 	}
 	
 	private void Transition() {
-		FindObjectOfType<LoadManager>().LoadByName("NZRevealadditive");
+		FindObjectOfType<LoadManager>().LoadByName("NZReveal");
 	}
 }
