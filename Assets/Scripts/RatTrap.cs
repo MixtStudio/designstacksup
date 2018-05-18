@@ -15,27 +15,18 @@ public class RatTrap : MonoBehaviour {
 	private Vector3 spawnPos = Vector3.zero;
 	private Quaternion spawnRot;
 	private GameObject[] hiddenObjs;
-	private RevealManager revealManager;
-	private TransitionManager transitionManager;
 	private HandDraggable handDraggable;
 	private bool fallingCheck = false;
 	private Rigidbody rg;
-	private AudioManager audioManager;
 	private bool allowMultipleSpawn = true;
 	private bool canRotate = true;
 	private DynamicTextController textComp;
 	
 
-
-
 	public void SetSpawnPosition(Vector3 pos) { spawnPos = pos; }
 
-	// Use this for initialization
 	void OnEnable() {
-		audioManager = FindObjectOfType<AudioManager>();
-		revealManager = FindObjectOfType<RevealManager>();
-		number_of_Spawns = revealManager.revealNumThreshold;
-		transitionManager = FindObjectOfType<TransitionManager>();
+		number_of_Spawns = RevealManager.Instance.revealNumThreshold;
 		handDraggable = GetComponent<HandDraggable>();
 		handDraggable.StartedDragging += DraggingStart;
 		spawnRot = transform.rotation;
@@ -52,12 +43,9 @@ public class RatTrap : MonoBehaviour {
 
 	private void DraggingStart() {
 		//Debug.Log("DraggingStart");
-		audioManager.NowPlay(AudioManager.Audio.TrapRattle);
+		AudioManager.Instance.NowPlay(AudioManager.Audio.TrapRattle);
 		if (!fallingCheck) {
-			if (transitionManager != null)
-				transitionManager.BeginFalling();
-			else
-				GameObject.FindObjectOfType<TransitionManagerScaling>().BeginDisappear();
+			TransitionManager.Instance.BeginFalling();
 			fallingCheck = true;
 			canRotate = false;
 		}
@@ -65,9 +53,9 @@ public class RatTrap : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col) {
 		if(col.collider.gameObject.tag == "Floor") {
-			audioManager.NowPlay(AudioManager.Audio.TrapImpact);
+			AudioManager.Instance.NowPlay(AudioManager.Audio.TrapImpact);
 			if (hiddenObjs == null) {
-				hiddenObjs = revealManager.GetHiddenObjects();
+				hiddenObjs = RevealManager.Instance.GetHiddenObjects();
 			}
 			if (SpawnCount == 2 && allowMultipleSpawn) {
 				SpawnMultiple(transform.position, transform.rotation);
@@ -78,20 +66,14 @@ public class RatTrap : MonoBehaviour {
 
 	void OnCollisionExit(Collision col) {
 		if (col.collider.gameObject.tag == "Pedastal") {
-			if (!fallingCheck) {
-				if (transitionManager != null)
-					transitionManager.BeginFalling();
-				else
-					FindObjectOfType<TransitionManagerScaling>().BeginDisappear();
-
-				fallingCheck = true;
-			}
-		}
+			TransitionManager.Instance.BeginFalling();
+			fallingCheck = true;
+		}		
 	}
 
 	private void RevealArea() {
 		Debug.Log("Revealing Area");
-		revealManager.IncrementRevealNum(transform.position, revealRadius);
+		RevealManager.Instance.IncrementRevealNum(transform.position, revealRadius);
 		if (SpawnCount < number_of_Spawns)
 			Respawn();
 		else {
@@ -118,7 +100,6 @@ public class RatTrap : MonoBehaviour {
 	}
 
 	private void SpawnMultiple(Vector3 spawnPoint, Quaternion spawnRotation) {
-
 		for (int i = 0; i < 100; i++) {
 			GameObject copyObj = Instantiate(gameObject);
 			copyObj.transform.position = spawnPoint;
@@ -140,7 +121,6 @@ public class RatTrap : MonoBehaviour {
 			Destroy(copyObj.GetComponent<HandDraggable>());
 			Destroy(copyObj.GetComponent<RatTrap>());
 		}
-
 		allowMultipleSpawn = false;
 	}
 

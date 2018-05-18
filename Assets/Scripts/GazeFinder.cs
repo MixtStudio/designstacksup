@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GazeFinder : MonoBehaviour {
+public class GazeFinder : Mixt.Singleton<GazeFinder> {
 
 	public GameObject gazeCursor;
 	
@@ -11,6 +11,8 @@ public class GazeFinder : MonoBehaviour {
 	private int layerMask;
 	
 	public RaycastHit GetRayCastHit(){return hit;}
+	
+	protected override void Init() {}
 
 	void Start () {
 		layerMask = 1 << LayerMask.NameToLayer("Gaze");

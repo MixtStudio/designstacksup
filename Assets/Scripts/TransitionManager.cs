@@ -3,35 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
 
-public class TransitionManager : MonoBehaviour {
+public class TransitionManager : Mixt.Singleton<TransitionManager> {
 
 	private GameObject barsHolder;
 	private bool fallCheck = false;
 	private List<Transform> columns;
 	private Pedastal pedastal;
 	private SliderHandDrag sliderHandDrag;
-	private LoadManager loadManager;
-	private RevealManager revealManager;
-	private AudioManager audioManager;
 
 	public void SetBarsHolder(GameObject obj) { barsHolder = obj; }
 	public GameObject GetBarsHolder() { return barsHolder; }
 
-	// Use this for initialization
-	void Start () {
-		//pedastal = FindObjectOfType<Pedastal>();
-		//sliderHandDrag = FindObjectOfType<SliderHandDrag>();
-		loadManager = FindObjectOfType<LoadManager>();
-		revealManager = FindObjectOfType<RevealManager>();
-		audioManager = FindObjectOfType<AudioManager>();
-	}
+	protected override void Init() {}
 
 	public void RaisePedastal() {
 		Debug.Log("Raise the Pedastal");
 		if(pedastal == null)
 			pedastal = FindObjectOfType<Pedastal>();
 		pedastal.BeginRaising();
-		audioManager.NowPlay(AudioManager.Audio.RisingPlatform);
+		AudioManager.Instance.NowPlay(AudioManager.Audio.RisingPlatform);
 	}
 
 	public void BeginFalling() {
@@ -39,7 +29,7 @@ public class TransitionManager : MonoBehaviour {
 
 		Debug.Log("Begin Falling");
 
-		audioManager.NowPlay(AudioManager.Audio.ForestAmbience, true, false);
+		AudioManager.Instance.NowPlay(AudioManager.Audio.ForestAmbience, true, false);
 
 		if (sliderHandDrag == null)
 			sliderHandDrag = FindObjectOfType<SliderHandDrag>();
@@ -52,8 +42,8 @@ public class TransitionManager : MonoBehaviour {
 
 		fallCheck = true;
 		StartCoroutine(FallingColumns());
-		loadManager.AdditiveLoadByName("Scene2additive");
-		StartCoroutine(revealManager.ScanHidden());
+		LoadManager.Instance.AdditiveLoadByName("Scene2additive");
+		StartCoroutine(RevealManager.Instance.ScanHidden());
 	}
 
 	private IEnumerator FallingColumns() {

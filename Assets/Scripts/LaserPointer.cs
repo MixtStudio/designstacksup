@@ -14,8 +14,7 @@ public class LaserPointer : MonoBehaviour {
 	
 	
 	void Start () {		
-		LR = GetComponent<LineRenderer>();
-		
+		LR = GetComponent<LineRenderer>();		
 	}
 	
 	void Update () {

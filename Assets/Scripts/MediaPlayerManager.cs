@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using RenderHeads.Media.AVProVideo;
 
-public class MediaPlayerManager : MonoBehaviour {
+public class MediaPlayerManager : Mixt.Singleton<MediaPlayerManager> {
 
 	private MediaPlayer mediaPlayer;
-	private StartScene startScene;
+	
+	protected override void Init() {}
 	
 	void Start () {
-		startScene = FindObjectOfType<StartScene>();
 		mediaPlayer = GetComponent<MediaPlayer>();
 		mediaPlayer.Events.AddListener(OnVideoEvent);
 	}
@@ -22,7 +22,7 @@ public class MediaPlayerManager : MonoBehaviour {
 		Debug.Log("Event:   " + et.ToString());
 		switch (et) {
 			case MediaPlayerEvent.EventType.FinishedPlaying:
-				startScene.LoadScene1();
+				LoadManager.Instance.AdditiveLoadByName("Scene1additive");
 				gameObject.SetActive(false);
 				break;
 		}
