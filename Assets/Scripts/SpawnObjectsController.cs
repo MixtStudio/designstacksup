@@ -8,7 +8,7 @@ using TMPro;
 /// Class that attaches to a spawner object, gets the public variables and does things that are non-specific to the
 /// type of object.
 /// </summary>
-public class SpawnObjectsController : MonoBehaviour {
+public class SpawnObjectsController : Mixt.Singleton<SpawnObjectsController> {
 
 	[SerializeField]
 	private GameObject _normalBlock;
@@ -26,9 +26,13 @@ public class SpawnObjectsController : MonoBehaviour {
 		}
 	}
 
+	//[SerializeField]
+	//private TMP_Text _textPrefab;
+	//public TMP_Text TextPrefab => _textPrefab;
+
 	[SerializeField]
-	private TMP_Text _textPrefab;
-	public TMP_Text TextPrefab => _textPrefab;
+	private DynamicTextController _dynamicTextPrefab;
+	public DynamicTextController DynamicTextPrefab => _dynamicTextPrefab;
 
 	[SerializeField]
 	private float _radius = 5;
@@ -70,11 +74,11 @@ public class SpawnObjectsController : MonoBehaviour {
 		}
 	}
 
-	//[HideInInspector]
+	[HideInInspector]
 	public float PrefabSize = 1f;
 
-	[HideInInspector]
-	public static SpawnObjectsController instance;
+	//[HideInInspector]
+	//public static SpawnObjectsController instance;
 
 
 	/// <summary>
@@ -97,8 +101,10 @@ public class SpawnObjectsController : MonoBehaviour {
 
 	public GameObject TextContainer { get; private set; }
 
-	private void Awake() {
-		instance = this;
+	//public Prompts PromptsInstance;
+
+	protected override void Init() {
+		//instance = this;
 		CategoryList = new List<Category>();
 		InvestBlocks = new List<GameObject>();
 		CreateHarcodeBar();

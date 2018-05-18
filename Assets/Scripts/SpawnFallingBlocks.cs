@@ -20,7 +20,7 @@ public class SpawnFallingBlocks : MonoBehaviour {
 	/// Constructor to bring in the variables from SpawnObjectsController.
 	/// </summary>
 	public SpawnFallingBlocks() {
-		SOC = SpawnObjectsController.instance;
+		SOC = SpawnObjectsController.Instance;
 		radius = SOC.Radius;
 		prefabSize = SOC.PrefabSize;
 		FallingBlock = SOC.NormalBlock;
@@ -131,7 +131,7 @@ public class SpawnFallingBlocks : MonoBehaviour {
 		var focusEvt = c.CategoryContainer.AddComponent<OnFocusEvent>();
 		c.CategoryContainer.AddComponent<OnFocusEvent>();
 		GraphInteraction graph_interaction = c.CategoryContainer.AddComponent<GraphInteraction>();
-		graph_interaction.TextPrefab = SOC.TextPrefab;
+		graph_interaction.TextPrefab = SOC.DynamicTextPrefab;
 		graph_interaction.c = c;
 	}
 
