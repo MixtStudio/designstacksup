@@ -67,6 +67,7 @@ public class Ascend : MonoBehaviour {
 		AB_FACT = Prompts.GetPrompt(new Vector3(offset.x, height + offset.y, offset.z),prompt);
 		
 		AudioManager.Instance.NowPlay(AudioManager.Audio.AscendingTone, true, true);
+		AudioManager.Instance.NowPlay(AudioManager.Audio.RisingPlatform, true, true);
 		startPos = transform.position;
 		endPos = startPos + (Vector3.up * height);
 		ascending = true;
@@ -95,6 +96,7 @@ public class Ascend : MonoBehaviour {
 		if (delta >= 1.0f) {
 			ascending = false;
 			AudioManager.Instance.NowStop(AudioManager.Audio.AscendingTone);
+			AudioManager.Instance.NowStop(AudioManager.Audio.RisingPlatform);
 			designDial.gameObject.SetActive(true);
 			designDial.Respawn();
 		}
