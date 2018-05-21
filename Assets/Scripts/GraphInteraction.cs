@@ -31,7 +31,9 @@ public class GraphInteraction : MonoBehaviour {
 	}
 
 	private string GetSumString(Category c) {
-		return string.Format("<size=220%><font=\"Helvetica\">${0}m</size>\n<size=50%>{1}</size>\n{2}", c.CurrentSum, "Design-related economic activity within the", c.Name);
+		return string.Format("<size=220%><line-height=50%>${0}m</size>\n" +
+							"<size=60%><b>{1}</b></size>\n"
+							+"{2}", c.CurrentSum, "Design-related economic activity within the", c.Name);
 	}
 
 	private void Update() {

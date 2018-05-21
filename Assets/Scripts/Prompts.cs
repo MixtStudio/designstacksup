@@ -9,6 +9,8 @@ using TMPro;
 public static class Prompts {
 
 	public enum PromptName {
+		PRESS_ANY_BUTTON_TO_START,
+		GRAB_ME,
 		SCN1_DIAL_UP_DESIGN,
 		GN_INTRO,
 		GN_DIAL_UP_DESIGN,
@@ -24,7 +26,7 @@ public static class Prompts {
 
 	private static Dictionary<PromptName, DynamicTextController> promptObjects = new Dictionary<PromptName ,DynamicTextController>();
 	private static Dictionary<PromptName, string> prompts;
-	//private TMP_Text TextPrefab;
+
 	
 	static Prompts() {
 		FillPromptList();
@@ -32,45 +34,50 @@ public static class Prompts {
 
 	private static void FillPromptList() {
 
-		//TextPrefab = SpawnObjectsController.instance.TextPrefabBlack;
-		//string bgColor = "#FFFFFF";
-		//string bgColor = "#FF0000";
-		//string fontColor ="#000000";
+		//string upArrow = "\u3000";
+		string downArrow = "\u3001";
+		string headerSize = "<size=180%>";
+		//string bodySize = "<size=30%>";
 		
 		prompts = new Dictionary<PromptName, string>() {
-			{ PromptName.SCN1_DIAL_UP_DESIGN,"<size=20%>\u3001 Dial up\n"+
-											 "Design</size>"},
+			{PromptName.PRESS_ANY_BUTTON_TO_START,"Press any button to start" },
 
-			{ PromptName.GN_INTRO,"<size=40%>Goodnature applied design principles\n"+
+			{PromptName.GRAB_ME,"Grab me" },
+
+			{ PromptName.SCN1_DIAL_UP_DESIGN,"\u3001 Dial up\n"+
+											 "Design"},
+
+			{ PromptName.GN_INTRO,"Goodnature applied design principles\n"+
 								  "to make a humane, toxin-free,\n" +
 								  "targeted, ergonomically easy-to-use\n"+
 								  "and labour-saving trapping system.\n"+
 								  "Their vision is a natural environment\n" +
 								  "in which native species survive\n"+
 								  "and thrive,free from the threat\n"+
-								  "of introduced pests.</size>"},
+								  "of introduced pests."},
 
 			{PromptName.GN_DIAL_UP_DESIGN, "Throw this Goodnature trap/n" +
-											"to discover its impact </size>" },
+											"to discover its impact"},
 
-			{ PromptName.GN_FACT_1, "<size=200%>34 visits\n reduced to 2\n" +
-									"</size>Goodnature’s design reduced the number of\n"+
+			{ PromptName.GN_FACT_1, string.Format("{0}34 visits\n "+
+									"{0}reduced to 2\n" +
+									"Goodnature’s design reduced the number of\n"+
 									"annual visits by a Department of Conservation (DOC)/n"+
 									"person required to maintain traps by a factor"+
-									"of 34 visits to just 2."},
+									"of 34 visits to just 2.",headerSize)},
 
-			{ PromptName.GN_FACT_2,"Cost ↓90%\n" +
+			{ PromptName.GN_FACT_2,string.Format("{0}Cost {1} 90%\n" +
 								  "Goodnature’s trapping system has allowed\n"+
 								  "DOC to eliminate all trace of rats, and slashed\n"+
-								  "the cost of trapping by an astonishing 90%."},
+								  "the cost of trapping by an astonishing 90%.",headerSize,downArrow)},
 
-			{ PromptName.GN_FACT_3, "From backyards\n"+
-									"to 10,000ha\n" +
+			{ PromptName.GN_FACT_3,string.Format ("{0}From backyards\n"+
+									"{0}to 10,000ha\n" +
 									"Goodnature’s designers have developed a system\n" +
 									"that works equally as well in a person’s backyard\n"+
 									"as in a 10,000 hectare conservation site allowing\n"+
 									"all New Zealanders to engage in conservation efforts,\n"+
-									"and DOC to improve the health of whole forests."},
+									"and DOC to improve the health of whole forests.",headerSize)},
 
 			{PromptName.AB_INTRO, "Design has made Allbirds the world’s\n"+
 								  "largest direct-to-consumer shoe brand.\n"+
@@ -78,29 +85,29 @@ public static class Prompts {
 								  "its merino wool fabric shoes online."},
 
 			{PromptName.AB_DIAL_UP_DESIGN, "Dial up this shoe design to\n"+
-											"see Allbirds success" },
+											"see Allbirds success"},
 
-			{PromptName.AB_FACT_1,"1 product\n"+
+			{PromptName.AB_FACT_1,string.Format("{0}1 product\n"+
 								  "Allbirds produces just one product, perfectly done.\n"+
 								  "These aren’t shoes, these are Allbirds.\n"+
 								  "Design was used to strip away the unneccessary —\n"+
 								  "this is Allbirds’ philosophy across everything it does,\n"+
-								  "including product, brand, marketing and communication."},
+								  "including product, brand, marketing and communication.",headerSize)},
 
-			{PromptName.AB_FACT_2,"2015 – 2 staff\n"+
-								  "2016 – 30 staff\n"+
-								  "2018 – 100+ staff\n"+
+			{PromptName.AB_FACT_2,string.Format("{0}2015 – 2 staff\n"+
+								  "{0}2016 – 30 staff\n"+
+								  "{0}2018 – 100+ staff\n"+
 								  "Allbirds started with two staff at the end of 2015,\n"+
-								  "30 in 2016, and now has over 100."},
+								  "30 in 2016, and now has over 100.",headerSize)},
 
-			{PromptName.AB_FACT_3,"1 million pairs/n"+
-								  "of shoes/n"+
-								  "sold in 2 years/n"+
+			{PromptName.AB_FACT_3,string.Format("{0}1 million pairs/n"+
+								  "{0}of shoes/n"+
+								  "{0}sold in 2 years/n"+
 								  "In two years Allbirds have sold 1 million shoes./n"+
 								  "Allbirds is the world’s largest direct-to-consumer shoe/n"+
 								  "brand that makes its own products and sells them./n"+
 								  "Design has been an effective way to overcome the/n"+
-								  "small size of the New Zealand market."}
+								  "small size of the New Zealand market.",headerSize)}
 		};
 	}
 
@@ -118,7 +125,7 @@ public static class Prompts {
 		}
 
 		DynamicTextController obj;
-		if (!promptObjects.TryGetValue(prompt, out obj)) {
+		if (!promptObjects.TryGetValue(prompt, out obj) || obj == null) {
 			// no text object exists for the prompt, so we create it now
 			obj = CreatePrompt(text);
 			promptObjects[prompt] = obj;
@@ -126,12 +133,47 @@ public static class Prompts {
 		return obj;
 	}
 
-	//public TMP_Text GetMyText(int promptNumber) {
-	//	TMP_Text textComp;
-	//	textComp = Instantiate(TextPrefab);
-	//	//textComp.name = "Text " + c.Nam;
-	//	textComp.text = prompts[promptNumber];
-	//	return textComp;
+	//public static DynamicTextController GetPrompt(Vector3 position, Transform transform, PromptName promptName) {
+	//	Vector3 direction = transform.position - Camera.main.transform.position;
+	//	Quaternion rotation = Quaternion.LookRotation(direction.normalized);
+	//	DynamicTextController prompt = GetPrompt(promptName);
+	//	prompt.name = nameof(promptName);
+	//	prompt.transform.position = position;
+	//	prompt.transform.rotation = rotation;
+	//	return prompt;
 	//}
-	
+
+	public static DynamicTextController GetPrompt(Vector3 position, PromptName promptName, Transform parent = null) {
+		DynamicTextController prompt = GetPrompt(promptName);
+		prompt.transform.SetParent(parent);
+		prompt.name = promptName.ToString();
+		Debug.Log("Placing at position: " + position);
+		prompt.transform.localPosition = position;
+		//prompt.transform.rotation = rotation;
+		return prompt;
+	}
+
+	public static DynamicTextController GetPrompt(DynamicTextController textObject, Vector3 position, PromptName promptName, Transform parent = null) {
+		if (textObject == null) {
+			return GetPrompt(position, promptName, parent);
+		}
+		//DynamicTextController prompt = Prompts.GetPrompt(promptName);
+		string text = null;
+		if (!prompts.TryGetValue(promptName, out text)) {
+			Debug.LogError("No Prompt found for type: " + promptName);
+			return textObject;
+		}
+		textObject.text = text;
+		textObject.name = promptName.ToString();
+		textObject.transform.position = position;
+		//prompt.transform.rotation = rotation;
+		return textObject;
+	}
+
+	public static void DestroyPrompt(DynamicTextController dynamicTextController) {
+		if (dynamicTextController == null || dynamicTextController.gameObject == null) {
+			return;
+		}
+		UnityEngine.Object.Destroy(dynamicTextController.gameObject);
+	}
 }

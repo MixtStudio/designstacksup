@@ -16,7 +16,7 @@ namespace HoloToolkit.Unity.InputModule {
 		public float timeThreshold = 3.0f;
 		private GameObject barsHolder;
 		private List<GameObject> investBlocks;
-		private float distanceCam;
+
 		private float timeCounter;
 		private TransitionManager transitionManager;
 		private bool pedastalCheck = false;
@@ -24,7 +24,9 @@ namespace HoloToolkit.Unity.InputModule {
 		private AudioManager audioManager;
 		private float[] thresholds;
 		private List<float> thresholdCheck;
-		private DynamicTextController textComp;
+		private DynamicTextController DIAL_UP_DESIGN;
+		public bool DIAL_UP_FLAG=false;
+		private float offset = .5f;
 
 
 		protected override void Start() {
@@ -33,7 +35,6 @@ namespace HoloToolkit.Unity.InputModule {
 			transitionManager = FindObjectOfType<TransitionManager>();
 			HostTransform.position = new Vector3(HostTransform.position.x, minHeight, HostTransform.position.z);
 			SpawnObjectsController.Instance.FallingBlocksInstance.GraphCompleted += OnGraphCompleted;
-
 			if (percentageThreshold > 1.0f)
 				percentageThreshold = 1.0f;
 			if (percentageThreshold <= 0.0f)
@@ -52,6 +53,8 @@ namespace HoloToolkit.Unity.InputModule {
 
 		protected override void Update() {
 			base.Update();
+
+
 			if (!pedastalCheck) {
 				if (HostTransform.position.y >= (percentageThreshold * maxHeight))
 					timeCounter += Time.deltaTime;
@@ -67,6 +70,7 @@ namespace HoloToolkit.Unity.InputModule {
 			}
 		}
 
+	
 		private void AudioCheck() {
 			float heightRatio = Mathf.InverseLerp(minHeight, maxHeight, HostTransform.position.y);
 
@@ -104,6 +108,13 @@ namespace HoloToolkit.Unity.InputModule {
 
 		protected override void StartDragging(Vector3 initialDraggingPosition) {
 			base.StartDragging(initialDraggingPosition);
+
+			if (!DIAL_UP_FLAG) {
+				Prompts.DestroyPrompt(DIAL_UP_DESIGN);
+				Create_DIAL_UP_DESIGN(Prompts.PromptName.SCN1_DIAL_UP_DESIGN);
+				DIAL_UP_FLAG = true;
+			}
+
 			ConstraintCheck();
 			if (graphCompleted)
 				StartCoroutine(ChangeScale());
@@ -113,6 +124,7 @@ namespace HoloToolkit.Unity.InputModule {
 		protected override void UpdateDragging() {
 			base.UpdateDragging();
 			ConstraintCheck();
+			Update_DIAL_UP_DESIGN();
 			if (graphCompleted)
 				StartCoroutine(ChangeScale());
 		}
@@ -153,7 +165,7 @@ namespace HoloToolkit.Unity.InputModule {
 
 		public void OnGraphCompleted(object source, EventArgs e) {
 			MakeInvestBlocksReady();
-			DialUpDesignPrompt();
+			Create_DIAL_UP_DESIGN(Prompts.PromptName.GRAB_ME);
 			graphCompleted = true;
 		}
 
@@ -166,10 +178,21 @@ namespace HoloToolkit.Unity.InputModule {
 			}
 		}
 
-		public void DialUpDesignPrompt() {
-			textComp = Prompts.GetPrompt(Prompts.PromptName.SCN1_DIAL_UP_DESIGN);
-			textComp.transform.position = HostTransform.position;
+		private void Create_DIAL_UP_DESIGN(Prompts.PromptName prompt) {
+			DIAL_UP_DESIGN = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y + offset, transform.position.z), prompt);
+			Vector3 direction = transform.position - Camera.main.transform.position;
+			DIAL_UP_DESIGN.transform.rotation = Quaternion.LookRotation(direction.normalized);
+			DIAL_UP_DESIGN.transform.localScale *= .4f;
 		}
+
+		private void Update_DIAL_UP_DESIGN() {
+			if (DIAL_UP_DESIGN != null) {
+				DIAL_UP_DESIGN.transform.position = new Vector3(transform.position.x,transform.position.y + offset, transform.position.z);
+				Vector3 direction = transform.position - Camera.main.transform.position;
+				DIAL_UP_DESIGN.transform.rotation = Quaternion.LookRotation(direction.normalized);
+			}
+		}
+
 
 		public void BeginFalling() {
 			SetDragging(false);
@@ -177,7 +200,13 @@ namespace HoloToolkit.Unity.InputModule {
 			rg.isKinematic = false;
 			rg.useGravity = true;
 			rg.GetComponent<SphereCollider>().enabled = false;
-			GetComponent<SliderHandDrag>().enabled = false;
+			Debug.Log("SliderHandleDrag::BeginFalling | About to destroy self");
+			Destroy(this.gameObject);
+		}
+
+		private void OnDestroy() {
+			Debug.Log("SliderHandleDrag::OnDestroy | Destroying");
+			Prompts.DestroyPrompt(DIAL_UP_DESIGN);
 		}
 	}
 }
