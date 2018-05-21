@@ -16,15 +16,20 @@ public class MediaPlayerManager : Mixt.Singleton<MediaPlayerManager> {
 
 	public void Begin() {
 		mediaPlayer.Play();
+		AudioManager.Instance.NowPlay(AudioManager.Audio.IntroText, false, true);
 	}
 
 	public void OnVideoEvent(MediaPlayer mp, MediaPlayerEvent.EventType et, ErrorCode errorCode) {
 		Debug.Log("Event:   " + et.ToString());
-		switch (et) {
-			case MediaPlayerEvent.EventType.FinishedPlaying:
-				LoadManager.Instance.AdditiveLoadByName("Scene1additive");
-				gameObject.SetActive(false);
-				break;
+		if(et == MediaPlayerEvent.EventType.FinishedPlaying && mediaPlayer.m_AutoStart == false) {
+			LoadManager.Instance.AdditiveLoadByName("Scene1additive");
+			//AudioManager.Instance.NowPlay(AudioManager.Audio.HubAmbience,true, false);
+			AudioManager.Instance.NowStop(AudioManager.Audio.IntroText);
+			gameObject.SetActive(false);
+		}
+		else if(et == MediaPlayerEvent.EventType.FinishedPlaying && mediaPlayer.m_AutoStart == true) {
+				//LoadManager.Instance.AdditiveLoadByName("Scene1additive");
+				//gameObject.SetActive(false);
 		}
 	}
 }

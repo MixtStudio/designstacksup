@@ -17,7 +17,6 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 	private float colourChangeSpeed = 1.0f; // may need to implement a failsafe if the user triggers the reveals too fast (the colour change speed is too fast atm for that to happen)
 	private float delta;
 	private bool colourTransition = false;
-	private bool transitionDone = false;
 	private Color startFloorColour;
 	private Color startBackgroundColour;
 	private int revealCount = 0;
@@ -79,6 +78,7 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 			}
 		} else {
 			Debug.Log("Reveal Nearby");
+			AudioManager.Instance.NowPlay(AudioManager.Audio.Birds);
 			for (int i = 0; i < treeList.Count; i++) {
 				if (Vector3.Distance(revealPosition, treeList[i].transform.position) <= revealRadius) {
 					Debug.Log("Revealing Obj");
@@ -101,7 +101,6 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 		startFloorColour = floor.GetComponent<MeshRenderer>().material.color;
 		startBackgroundColour = Camera.main.backgroundColor;
 		colourTransition = true;
-		transitionDone = false;
 		delta = 0.0f;
 	}
 
@@ -114,7 +113,6 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 
 		if (delta >= 1.0f) {
 			colourTransition = false;
-			transitionDone = true;
 		}
 	}
 

@@ -29,7 +29,6 @@ public class Ascend : MonoBehaviour {
 		switch(ascendCount){
 			case 1:
 				height = 10.0f;
-				AudioManager.Instance.NowPlay(AudioManager.Audio.AscendingTone, true, false);
 				break;
 				
 			case 2:
@@ -46,13 +45,13 @@ public class Ascend : MonoBehaviour {
 				
 			case 5:
 				Transition();
-				break;
+				return;
 				
 			default:
 				return;
 		}
 		
-		AudioManager.Instance.NowPlay(AudioManager.Audio.RisingPlatform, true, true);
+		AudioManager.Instance.NowPlay(AudioManager.Audio.AscendingTone, true, true);
 		startPos = transform.position;
 		endPos = startPos + (Vector3.up * height);
 		ascending = true;
@@ -61,8 +60,12 @@ public class Ascend : MonoBehaviour {
 		designDial.Despawn();
 		designDial.gameObject.SetActive(false);
 		
-		if (ascendCount == cloudTrigger)
+		if (ascendCount == cloudTrigger) {
+			AudioManager.Instance.NowPlay(AudioManager.Audio.Wind);
+			AudioManager.Instance.NowStop(AudioManager.Audio.Birds);
+			AudioManager.Instance.NowStop(AudioManager.Audio.ForestAmbience);
 			CloudEffect.SetActive(true);
+		}
 	}
 
 	void Update () {
@@ -76,13 +79,14 @@ public class Ascend : MonoBehaviour {
 
 		if (delta >= 1.0f) {
 			ascending = false;
-			AudioManager.Instance.NowStop(AudioManager.Audio.RisingPlatform);
+			AudioManager.Instance.NowStop(AudioManager.Audio.AscendingTone);
 			designDial.gameObject.SetActive(true);
 			designDial.Respawn();
 		}
 	}
 	
 	private void Transition() {
+		AudioManager.Instance.StopAll();
 		FindObjectOfType<LoadManager>().LoadByName("NZReveal");
 	}
 }

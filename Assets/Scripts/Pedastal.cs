@@ -13,7 +13,6 @@ public class Pedastal : MonoBehaviour {
 	private Vector3 startScale;
 	private Vector3 endScale;
 	private bool rising = false;
-	private bool risingDone = false;
 
 	private MeshRenderer meshRenderer;
 
@@ -27,7 +26,7 @@ public class Pedastal : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (rising && !risingDone)
+		if (rising)
 			Rise();		
 	}
 
@@ -41,8 +40,9 @@ public class Pedastal : MonoBehaviour {
 		transform.localScale = Vector3.Lerp(startScale, endScale, delta);
 
 		if (delta >= 1.0f) {
-			risingDone = true;
+			rising = false;
 			StartCoroutine(WaitSpawnRatTrap(spawnWaitTime));
+			AudioManager.Instance.NowStop(AudioManager.Audio.RisingPlatform);
 		}
 	}
 

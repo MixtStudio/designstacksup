@@ -32,7 +32,7 @@ public class DesignDial : MonoBehaviour {
 	}
 	
 	private void StopAudio() {
-		AudioManager.Instance.NowPlay(AudioManager.Audio.UserControl);
+		AudioManager.Instance.NowStop(AudioManager.Audio.UserControl);
 	}
 	
 }

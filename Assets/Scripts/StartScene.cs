@@ -8,6 +8,10 @@ public class StartScene : MonoBehaviour {
 	private InteractionSourceState[] interactionSourceStates;
 	private bool begin;
 
+	void Start() {
+		AudioManager.Instance.NowPlay(AudioManager.Audio.HubAmbience, true, false);
+	}
+	
 	void Update () {
 		if (!begin) {
 			interactionSourceStates = InteractionManager.GetCurrentReading();

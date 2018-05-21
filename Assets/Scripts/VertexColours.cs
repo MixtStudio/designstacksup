@@ -12,7 +12,6 @@ public class VertexColours : MonoBehaviour {
 	public float bleedThreshold = 0.1f;
 
 	private float[] deltas;
-	private bool scaling = false;
 	private bool changingDone = false;
 	private float uvThreshold = 0.0f;
 

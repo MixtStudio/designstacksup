@@ -19,7 +19,7 @@ public class RatTrap : MonoBehaviour {
 	private bool fallingCheck = false;
 	private Rigidbody rg;
 	private bool allowMultipleSpawn = true;
-	private bool canRotate = true;
+	//private bool canRotate = true;
 	private DynamicTextController textComp;
 	
 
@@ -47,7 +47,7 @@ public class RatTrap : MonoBehaviour {
 		if (!fallingCheck) {
 			TransitionManager.Instance.BeginFalling();
 			fallingCheck = true;
-			canRotate = false;
+			//canRotate = false;
 		}
 	}
 
@@ -96,7 +96,7 @@ public class RatTrap : MonoBehaviour {
 		transform.rotation = spawnRot;
 		SpawnCount++;
 		Debug.Log("SpawnCount: "+SpawnCount);
-		canRotate = true;
+		//canRotate = true;
 	}
 
 	private void SpawnMultiple(Vector3 spawnPoint, Quaternion spawnRotation) {

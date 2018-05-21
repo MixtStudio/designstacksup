@@ -12,8 +12,9 @@ namespace HoloToolkit.Unity.InputModule {
 		public float maxHeight = 3.0f;
 		public float minHeight = 1.0f;
 		public float scaleFactor = 10f;
-		public float percentageThreshold = 0.9f;
-		public float timeThreshold = 3.0f;
+		public float percentageThreshold = 0.8f;
+		public float timeThreshold = 2.0f;
+		public float backupTimeThreshold = 30.0f;
 		private GameObject barsHolder;
 		private List<GameObject> investBlocks;
 		private float distanceCam;
@@ -23,6 +24,7 @@ namespace HoloToolkit.Unity.InputModule {
 		private float[] thresholds;
 		private List<float> thresholdCheck;
 		private DynamicTextController textComp;
+		private float timer = 0.0f;
 
 
 		protected override void Start() {
@@ -53,10 +55,10 @@ namespace HoloToolkit.Unity.InputModule {
 				if (HostTransform.position.y >= (percentageThreshold * maxHeight))
 					timeCounter += Time.deltaTime;
 				AudioCheck();
-				if (timeCounter >= timeThreshold) {
+				if ( (timeCounter >= timeThreshold) || ((Time.time - timer) >= backupTimeThreshold) ) {
 					TransitionManager.Instance.RaisePedastal();
 					pedastalCheck = true;
-				}
+				}					
 			}
 		}
 
@@ -107,7 +109,6 @@ namespace HoloToolkit.Unity.InputModule {
 		protected override void UpdateDragging() {
 			base.UpdateDragging();
 			ConstraintCheck();
-			AudioManager.Instance.NowStop(AudioManager.Audio.UserControl);
 			if (graphCompleted)
 				StartCoroutine(ChangeScale());
 		}
@@ -115,6 +116,7 @@ namespace HoloToolkit.Unity.InputModule {
 
 		protected override void StopDragging() {
 			base.StopDragging();
+			AudioManager.Instance.NowStop(AudioManager.Audio.UserControl);
 			ConstraintCheck();
 			if (graphCompleted)
 				StartCoroutine(ChangeScale());
@@ -153,6 +155,7 @@ namespace HoloToolkit.Unity.InputModule {
 		}
 
 		private void Visiblity(bool visible) {
+			timer = Time.time;
 			GetComponent<SphereCollider>().enabled = visible;
 			for(int i = 0; i < transform.childCount; i++)
 				transform.GetChild(i).gameObject.SetActive(visible);			
