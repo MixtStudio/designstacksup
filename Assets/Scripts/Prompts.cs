@@ -56,14 +56,14 @@ public static class Prompts {
 								  "and thrive,free from the threat\n"+
 								  "of introduced pests."},
 
-			{PromptName.GN_DIAL_UP_DESIGN, "Throw this Goodnature trap/n" +
+			{PromptName.GN_DIAL_UP_DESIGN, "Throw this Goodnature trap\n" +
 											"to discover its impact"},
 
 			{ PromptName.GN_FACT_1, string.Format("{0}34 visits\n "+
 									"{0}reduced to 2\n" +
 									"Goodnature’s design reduced the number of\n"+
-									"annual visits by a Department of Conservation (DOC)/n"+
-									"person required to maintain traps by a factor"+
+									"annual visits by a Department of Conservation (DOC)\n"+
+									"person required to maintain traps by a factor\n"+
 									"of 34 visits to just 2.",headerSize)},
 
 			{ PromptName.GN_FACT_2,string.Format("{0}Cost {1} 90%\n" +
