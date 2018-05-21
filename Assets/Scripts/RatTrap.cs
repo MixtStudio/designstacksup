@@ -32,6 +32,8 @@ public class RatTrap : MonoBehaviour {
 
 	public void SetSpawnPosition(Vector3 pos) { spawnPos = pos; }
 
+	private bool scale_flag = true;
+
 	void OnEnable() {
 		number_of_Spawns = RevealManager.Instance.revealNumThreshold;
 		handDraggable = GetComponent<HandDraggable>();
@@ -43,14 +45,14 @@ public class RatTrap : MonoBehaviour {
 		GN_INTRO = Prompts.GetPrompt(new Vector3(transform.position.x+offset.x, transform.position.y + offset.y, transform.position.z), Prompts.PromptName.GN_INTRO);
 		GN_INTRO.transform.localScale *= .15f;
 
-		GN_DIAL_UP = Prompts.GetPrompt(new Vector3(transform.position.x + offset.x+.05f, transform.position.y + offset.y, transform.position.z), Prompts.PromptName.GN_DIAL_UP_DESIGN);
+		GN_DIAL_UP = Prompts.GetPrompt(new Vector3(transform.position.x + offset.x, transform.position.y + offset.y-.2f, transform.position.z), Prompts.PromptName.GN_DIAL_UP_DESIGN);
 		GN_DIAL_UP.transform.localScale *= .15f;
 
 	}
 
 	private void Update() {
 		if (GN_DIAL_UP != null) {
-			GN_DIAL_UP.transform.position = new Vector3(transform.position.x + offset.x + .2f, transform.position.y + offset.y, transform.position.z);
+			GN_DIAL_UP.transform.position = new Vector3(transform.position.x + offset.x , transform.position.y - .2f + offset.y, transform.position.z);
 		}
 		
 	}
@@ -135,7 +137,7 @@ public class RatTrap : MonoBehaviour {
 
 	private void Spawn_GN_FACT() {
 		Vector3 GN_FACT_POSITION = new Vector3(.558f, 1.827f, 1.137f);
-		//Vector3 GN_FACT_POSITION = new Vector3(4f, 3, 1.137f);
+
 		Prompts.PromptName prompt;
 		switch (SpawnCount) {
 			case 1:
@@ -156,7 +158,12 @@ public class RatTrap : MonoBehaviour {
 		}
 
 		GN_FACT = Prompts.GetPrompt(GN_FACT, GN_FACT_POSITION, prompt);
-		GN_FACT.transform.localScale *= .8f;
+		if (scale_flag) {
+			GN_FACT.transform.localScale *= .5f;
+		}
+
+		scale_flag = false;
+		
 	}
 
 	private void Update_GN_PROMPTS() {

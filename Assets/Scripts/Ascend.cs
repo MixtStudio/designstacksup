@@ -19,7 +19,7 @@ public class Ascend : MonoBehaviour {
 
 	private DynamicTextController AB_FACT;
 
-	private Vector3 offset = new Vector3(.2f,.5f,.6f);
+	private Vector3 offset = new Vector3(.2f,1f,1f);
 
 
 	void OnEnable() {
@@ -64,7 +64,7 @@ public class Ascend : MonoBehaviour {
 				return;
 		}
 
-		AB_FACT = Prompts.GetPrompt(new Vector3(offset.x, height + offset.y, offset.z),prompt);
+		AB_FACT = Prompts.GetPrompt(new Vector3(transform.position.x+offset.x, transform.position.y+ offset.y, transform.position.z+offset.z),prompt,transform);
 		
 		AudioManager.Instance.NowPlay(AudioManager.Audio.AscendingTone, true, true);
 		startPos = transform.position;

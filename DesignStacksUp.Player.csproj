@@ -1674,7 +1674,6 @@
     <Compile Include="Assets\Scripts\RatTrap.cs" />
     <Compile Include="Assets\Scripts\RevealManager.cs" />
     <Compile Include="Assets\Scripts\ScaleChanger.cs" />
-    <Compile Include="Assets\Scripts\Scene2Start.cs" />
     <Compile Include="Assets\Scripts\Shoe.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\SliderHandDrag.cs" />
@@ -1683,6 +1682,7 @@
     <Compile Include="Assets\Scripts\SpawnObjectsController.cs" />
     <Compile Include="Assets\Scripts\StartScene.cs" />
     <Compile Include="Assets\Scripts\TextAnimScript.cs" />
+    <Compile Include="Assets\Scripts\TextManager.cs" />
     <Compile Include="Assets\Scripts\TransitionManager.cs" />
     <Compile Include="Assets\Scripts\TransitionManagerScaling.cs" />
     <Compile Include="Assets\Scripts\Utils\CoroutineUtils.cs" />
