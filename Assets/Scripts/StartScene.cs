@@ -7,9 +7,14 @@ public class StartScene : MonoBehaviour {
 
 	private InteractionSourceState[] interactionSourceStates;
 	private bool begin;
+	private DynamicTextController PRESS_ANY_BUTTON;
+	private float offset = .5f;
 
-	void Start() {
-		AudioManager.Instance.NowPlay(AudioManager.Audio.HubAmbience, true, false);
+	void Start () {
+		PRESS_ANY_BUTTON = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y + offset, transform.position.z),Prompts.PromptName.PRESS_ANY_BUTTON_TO_START);
+		Vector3 direction = transform.position - Camera.main.transform.position;
+		PRESS_ANY_BUTTON.transform.rotation = Quaternion.LookRotation(direction.normalized);
+		PRESS_ANY_BUTTON.transform.localScale *= .4f;
 	}
 	
 	void Update () {
@@ -18,6 +23,7 @@ public class StartScene : MonoBehaviour {
 			foreach (InteractionSourceState interactionSourceState in interactionSourceStates) {
 				if (interactionSourceState.anyPressed) {
 					MediaPlayerManager.Instance.Begin();
+					Prompts.DestroyPrompt(PRESS_ANY_BUTTON);
 					begin = true;
 					break;
 				}
