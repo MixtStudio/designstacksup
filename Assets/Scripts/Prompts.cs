@@ -112,7 +112,7 @@ public static class Prompts {
 	}
 
 	private static DynamicTextController CreatePrompt(string text) {
-		DynamicTextController obj = GameObject.Instantiate(SpawnObjectsController.Instance.DynamicTextPrefab);
+		DynamicTextController obj = GameObject.Instantiate(TextManager.Instance.DynamicTextPrefab);
 		obj.text = text;
 		return obj;
 	}

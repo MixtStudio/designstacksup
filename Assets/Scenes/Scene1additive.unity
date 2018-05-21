@@ -14505,12 +14505,6 @@ MonoBehaviour:
   maxHeight: 3
   minHeight: 1
   scaleFactor: 3
-<<<<<<< HEAD
   percentageThreshold: 0.8
   timeThreshold: 2
   backupTimeThreshold: 30
-=======
-  percentageThreshold: 0.9
-  timeThreshold: 3
-  DIAL_UP_FLAG: 0
->>>>>>> 69-UX-PROMPTS

@@ -131,7 +131,7 @@ public class SpawnFallingBlocks : MonoBehaviour {
 		//var focusEvt = c.CategoryContainer.AddComponent<OnFocusEvent>();
 		c.CategoryContainer.AddComponent<OnFocusEvent>();
 		GraphInteraction graph_interaction = c.CategoryContainer.AddComponent<GraphInteraction>();
-		graph_interaction.TextPrefab = SOC.DynamicTextPrefab;
+		graph_interaction.TextPrefab = TextManager.Instance.DynamicTextPrefab;
 		graph_interaction.c = c;
 	}
 
