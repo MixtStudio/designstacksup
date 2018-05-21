@@ -14505,5 +14505,6 @@ MonoBehaviour:
   maxHeight: 3
   minHeight: 1
   scaleFactor: 3
-  percentageThreshold: 0.85
+  percentageThreshold: 0.8
   timeThreshold: 2
+  backupTimeThreshold: 30
