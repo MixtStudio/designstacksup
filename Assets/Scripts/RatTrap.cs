@@ -22,6 +22,13 @@ public class RatTrap : MonoBehaviour {
 	//private bool canRotate = true;
 	private DynamicTextController textComp;
 	
+	private bool canRotate = true;
+
+	private DynamicTextController GN_INTRO;
+	private DynamicTextController GN_DIAL_UP;
+	private DynamicTextController GN_FACT;
+
+	private Vector3 offset = new Vector3(.4f,.2f,0);
 
 	public void SetSpawnPosition(Vector3 pos) { spawnPos = pos; }
 
@@ -31,24 +38,34 @@ public class RatTrap : MonoBehaviour {
 		handDraggable.StartedDragging += DraggingStart;
 		spawnRot = transform.rotation;
 		rg = GetComponent<Rigidbody>();
-		textComp = Prompts.GetPrompt(Prompts.PromptName.GN_INTRO);
-	
-		textComp.transform.position = new Vector3(2.055f,.691f,.492f);
+		
+
+		GN_INTRO = Prompts.GetPrompt(new Vector3(transform.position.x+offset.x, transform.position.y + offset.y, transform.position.z), Prompts.PromptName.GN_INTRO);
+		GN_INTRO.transform.localScale *= .15f;
+
+		GN_DIAL_UP = Prompts.GetPrompt(new Vector3(transform.position.x + offset.x+.05f, transform.position.y + offset.y, transform.position.z), Prompts.PromptName.GN_DIAL_UP_DESIGN);
+		GN_DIAL_UP.transform.localScale *= .15f;
+
 	}
 
-	//private void Update() {
-	//	if (canRotate)
-	//		transform.Rotate(0, rotationSpeed, 0);
-	//}
+	private void Update() {
+		if (GN_DIAL_UP != null) {
+			GN_DIAL_UP.transform.position = new Vector3(transform.position.x + offset.x + .2f, transform.position.y + offset.y, transform.position.z);
+		}
+		
+	}
 
 	private void DraggingStart() {
 		//Debug.Log("DraggingStart");
 		AudioManager.Instance.NowPlay(AudioManager.Audio.TrapRattle);
+		audioManager.NowPlay(AudioManager.Audio.TrapRattle);
 		if (!fallingCheck) {
 			TransitionManager.Instance.BeginFalling();
 			fallingCheck = true;
 			//canRotate = false;
 		}
+
+		Prompts.DestroyPrompt(GN_INTRO);
 	}
 
 	void OnCollisionEnter(Collision col) {
@@ -60,6 +77,8 @@ public class RatTrap : MonoBehaviour {
 			if (SpawnCount == 2 && allowMultipleSpawn) {
 				SpawnMultiple(transform.position, transform.rotation);
 			}
+			Prompts.DestroyPrompt(GN_DIAL_UP);
+			Spawn_GN_FACT();
 			RevealArea();
 		}
 	}
@@ -74,8 +93,10 @@ public class RatTrap : MonoBehaviour {
 	private void RevealArea() {
 		Debug.Log("Revealing Area");
 		RevealManager.Instance.IncrementRevealNum(transform.position, revealRadius);
-		if (SpawnCount < number_of_Spawns)
+		if (SpawnCount < number_of_Spawns) {
 			Respawn();
+		}
+			
 		else {
 			rg.isKinematic = true;
 			handDraggable.IsDraggingEnabled = false;
@@ -83,7 +104,7 @@ public class RatTrap : MonoBehaviour {
 	}
 
 	private void Respawn() {
-		//instantiate a copy
+		//instantiate a copy	
 		GameObject copyObj = Instantiate(gameObject);
 		copyObj.transform.position = transform.position;
 		copyObj.transform.rotation = transform.rotation;
@@ -104,24 +125,59 @@ public class RatTrap : MonoBehaviour {
 			GameObject copyObj = Instantiate(gameObject);
 			copyObj.transform.position = spawnPoint;
 			copyObj.transform.rotation = spawnRotation;
-			copyObj.GetComponent<Renderer>().material.color = Color.red;
-			//float vx = Random.Range(.1f,.3f);
-			//float vy = Random.Range(.1f, .3f);
-			//float vz = Random.Range(.1f, .3f);
-			//float vw = Random.Range(20,30);
 			Rigidbody copyRG = copyObj.GetComponent<Rigidbody>();
 			copyRG.AddForce(Vector3.up*30);
-			//copyRG.useGravity = false;
-			//copyRG.velocity= new Vector3(0,-0.5f,0); 
-
-			//rg.velocity = new Vector3(vx, vy, vz);
-
-			//rg.velocity = new Vector3(vx, vy, vz);
-			//rg.angularVelocity = new Vector3(vx, vy, vz);
+		
 			Destroy(copyObj.GetComponent<HandDraggable>());
 			Destroy(copyObj.GetComponent<RatTrap>());
 		}
 		allowMultipleSpawn = false;
+	}
+
+	private void Spawn_GN_FACT() {
+		Vector3 GN_FACT_POSITION = new Vector3(.558f, 1.827f, 1.137f);
+		//Vector3 GN_FACT_POSITION = new Vector3(4f, 3, 1.137f);
+		Prompts.PromptName prompt;
+		switch (SpawnCount) {
+			case 1:
+				prompt = Prompts.PromptName.GN_FACT_1;
+				break;
+
+			case 2:
+				prompt = Prompts.PromptName.GN_FACT_2;
+				break;
+
+			case 3:
+				prompt = Prompts.PromptName.GN_FACT_3;
+				break;
+
+			default:
+				prompt = Prompts.PromptName.GN_FACT_1;
+				return;
+		}
+
+		GN_FACT = Prompts.GetPrompt(GN_FACT, GN_FACT_POSITION, prompt);
+		GN_FACT.transform.localScale *= .8f;
+	}
+
+	private void Update_GN_PROMPTS() {
+		//Vector3 direction;
+
+		//if (GN_INTRO != null) {
+		//	direction= GN_INTRO.transform.position - Camera.main.transform.position;
+		//	GN_INTRO.transform.rotation = Quaternion.LookRotation(direction.normalized);
+		//}
+
+		//if (GN_DIAL_UP!= null) {
+		//	direction = GN_DIAL_UP.transform.position - Camera.main.transform.position;
+		//	GN_DIAL_UP.transform.rotation = Quaternion.LookRotation(direction.normalized);
+		//}
+
+
+		//if (GN_FACT != null) {
+		//	direction = GN_FACT.transform.position - Camera.main.transform.position;
+		//	GN_FACT.transform.rotation = Quaternion.LookRotation(direction.normalized);
+		//}
 	}
 
 }

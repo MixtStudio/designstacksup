@@ -7,6 +7,10 @@ public class DesignDial : MonoBehaviour {
 
 	private Vector3 spawnPos;
 	private HandDraggable handDraggable;
+	private DynamicTextController DIAL_UP_DESIGN;
+	private Vector3 DIAL_UP_DESIGN_POS;
+	private float offset = .5f;
+
 
 	public void SetSpawnPos(Vector3 pos) { spawnPos = pos; }
 	public Vector3 GetSpawnPos() { return spawnPos; }
@@ -33,6 +37,8 @@ public class DesignDial : MonoBehaviour {
 	
 	private void StopAudio() {
 		AudioManager.Instance.NowStop(AudioManager.Audio.UserControl);
+		//DIAL_UP_DESIGN_POS = new Vector3(this.position.x, HostTransform.position.y + offset, HostTransform.position.z);
+		//DIAL_UP_DESIGN = Prompts.Spawn_Prompt(DIAL_UP_DESIGN_POS, Prompts.PromptName.SCN1_DIAL_UP_DESIGN);
 	}
 	
 }
