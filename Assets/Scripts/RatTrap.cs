@@ -58,7 +58,6 @@ public class RatTrap : MonoBehaviour {
 	private void DraggingStart() {
 		//Debug.Log("DraggingStart");
 		AudioManager.Instance.NowPlay(AudioManager.Audio.TrapRattle);
-		audioManager.NowPlay(AudioManager.Audio.TrapRattle);
 		if (!fallingCheck) {
 			TransitionManager.Instance.BeginFalling();
 			fallingCheck = true;
