@@ -92,7 +92,7 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 		}
 		if (revealCount == revealTotal && !loaded) {
 			Debug.Log("Begin loading Scene3");
-			StartCoroutine(LoadManager.Instance.AdditiveLoadByName("Scene3additive", 6.0f));
+			StartCoroutine(LoadManager.Instance.AdditiveLoadByName("Scene3additive", 7.0f));
 			loaded = true;
 		}
 	}
@@ -116,7 +116,7 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 		}
 	}
 
-	GameObject FindClosest(List<GameObject> objList, Vector3 revealPosition) {
+	private GameObject FindClosest(List<GameObject> objList, Vector3 revealPosition) {
 		float minDist = Mathf.Infinity;
 		GameObject minObj =  new GameObject();
 

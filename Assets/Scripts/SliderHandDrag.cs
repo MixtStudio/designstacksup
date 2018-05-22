@@ -166,6 +166,7 @@ namespace HoloToolkit.Unity.InputModule {
 			MakeInvestBlocksReady();
 			Create_DIAL_UP_DESIGN(Prompts.PromptName.GRAB_ME);
 			graphCompleted = true;
+			AudioManager.Instance.NowPlay(AudioManager.Audio.DesignBallSpawn);
 		}
 
 		private void Visiblity(bool visible) {

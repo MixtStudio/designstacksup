@@ -52,12 +52,12 @@ public class AudioManager : Mixt.Singleton<AudioManager> {
 		{
 			case Audio.IntroText:
 				return FindAudio("IntroText");
+				
+			case Audio.EndText:
+				return FindAudio("EndText");
 			
 			case Audio.HubAmbience:
 				return FindAudio("HubAmbience");
-				
-			//case Audio.FallingImpact:
-			//	return FindAudio("FallingImpact");
 
 			case Audio.StatSlider:
 				return FindAudio("StatSlider");
@@ -94,6 +94,15 @@ public class AudioManager : Mixt.Singleton<AudioManager> {
 				
 			case Audio.Birds:
 				return FindAudio("Birds");
+				
+			case Audio.DesignBallSpawn:
+				return FindAudio("DesignBallSpawn");
+			
+			case Audio.TrapSpawn:
+				return FindAudio("TrapSpawn");
+			
+			case Audio.ShoeSpawn:
+				return FindAudio("ShoeSpawn");				
 				
 			case Audio.BlockLanding:
 				return RandomPick(blockLanding);
@@ -151,8 +160,8 @@ public class AudioManager : Mixt.Singleton<AudioManager> {
 
 	public enum Audio {
 		IntroText,
+		EndText,
 		HubAmbience,
-		//FallingImpact,
 		StatSlider,
 		TextPopUp,
 		RisingPlatform,
@@ -165,6 +174,9 @@ public class AudioManager : Mixt.Singleton<AudioManager> {
 		Wind,
 		AboveNZ,
 		Birds,
+		DesignBallSpawn,
+		TrapSpawn,
+		ShoeSpawn,
 		
 		BlockLanding,
 		TrapRattle,

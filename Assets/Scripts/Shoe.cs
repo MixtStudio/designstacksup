@@ -14,6 +14,7 @@ public class Shoe : MonoBehaviour {
 	private void OnTriggerEnter(Collider col) {
 		Debug.Log("Collsion with: "+col);
 		if(col.gameObject.tag == "DesignDial") {
+			AudioManager.Instance.NowPlay(AudioManager.Audio.StatStepFinal);
 			ascend.StartAscending();
 		}
 	}
@@ -27,5 +28,6 @@ public class Shoe : MonoBehaviour {
 		AB_DIAL_UP.transform.localScale *= .15f;
 
 		ascend = FindObjectOfType<Ascend>();
+		AudioManager.Instance.NowPlay(AudioManager.Audio.ShoeSpawn);
 	}
 }

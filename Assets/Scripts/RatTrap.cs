@@ -48,6 +48,7 @@ public class RatTrap : MonoBehaviour {
 		GN_DIAL_UP = Prompts.GetPrompt(new Vector3(transform.position.x + offset.x, transform.position.y + offset.y-.2f, transform.position.z), Prompts.PromptName.GN_DIAL_UP_DESIGN);
 		GN_DIAL_UP.transform.localScale *= .15f;
 
+		AudioManager.Instance.NowPlay(AudioManager.Audio.TrapSpawn);
 	}
 
 	private void Update() {
@@ -118,6 +119,7 @@ public class RatTrap : MonoBehaviour {
 		transform.rotation = spawnRot;
 		SpawnCount++;
 		Debug.Log("SpawnCount: "+SpawnCount);
+		AudioManager.Instance.NowPlay(AudioManager.Audio.TrapSpawn);
 		//canRotate = true;
 	}
 

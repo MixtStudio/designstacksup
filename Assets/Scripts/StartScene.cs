@@ -29,6 +29,7 @@ public class StartScene : MonoBehaviour {
 			foreach (InteractionSourceState interactionSourceState in interactionSourceStates) {
 				if (interactionSourceState.anyPressed) {
 					MediaPlayerManager.Instance.Begin();
+					AudioManager.Instance.NowPlay(AudioManager.Audio.IntroText, false, true);
 					Prompts.DestroyPrompt(PRESS_ANY_BUTTON);
 					begin = true;
 					break;

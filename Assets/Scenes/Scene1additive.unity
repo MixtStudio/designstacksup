@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 259448206}
   m_Layer: 0
   m_Name: Pedastal
-  m_TagString: Untagged
+  m_TagString: Pedastal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4851,7 +4851,7 @@ GameObject:
   - component: {fileID: 949522084}
   m_Layer: 0
   m_Name: Geo
-  m_TagString: Untagged
+  m_TagString: Pedastal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4933,7 +4933,7 @@ GameObject:
   - component: {fileID: 1176434438}
   m_Layer: 0
   m_Name: SpawnPoint
-  m_TagString: Untagged
+  m_TagString: Pedastal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
