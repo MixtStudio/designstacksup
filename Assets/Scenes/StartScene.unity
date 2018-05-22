@@ -540,6 +540,36 @@ Prefab:
       propertyPath: m_TagString
       value: MainCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 114244653559405336, guid: d29bc40b7f3df26479d6a0aac211c355,
+        type: 2}
+      propertyPath: fadeColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114244653559405336, guid: d29bc40b7f3df26479d6a0aac211c355,
+        type: 2}
+      propertyPath: fadeColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114244653559405336, guid: d29bc40b7f3df26479d6a0aac211c355,
+        type: 2}
+      propertyPath: fadeColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114244653559405336, guid: d29bc40b7f3df26479d6a0aac211c355,
+        type: 2}
+      propertyPath: FadeSharedMaterial
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20770519707920992, guid: d29bc40b7f3df26479d6a0aac211c355,
+        type: 2}
+      propertyPath: far clip plane
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114244653559405336, guid: d29bc40b7f3df26479d6a0aac211c355,
+        type: 2}
+      propertyPath: fadeColor.a
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d29bc40b7f3df26479d6a0aac211c355, type: 2}
   m_IsPrefabParent: 0

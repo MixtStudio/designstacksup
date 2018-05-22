@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HoloToolkit.Unity;
 
 public class Ascend : MonoBehaviour {
 
@@ -56,6 +58,9 @@ public class Ascend : MonoBehaviour {
 				
 			case 5:
 				prompt = Prompts.PromptName.AB_FACT_1;
+				//LoadManager.Instance.LoadByName("NZReveal");
+				//FadeManager.Instance.DoFade(2.0f, 2.0f, Temp1, Temp2);
+				//StartCoroutine(Transition(2.0f));
 				Transition();
 				return;
 				
@@ -102,9 +107,21 @@ public class Ascend : MonoBehaviour {
 		}
 	}
 	
+	private Action Temp1;
+	private Action Temp2;
+	/*
+	private IEnumerator Transition(float delaytime) {
+		yield return new WaitForSeconds(delaytime);
+		//FadeManager.Instance.DoFade(2.0f, 2.0f, Temp1, Temp2);
+		//AudioManager.Instance.StopAll(2.0f);
+		//StartCoroutine(LoadManager.Instance.LoadByName("NZReveal", 2.0f));
+		LoadManager.Instance.LoadByName("NZReveal");
+	}
+	*/
 	private void Transition() {
-		AudioManager.Instance.StopAll();
-		FindObjectOfType<LoadManager>().LoadByName("NZReveal");
+		FadeManager.Instance.DoFade(2.0f, 2.0f, Temp1, Temp2);
+		AudioManager.Instance.StopAll(2.0f);
+		StartCoroutine(LoadManager.Instance.LoadByName("NZReveal", 2.0f));
 	}
 
 

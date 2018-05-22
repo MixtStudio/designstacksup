@@ -14505,4 +14505,4 @@ MonoBehaviour:
   scaleFactor: 3
   percentageThreshold: 0.8
   timeThreshold: 2
-  backupTimeThreshold: 30
+  backupTimeThreshold: 90

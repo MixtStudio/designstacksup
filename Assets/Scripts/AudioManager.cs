@@ -157,6 +157,14 @@ public class AudioManager : Mixt.Singleton<AudioManager> {
 				source.Stop();
 		}
 	}
+	
+	public IEnumerator StopAll(float delaytime) {
+		yield return new WaitForSeconds(delaytime);
+		foreach(AudioSource source in audioSources) {
+			if (source.isPlaying)
+				source.Stop();
+		}
+	}
 
 	public enum Audio {
 		IntroText,

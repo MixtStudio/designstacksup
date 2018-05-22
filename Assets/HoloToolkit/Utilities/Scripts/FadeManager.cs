@@ -21,7 +21,7 @@ namespace HoloToolkit.Unity
         public bool FadeSharedMaterial;
 
         private Material fadeMaterial;
-        private Color fadeColor = Color.black;
+        public Color fadeColor;
 
         private enum FadeState
         {
