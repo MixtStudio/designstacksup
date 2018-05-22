@@ -92,7 +92,7 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 		}
 		if (revealCount == revealTotal && !loaded) {
 			Debug.Log("Begin loading Scene3");
-			StartCoroutine(LoadManager.Instance.AdditiveLoadByName("Scene3additive", 5.0f));
+			StartCoroutine(LoadManager.Instance.AdditiveLoadByName("Scene3additive", 6.0f));
 			loaded = true;
 		}
 	}
