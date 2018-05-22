@@ -32,7 +32,11 @@ public class Ascend : MonoBehaviour {
 		ascendCount++;
 		float height = 0.0f;
 		Prompts.PromptName prompt;
-		
+
+		Vector3 AB_FACT_POSITION = TransformUtils.GetLookAtPosition(2);
+		//AB_FACT_POSITION = new Vector3(AB_FACT_POSITION.x, AB_FACT_POSITION.y + 1.5f, AB_FACT_POSITION.z);
+		AB_FACT_POSITION = new Vector3(AB_FACT_POSITION.x, AB_FACT_POSITION.y + 1.5f, AB_FACT_POSITION.z);
+
 		switch (ascendCount){
 			case 1:
 				height = 10.0f;
@@ -64,8 +68,15 @@ public class Ascend : MonoBehaviour {
 				return;
 		}
 
-		AB_FACT = Prompts.GetPrompt(new Vector3(transform.position.x+offset.x, transform.position.y+ offset.y, transform.position.z+offset.z),prompt,transform);
-		
+		//AB_FACT = Prompts.GetPrompt(new Vector3(transform.position.x+offset.x, transform.position.y+ offset.y, transform.position.z+offset.z),Quaternion.identity,prompt,1,transform);
+
+		AB_FACT = Prompts.GetPrompt(AB_FACT, AB_FACT_POSITION, Quaternion.identity, prompt, .5f,transform);
+		Quaternion AB_FACT_ROTATION = TransformUtils.GetLookAtRotation(AB_FACT.transform);
+
+		AB_FACT.transform.rotation = TransformUtils.GetLookAtRotation(AB_FACT.transform);
+
+		AB_FACT.transform.rotation = AB_FACT_ROTATION;
+
 		AudioManager.Instance.NowPlay(AudioManager.Audio.AscendingTone, true, true);
 		AudioManager.Instance.NowPlay(AudioManager.Audio.RisingPlatform, true, true);
 		startPos = transform.position;

@@ -26,11 +26,6 @@ public class SpawnObjectsController : Mixt.Singleton<SpawnObjectsController> {
 		}
 	}
 
-	//[SerializeField]
-	//private TMP_Text _textPrefab;
-	//public TMP_Text TextPrefab => _textPrefab;
-
-
 
 	[SerializeField]
 	private float _radius = 5;

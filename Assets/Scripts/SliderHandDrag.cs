@@ -15,6 +15,7 @@ namespace HoloToolkit.Unity.InputModule {
 		public float percentageThreshold = 0.8f;
 		public float timeThreshold = 2.0f;
 		public float backupTimeThreshold = 30.0f;
+
 		private GameObject barsHolder;
 		private List<GameObject> investBlocks;
 
@@ -23,13 +24,14 @@ namespace HoloToolkit.Unity.InputModule {
 		private bool graphCompleted = false;
 		private float[] thresholds;
 		private List<float> thresholdCheck;
-		private DynamicTextController textComp;
 		private float timer = 0.0f;
+
 		private DynamicTextController DIAL_UP_DESIGN;
+
+		//To change dial from GRAB ME to DIAL UP DESIGN 
 		private bool DIAL_UP_FLAG = false;
-		private float offset = .5f;
 
-
+		private float offset_DIAL = .4f;
 
 		protected override void Start() {
 			base.Start();
@@ -54,7 +56,7 @@ namespace HoloToolkit.Unity.InputModule {
 
 		protected override void Update() {
 			base.Update();
-
+			Update_DIAL_UP_DESIGN();
 
 			if (!pedastalCheck) {
 				if (HostTransform.position.y >= (percentageThreshold * maxHeight))
@@ -108,7 +110,8 @@ namespace HoloToolkit.Unity.InputModule {
 
 			if (!DIAL_UP_FLAG) {
 				Prompts.DestroyPrompt(DIAL_UP_DESIGN);
-				Create_DIAL_UP_DESIGN(Prompts.PromptName.SCN1_DIAL_UP_DESIGN);
+				Quaternion rotation = TransformUtils.GetLookAtRotation(transform);
+				DIAL_UP_DESIGN = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y + offset_DIAL, transform.position.z), rotation, Prompts.PromptName.SCN1_DIAL_UP_DESIGN, .4f);
 				DIAL_UP_FLAG = true;
 			}
 
@@ -122,7 +125,7 @@ namespace HoloToolkit.Unity.InputModule {
 		protected override void UpdateDragging() {
 			base.UpdateDragging();
 			ConstraintCheck();
-			Update_DIAL_UP_DESIGN();
+			//Update_DIAL_UP_DESIGN();
 			if (graphCompleted)
 				StartCoroutine(ChangeScale());
 		}
@@ -164,7 +167,8 @@ namespace HoloToolkit.Unity.InputModule {
 		public void OnGraphCompleted(object source, EventArgs e) {
 			Visiblity(true);
 			MakeInvestBlocksReady();
-			Create_DIAL_UP_DESIGN(Prompts.PromptName.GRAB_ME);
+			Quaternion rotation = TransformUtils.GetLookAtRotation(transform);
+			DIAL_UP_DESIGN = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y + .2f, transform.position.z), rotation, Prompts.PromptName.GRAB_ME, .4f);
 			graphCompleted = true;
 		}
 
@@ -184,23 +188,22 @@ namespace HoloToolkit.Unity.InputModule {
 			}
 		}
 
-		private void Create_DIAL_UP_DESIGN(Prompts.PromptName prompt) {
-			DIAL_UP_DESIGN = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y + offset, transform.position.z), prompt);
-			Vector3 direction = transform.position - Camera.main.transform.position;
-			DIAL_UP_DESIGN.transform.rotation = Quaternion.LookRotation(direction.normalized);
-			DIAL_UP_DESIGN.transform.localScale *= .4f;
-		}
+		//private void Create_DIAL_UP_DESIGN(Prompts.PromptName prompt,float offset) {
+		//	Quaternion rotation = TransformUtils.GetLookAtRotation(transform);
+		//	DIAL_UP_DESIGN = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y + offset, transform.position.z),rotation,prompt,.4f);
+		//	//Vector3 direction = transform.position - Camera.main.transform.position;
+		//	//DIAL_UP_DESIGN.transform.rotation = Quaternion.LookRotation(direction.normalized);
+		//}
 
 		private void Update_DIAL_UP_DESIGN() {
 			if (DIAL_UP_DESIGN != null) {
-				DIAL_UP_DESIGN.transform.position = new Vector3(transform.position.x,transform.position.y + offset, transform.position.z);
-				Vector3 direction = transform.position - Camera.main.transform.position;
-				DIAL_UP_DESIGN.transform.rotation = Quaternion.LookRotation(direction.normalized);
+				//DIAL_UP_DESIGN.transform.position = new Vector3(transform.position.x,transform.position.y + offset_DIAL, transform.position.z);
+				//DIAL_UP_DESIGN.transform.rotation = TransformUtils.GetLookAtRotation(DIAL_UP_DESIGN.transform);
 			}
 		}
 
 
-		public void BeginFalling() {
+		public void BeginFalling() { 
 			SetDragging(false);
 			Rigidbody rg = GetComponent<Rigidbody>();
 			rg.isKinematic = false;
@@ -210,10 +213,11 @@ namespace HoloToolkit.Unity.InputModule {
 			Destroy(this.gameObject);
 		}
 
-		private void OnDestroy() {
+		public void DestroyPrompt() {
 			Debug.Log("SliderHandleDrag::OnDestroy | Destroying");
 			Prompts.DestroyPrompt(DIAL_UP_DESIGN);
 		}
+	
 	}
 }
 

@@ -11,17 +11,14 @@ public class StartScene : MonoBehaviour {
 	private Vector3 offset = new Vector3(0,2,1.5f);
 
 	void Start () {
-		PRESS_ANY_BUTTON = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y + offset.y, transform.position.z+offset.z),Prompts.PromptName.PRESS_ANY_BUTTON_TO_START);
-		Vector3 direction = PRESS_ANY_BUTTON.transform.position - Camera.main.transform.position;
-		PRESS_ANY_BUTTON.transform.rotation = Quaternion.LookRotation(direction.normalized);
-		PRESS_ANY_BUTTON.transform.localScale *= .4f;
+		PRESS_ANY_BUTTON = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y + offset.y, transform.position.z+offset.z),Quaternion.identity,Prompts.PromptName.PRESS_ANY_BUTTON_TO_START,.4f);
+		PRESS_ANY_BUTTON.transform.rotation = TransformUtils.GetLookAtRotation(PRESS_ANY_BUTTON.transform);
 	}
 	
 	void Update () {
 
 		if (PRESS_ANY_BUTTON != null) {
-			Vector3 direction = PRESS_ANY_BUTTON.transform.position - Camera.main.transform.position;
-			PRESS_ANY_BUTTON.transform.rotation = Quaternion.LookRotation(direction.normalized);
+			PRESS_ANY_BUTTON.transform.rotation = TransformUtils.GetLookAtRotation(PRESS_ANY_BUTTON.transform);
 		}
 
 		if (!begin) {

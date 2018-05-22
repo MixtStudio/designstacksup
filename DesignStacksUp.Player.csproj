@@ -1654,7 +1654,6 @@
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\AVProMediaMapper.cs" />
     <Compile Include="Assets\Scripts\Category.cs" />
-    <Compile Include="Assets\Scripts\ColorUtilities.cs" />
     <Compile Include="Assets\Scripts\CubeCollision.cs" />
     <Compile Include="Assets\Scripts\DesignDial.cs" />
     <Compile Include="Assets\Scripts\DestroyOnTrigger.cs" />
@@ -1682,11 +1681,13 @@
     <Compile Include="Assets\Scripts\SpawnObjectsController.cs" />
     <Compile Include="Assets\Scripts\StartScene.cs" />
     <Compile Include="Assets\Scripts\TextAnimScript.cs" />
-    <Compile Include="Assets\Scripts\TextManager.cs" />
     <Compile Include="Assets\Scripts\TransitionManager.cs" />
     <Compile Include="Assets\Scripts\TransitionManagerScaling.cs" />
+    <Compile Include="Assets\Scripts\Utils\ColorUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\CoroutineUtils.cs" />
+    <Compile Include="Assets\Scripts\Utils\TransformUtils.cs" />
     <Compile Include="Assets\Scripts\VertexColours.cs" />
+    <Compile Include="Assets\Scripts\WindAudio.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
