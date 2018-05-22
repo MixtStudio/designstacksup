@@ -22,6 +22,7 @@ public class DesignDial : MonoBehaviour {
 	public void Respawn() {
 		transform.localPosition = spawnPos;
 		handDraggable.SetDragging(true);
+		AudioManager.Instance.NowPlay(AudioManager.Audio.DesignBallSpawn);
 	}
 
 	void Start() {
@@ -29,6 +30,7 @@ public class DesignDial : MonoBehaviour {
 		handDraggable = GetComponent<HandDraggable>();
 		handDraggable.StartedDragging += PlayAudio;
 		handDraggable.StoppedDragging += StopAudio;
+		AudioManager.Instance.NowPlay(AudioManager.Audio.DesignBallSpawn);
 	}
 	
 	private void PlayAudio() {

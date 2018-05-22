@@ -39,4 +39,17 @@ public class LoadManager : Mixt.Singleton<LoadManager> {
 		Debug.Log("sceneBuildIndex to load: " + sceneANumber);
 		SceneManager.LoadScene(sceneANumber, LoadSceneMode.Single);
 	}
+	
+	public IEnumerator LoadByName(string scenename, float delaytime) {
+		Debug.Log("waiting to load for: " + delaytime);
+		yield return new WaitForSeconds(delaytime);
+		Debug.Log("sceneName to load: " + scenename);
+		SceneManager.LoadScene(scenename, LoadSceneMode.Single);
+	}
+
+	public IEnumerator LoadByIndex(int sceneANumber, float delaytime) {
+		yield return new WaitForSeconds(delaytime);
+		Debug.Log("sceneBuildIndex to load: " + sceneANumber);
+		SceneManager.LoadScene(sceneANumber, LoadSceneMode.Single);
+	}
 }

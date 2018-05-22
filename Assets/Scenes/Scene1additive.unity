@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 259448206}
   m_Layer: 0
   m_Name: Pedastal
-  m_TagString: Untagged
+  m_TagString: Pedastal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4851,7 +4851,7 @@ GameObject:
   - component: {fileID: 949522084}
   m_Layer: 0
   m_Name: Geo
-  m_TagString: Untagged
+  m_TagString: Pedastal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4933,7 +4933,7 @@ GameObject:
   - component: {fileID: 1176434438}
   m_Layer: 0
   m_Name: SpawnPoint
-  m_TagString: Untagged
+  m_TagString: Pedastal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4982,12 +4982,10 @@ MonoBehaviour:
     type: 2}
   _investBlock: {fileID: 1004949787218310, guid: 8e4aeeceeadd45f43a5efec898d99b43,
     type: 2}
-  _dynamicTextPrefab: {fileID: 114243717252898780, guid: c451594984c474f46bdf70709e9d42e1,
-    type: 2}
   _radius: 5
   _color1: {r: 0.9918617, g: 1, b: 0.051886797, a: 0.5019608}
   _color2: {r: 0.9037957, g: 1, b: 0, a: 0.5019608}
-  _investColor: {r: 0.827451, g: 0.31764707, b: 0.38039216, a: 1}
+  _investColor: {r: 1, g: 0.6084906, b: 0.65455055, a: 1}
   _highlightColor: {r: 1, g: 1, b: 1, a: 1}
   PrefabSize: 1
   MaxCategorySum: 3932.0996
@@ -14507,4 +14505,4 @@ MonoBehaviour:
   scaleFactor: 3
   percentageThreshold: 0.8
   timeThreshold: 2
-  backupTimeThreshold: 30
+  backupTimeThreshold: 90

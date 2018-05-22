@@ -20,7 +20,9 @@ public class CubeCollision : MonoBehaviour {
     }
 
 	private void OnCollisionEnter(Collision collision) {
+		//if(Random.Range(0.0f, 1.0f) <= 0.5f)
 		AudioManager.Instance.NowPlay(AudioManager.Audio.BlockLanding);
+		
 		StartCoroutine(Freeze());
 	}
 
