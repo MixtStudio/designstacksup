@@ -11,60 +11,72 @@ public class RatTrap : MonoBehaviour {
 	private float rotationSpeed;
 	
 	private int number_of_Spawns;
-	private int SpawnCount = 1;
+	private static int SpawnCount = 1;
 	private Vector3 spawnPos = Vector3.zero;
 	private Quaternion spawnRot;
 	private GameObject[] hiddenObjs;
 	private HandDraggable handDraggable;
 	private bool fallingCheck = false;
 	private Rigidbody rg;
-	private bool allowMultipleSpawn = true;
-	//private bool canRotate = true;
-	private DynamicTextController textComp;
+	private static bool allowMultipleSpawn = true;
+	private static bool canRotate;
 	
-	private bool canRotate = true;
 
 	private DynamicTextController GN_INTRO;
 	private DynamicTextController GN_DIAL_UP;
 	private DynamicTextController GN_FACT;
 
 	private Vector3 offset = new Vector3(.4f,.2f,0);
-
+	private static bool rotateLookCamera = false;
 	public void SetSpawnPosition(Vector3 pos) { spawnPos = pos; }
 
-	private bool scale_flag = true;
+
+	//private bool spawn_GN_INTRO = true;
 
 	void OnEnable() {
+		canRotate = true;
 		number_of_Spawns = RevealManager.Instance.revealNumThreshold;
 		handDraggable = GetComponent<HandDraggable>();
 		handDraggable.StartedDragging += DraggingStart;
 		spawnRot = transform.rotation;
 		rg = GetComponent<Rigidbody>();
+
+		//Debug.LogFormat("SPAWN COUNT: {0} CAN INTRO: {1}", SpawnCount, spawn_GN_INTRO);
+
 		
+		if (SpawnCount == 1) {
+			GN_INTRO = Prompts.GetPrompt(new Vector3(transform.position.x+ offset.x, transform.position.y + offset.y, transform.position.z), Quaternion.identity, Prompts.PromptName.GN_INTRO, .15f);
 
-		GN_INTRO = Prompts.GetPrompt(new Vector3(transform.position.x+offset.x, transform.position.y + offset.y, transform.position.z), Prompts.PromptName.GN_INTRO);
-		GN_INTRO.transform.localScale *= .15f;
-
-		GN_DIAL_UP = Prompts.GetPrompt(new Vector3(transform.position.x + offset.x, transform.position.y + offset.y-.2f, transform.position.z), Prompts.PromptName.GN_DIAL_UP_DESIGN);
-		GN_DIAL_UP.transform.localScale *= .15f;
+		}
+		
+		GN_DIAL_UP = Prompts.GetPrompt(new Vector3(transform.position.x + offset.x-.1f, transform.position.y + offset.y-.3f, transform.position.z), Quaternion.identity, Prompts.PromptName.GN_DIAL_UP_DESIGN,.15f);
 
 		AudioManager.Instance.NowPlay(AudioManager.Audio.TrapSpawn);
 	}
 
 	private void Update() {
-		if (GN_DIAL_UP != null) {
-			GN_DIAL_UP.transform.position = new Vector3(transform.position.x + offset.x , transform.position.y - .2f + offset.y, transform.position.z);
+		if (canRotate) {
+			transform.Rotate(Vector3.up, 20 * Time.deltaTime);
+		}
+
+		if (rotateLookCamera) {
+			Update_GN_PROMPTS();
 		}
 		
 	}
 
+	private void GetSpawnPos() {
+		Vector3 spawnPos = Camera.main.transform.position + Camera.main.transform.forward * 3;
+	}
+
 	private void DraggingStart() {
 		//Debug.Log("DraggingStart");
+		rotateLookCamera = true;
+		canRotate = false;
 		AudioManager.Instance.NowPlay(AudioManager.Audio.TrapRattle);
 		if (!fallingCheck) {
 			TransitionManager.Instance.BeginFalling();
 			fallingCheck = true;
-			//canRotate = false;
 		}
 
 		Prompts.DestroyPrompt(GN_INTRO);
@@ -77,6 +89,7 @@ public class RatTrap : MonoBehaviour {
 				hiddenObjs = RevealManager.Instance.GetHiddenObjects();
 			}
 			if (SpawnCount == 2 && allowMultipleSpawn) {
+
 				SpawnMultiple(transform.position, transform.rotation);
 			}
 			Prompts.DestroyPrompt(GN_DIAL_UP);
@@ -107,6 +120,7 @@ public class RatTrap : MonoBehaviour {
 
 	private void Respawn() {
 		//instantiate a copy	
+		SpawnCount++;
 		GameObject copyObj = Instantiate(gameObject);
 		copyObj.transform.position = transform.position;
 		copyObj.transform.rotation = transform.rotation;
@@ -117,10 +131,8 @@ public class RatTrap : MonoBehaviour {
 		rg.angularVelocity = Vector3.zero;
 		transform.position = spawnPos;
 		transform.rotation = spawnRot;
-		SpawnCount++;
 		Debug.Log("SpawnCount: "+SpawnCount);
 		AudioManager.Instance.NowPlay(AudioManager.Audio.TrapSpawn);
-		//canRotate = true;
 	}
 
 	private void SpawnMultiple(Vector3 spawnPoint, Quaternion spawnRotation) {
@@ -138,8 +150,9 @@ public class RatTrap : MonoBehaviour {
 	}
 
 	private void Spawn_GN_FACT() {
-		Vector3 GN_FACT_POSITION = new Vector3(.558f, 1.827f, 1.137f);
-
+		Vector3 GN_FACT_POSITION = TransformUtils.GetLookAtPosition(2);
+		GN_FACT_POSITION = new Vector3(GN_FACT_POSITION.x, GN_FACT_POSITION.y + 1.5f, GN_FACT_POSITION.z);
+		
 		Prompts.PromptName prompt;
 		switch (SpawnCount) {
 			case 1:
@@ -159,14 +172,15 @@ public class RatTrap : MonoBehaviour {
 				return;
 		}
 
-		GN_FACT = Prompts.GetPrompt(GN_FACT, GN_FACT_POSITION, prompt);
-		if (scale_flag) {
-			GN_FACT.transform.localScale *= .5f;
-		}
+		GN_FACT = Prompts.GetPrompt(GN_FACT, GN_FACT_POSITION,Quaternion.identity, prompt,.5f);
+		Quaternion GN_FACT_ROTATION = TransformUtils.GetLookAtRotation(GN_FACT.transform);
+		//GN_FACT_ROTATION = new Quaternion(0, GN_FACT_ROTATION.y, GN_FACT_ROTATION.z, GN_FACT_ROTATION.w);
 
-		scale_flag = false;
-		
+		GN_FACT.transform.rotation= TransformUtils.GetLookAtRotation(GN_FACT.transform);
+
+		GN_FACT.transform.rotation = GN_FACT_ROTATION;
 	}
+
 
 	private void Update_GN_PROMPTS() {
 		//Vector3 direction;
@@ -176,16 +190,19 @@ public class RatTrap : MonoBehaviour {
 		//	GN_INTRO.transform.rotation = Quaternion.LookRotation(direction.normalized);
 		//}
 
-		//if (GN_DIAL_UP!= null) {
-		//	direction = GN_DIAL_UP.transform.position - Camera.main.transform.position;
-		//	GN_DIAL_UP.transform.rotation = Quaternion.LookRotation(direction.normalized);
-		//}
+		if (GN_DIAL_UP != null) {
 
-
-		//if (GN_FACT != null) {
-		//	direction = GN_FACT.transform.position - Camera.main.transform.position;
-		//	GN_FACT.transform.rotation = Quaternion.LookRotation(direction.normalized);
-		//}
+			GN_DIAL_UP.transform.position = new Vector3(transform.position.x + offset.x, transform.position.y - .2f + offset.y, transform.position.z);
+			GN_DIAL_UP.transform.rotation = TransformUtils.GetLookAtRotation(GN_DIAL_UP.transform);
+		}
+		
 	}
+
+
+	public void DestroGN_FACT() {
+		Prompts.DestroyPrompt(GN_FACT);
+	}
+
+
 
 }

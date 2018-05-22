@@ -17,9 +17,15 @@ public class TransitionManager : Mixt.Singleton<TransitionManager> {
 	protected override void Init() {}
 
 	public void RaisePedastal() {
+
+		if (sliderHandDrag == null)
+			sliderHandDrag = FindObjectOfType<SliderHandDrag>();
+		sliderHandDrag.DestroyPrompt();
+		
 		Debug.Log("Raise the Pedastal");
 		if(pedastal == null)
 			pedastal = FindObjectOfType<Pedastal>();
+
 		pedastal.BeginRaising();
 		AudioManager.Instance.NowPlay(AudioManager.Audio.RisingPlatform);
 	}
@@ -31,8 +37,8 @@ public class TransitionManager : Mixt.Singleton<TransitionManager> {
 
 		AudioManager.Instance.NowPlay(AudioManager.Audio.ForestAmbience, true, false);
 
-		if (sliderHandDrag == null)
-			sliderHandDrag = FindObjectOfType<SliderHandDrag>();
+		//if (sliderHandDrag == null)
+		//	sliderHandDrag = FindObjectOfType<SliderHandDrag>();
 		sliderHandDrag.BeginFalling();
 
 		columns = new List<Transform>();

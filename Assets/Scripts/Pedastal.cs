@@ -51,5 +51,8 @@ public class Pedastal : MonoBehaviour {
 		GameObject spawnedObj = Instantiate(spawnPrefab);
 		spawnedObj.transform.position = SpawnPoint.transform.position;
 		spawnedObj.GetComponent<RatTrap>().SetSpawnPosition(SpawnPoint.transform.position);
+
 	}
+
+
 }

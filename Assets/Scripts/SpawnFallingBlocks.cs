@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using HoloToolkit.Unity.InputModule.Tests;
 using System;
+using DG.Tweening;
 
 /// <summary>
 /// Creates the positions for the blocks and text to spawn at, and spawns them in.
@@ -15,6 +16,7 @@ public class SpawnFallingBlocks : MonoBehaviour {
 	private GameObject InvestBlock;
 	private float maxCategorySum;
 	private Color[] colors;
+
 
 	/// <summary>
 	/// Constructor to bring in the variables from SpawnObjectsController.
@@ -96,7 +98,10 @@ public class SpawnFallingBlocks : MonoBehaviour {
 				//Creates the multiple blocks in the category
 				for (var i = 0; i < sum; i++) {
 					block = SpawnBlock(c, spawnHeight + i, true);
-					block.GetComponent<Renderer>().material.color = AssignColor(index);
+					Renderer rend = block.GetComponent<Renderer>();
+					rend.material.color = Color.white;
+					Color colorTarget = AssignColor(index);
+					rend.material.DOColor(colorTarget, 1);
 					yield return wait;
 				}
 
@@ -127,11 +132,9 @@ public class SpawnFallingBlocks : MonoBehaviour {
 
 
 	private void AddGraphInteraction(Category c) {
-		//Category c = SpawnObjectsController.CategoryList[categoryIndex];
-		//var focusEvt = c.CategoryContainer.AddComponent<OnFocusEvent>();
 		c.CategoryContainer.AddComponent<OnFocusEvent>();
 		GraphInteraction graph_interaction = c.CategoryContainer.AddComponent<GraphInteraction>();
-		graph_interaction.TextPrefab = TextManager.Instance.DynamicTextPrefab;
+		graph_interaction.TextPrefab = Prompts.dynamicTextPrefab;
 		graph_interaction.c = c;
 	}
 
