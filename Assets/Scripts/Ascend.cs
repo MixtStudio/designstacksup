@@ -8,6 +8,7 @@ public class Ascend : MonoBehaviour {
 
 	public float ascendSpeed = 1.0f;
 	public GameObject CloudEffect;
+	public GameObject BorderFog;
 
 	private int cloudTrigger = 2;
 	private int ascendCount;
@@ -51,6 +52,7 @@ public class Ascend : MonoBehaviour {
 				
 			case 3: 
 				height = 250.0f;
+				BorderFog.SetActive(false);
 				prompt = Prompts.PromptName.AB_FACT_3;
 				break;				
 				
@@ -114,6 +116,12 @@ public class Ascend : MonoBehaviour {
 		FadeManager.Instance.DoFade(2.0f, 2.0f, Temp1, Temp2);
 		AudioManager.Instance.StopAll(2.0f);
 		StartCoroutine(LoadManager.Instance.LoadByName("NZReveal", 2.0f));
+	}
+	
+	private void TurnOffParticles(GameObject gObj){
+		foreach(ParticleSystem pSystem in gObj.GetComponentsInChildren<ParticleSystem>()){
+			pSystem.Stop();
+		}
 	}
 
 

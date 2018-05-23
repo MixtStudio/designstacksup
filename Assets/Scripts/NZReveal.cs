@@ -6,7 +6,7 @@ using HoloToolkit.Unity;
 
 public class NZReveal : MonoBehaviour {
 
-	public float delayTime = 7.0f;
+	public float delayTime = 10.0f;
 	private float timeCheck;
 	private bool trigger = false;
 	
@@ -15,7 +15,7 @@ public class NZReveal : MonoBehaviour {
 	
 	void Start () {
 		timeCheck = Time.time;
-		FadeManager.Instance.DoFade(0.0f, 5.0f, Temp1, Temp2);
+		FadeManager.Instance.DoFade(0.0f, 6.0f, Temp1, Temp2);
 	}	
 	
 	void Update () {

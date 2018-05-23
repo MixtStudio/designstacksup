@@ -14,7 +14,6 @@ public class CloudFade : MonoBehaviour {
 	
 	void Update () {
 		if( ((Time.time - timeCheck) >= fadeStartTime) && !trigger ){
-			//gameObject.SetActive(false);
 			TurnOffParticles();
 			trigger = true;
 		}
