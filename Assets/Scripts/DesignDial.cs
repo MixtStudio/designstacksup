@@ -32,8 +32,6 @@ public class DesignDial : MonoBehaviour {
 	void Start() {
 		spawnPos = transform.localPosition;
 		Quaternion rotation = TransformUtils.GetLookAtRotation(transform);
-		//DIAL_UP_DESIGN = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y + .2f, transform.position.z), rotation, Prompts.PromptName.GRAB_ME, .4f);
-
 		DIAL_UP_DESIGN = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y+.2f, transform.position.z), rotation,Prompts.PromptName.AB_DIAL_UP_DESIGN,.15f);
 		handDraggable = GetComponent<HandDraggable>();
 		handDraggable.StartedDragging += PlayAudio;

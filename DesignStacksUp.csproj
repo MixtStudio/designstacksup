@@ -1431,12 +1431,14 @@
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\AVProMediaMapper.cs" />
     <Compile Include="Assets\Scripts\Category.cs" />
+    <Compile Include="Assets\Scripts\CloudFade.cs" />
     <Compile Include="Assets\Scripts\CubeCollision.cs" />
     <Compile Include="Assets\Scripts\DesignDial.cs" />
     <Compile Include="Assets\Scripts\DestroyOnTrigger.cs" />
     <Compile Include="Assets\Scripts\Disappear.cs" />
     <Compile Include="Assets\Scripts\DynamicTextContainer.cs" />
     <Compile Include="Assets\Scripts\DynamicTextController.cs" />
+    <Compile Include="Assets\Scripts\FadeTest.cs" />
     <Compile Include="Assets\Scripts\GazeFinder.cs" />
     <Compile Include="Assets\Scripts\GraphInteraction.cs" />
     <Compile Include="Assets\Scripts\Grow.cs" />
@@ -1445,6 +1447,7 @@
     <Compile Include="Assets\Scripts\Leaves.cs" />
     <Compile Include="Assets\Scripts\LoadManager.cs" />
     <Compile Include="Assets\Scripts\MediaPlayerManager.cs" />
+    <Compile Include="Assets\Scripts\NZReveal.cs" />
     <Compile Include="Assets\Scripts\Pedastal.cs" />
     <Compile Include="Assets\Scripts\Prompts.cs" />
     <Compile Include="Assets\Scripts\RatTrap.cs" />
