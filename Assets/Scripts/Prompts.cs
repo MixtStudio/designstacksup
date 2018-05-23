@@ -60,10 +60,10 @@ public static class Prompts {
 								  "and labour-saving trapping system.\n"+
 								  "Their vision is a natural environment\n" +
 								  "in which native species survive\n"+
-								  "and thrive,free from the threat\n"+
+								  "and thrive, free from the threat\n"+
 								  "of introduced pests."},
 
-			{PromptName.GN_DIAL_UP_DESIGN, "Throw this Goodnature trap\n" +
+			{PromptName.GN_DIAL_UP_DESIGN, "Pick up and throw this Goodnature trap\n" +
 											"to discover its impact"},
 
 			{ PromptName.GN_FACT_1, string.Format("{0}34 visits\n "+

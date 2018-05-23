@@ -28,8 +28,8 @@ public class Shoe : MonoBehaviour {
 		ratTrap.DestroGN_FACT();
 
 		AB_INTRO = Prompts.GetPrompt(new Vector3(transform.position.x + offset.x, transform.position.y + offset.y, transform.position.z), Quaternion.identity,Prompts.PromptName.AB_INTRO,.15f);
-		
-		//AB_DIAL_UP = Prompts.GetPrompt(new Vector3(transform.position.x + offset.x + .05f, transform.position.y + offset.y-.8f, transform.position.z), Quaternion.identity,Prompts.PromptName.AB_DIAL_UP_DESIGN,.15f);
+		AB_INTRO.transform.rotation = TransformUtils.GetLookAtRotation(AB_INTRO.transform);
+
 		ascend = FindObjectOfType<Ascend>();
 		AudioManager.Instance.NowPlay(AudioManager.Audio.ShoeSpawn);
 	}

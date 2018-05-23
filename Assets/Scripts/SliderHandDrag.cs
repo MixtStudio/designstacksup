@@ -36,6 +36,8 @@ namespace HoloToolkit.Unity.InputModule {
 		protected override void Start() {
 			base.Start();
 			Visiblity(false);
+			transform.position = TransformUtils.GetLookAtPosition(1);
+			//HostTransform.position = TransformUtils.GetLookAtPosition(1);
 			HostTransform.position = new Vector3(HostTransform.position.x, minHeight, HostTransform.position.z);
 			SpawnObjectsController.Instance.FallingBlocksInstance.GraphCompleted += OnGraphCompleted;
 			if (percentageThreshold > 1.0f)

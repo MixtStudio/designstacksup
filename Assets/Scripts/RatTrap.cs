@@ -24,6 +24,7 @@ public class RatTrap : MonoBehaviour {
 
 	private DynamicTextController GN_INTRO;
 	private DynamicTextController GN_DIAL_UP;
+	private static bool scale_flag=true;
 	private DynamicTextController GN_FACT;
 
 	private Vector3 offset = new Vector3(.4f,.2f,0);
@@ -41,15 +42,19 @@ public class RatTrap : MonoBehaviour {
 		spawnRot = transform.rotation;
 		rg = GetComponent<Rigidbody>();
 
-		//Debug.LogFormat("SPAWN COUNT: {0} CAN INTRO: {1}", SpawnCount, spawn_GN_INTRO);
-
-		
 		if (SpawnCount == 1) {
 			GN_INTRO = Prompts.GetPrompt(new Vector3(transform.position.x+ offset.x, transform.position.y + offset.y, transform.position.z), Quaternion.identity, Prompts.PromptName.GN_INTRO, .15f);
-
+			GN_INTRO.transform.rotation = TransformUtils.GetLookAtRotation(GN_INTRO.transform);
 		}
-		
-		GN_DIAL_UP = Prompts.GetPrompt(new Vector3(transform.position.x + offset.x-.1f, transform.position.y + offset.y-.3f, transform.position.z), Quaternion.identity, Prompts.PromptName.GN_DIAL_UP_DESIGN,.15f);
+
+		Vector3 GN_DIAL_POSITION = new Vector3(transform.position.x + offset.x, transform.position.y - .2f + offset.y, transform.position.z);
+		GN_DIAL_UP = Prompts.GetPrompt(GN_DIAL_UP,GN_DIAL_POSITION, Quaternion.identity, Prompts.PromptName.GN_DIAL_UP_DESIGN);
+		GN_DIAL_UP.transform.rotation = TransformUtils.GetLookAtRotation(GN_DIAL_UP.transform);
+
+		if (scale_flag) {
+			GN_DIAL_UP.transform.localScale *=.15f;
+			scale_flag = false;
+		}
 
 		AudioManager.Instance.NowPlay(AudioManager.Audio.TrapSpawn);
 	}
@@ -59,10 +64,7 @@ public class RatTrap : MonoBehaviour {
 			transform.Rotate(Vector3.up, 20 * Time.deltaTime);
 		}
 
-		if (rotateLookCamera) {
-			Update_GN_PROMPTS();
-		}
-		
+		Update_GN_PROMPTS();
 	}
 
 	private void GetSpawnPos() {
@@ -70,7 +72,6 @@ public class RatTrap : MonoBehaviour {
 	}
 
 	private void DraggingStart() {
-		//Debug.Log("DraggingStart");
 		rotateLookCamera = true;
 		canRotate = false;
 		AudioManager.Instance.NowPlay(AudioManager.Audio.TrapRattle);
@@ -92,7 +93,7 @@ public class RatTrap : MonoBehaviour {
 
 				SpawnMultiple(transform.position, transform.rotation);
 			}
-			Prompts.DestroyPrompt(GN_DIAL_UP);
+			//Prompts.DestroyPrompt(GN_DIAL_UP);
 			Spawn_GN_FACT();
 			RevealArea();
 		}
@@ -165,6 +166,7 @@ public class RatTrap : MonoBehaviour {
 
 			case 3:
 				prompt = Prompts.PromptName.GN_FACT_3;
+				Prompts.DestroyPrompt(GN_DIAL_UP);
 				break;
 
 			default:
@@ -173,36 +175,25 @@ public class RatTrap : MonoBehaviour {
 		}
 
 		GN_FACT = Prompts.GetPrompt(GN_FACT, GN_FACT_POSITION,Quaternion.identity, prompt,.5f);
-		Quaternion GN_FACT_ROTATION = TransformUtils.GetLookAtRotation(GN_FACT.transform);
-		//GN_FACT_ROTATION = new Quaternion(0, GN_FACT_ROTATION.y, GN_FACT_ROTATION.z, GN_FACT_ROTATION.w);
-
 		GN_FACT.transform.rotation= TransformUtils.GetLookAtRotation(GN_FACT.transform);
-
-		GN_FACT.transform.rotation = GN_FACT_ROTATION;
 	}
 
 
 	private void Update_GN_PROMPTS() {
-		//Vector3 direction;
-
-		//if (GN_INTRO != null) {
-		//	direction= GN_INTRO.transform.position - Camera.main.transform.position;
-		//	GN_INTRO.transform.rotation = Quaternion.LookRotation(direction.normalized);
-		//}
-
+	
 		if (GN_DIAL_UP != null) {
-
 			GN_DIAL_UP.transform.position = new Vector3(transform.position.x + offset.x, transform.position.y - .2f + offset.y, transform.position.z);
 			GN_DIAL_UP.transform.rotation = TransformUtils.GetLookAtRotation(GN_DIAL_UP.transform);
 		}
-		
-	}
 
+
+		if (GN_INTRO != null) {
+			//.transform.position = new Vector3(transform.position.x + offset.x, transform.position.y - .2f + offset.y, transform.position.z);
+			GN_INTRO.transform.rotation = TransformUtils.GetLookAtRotation(GN_INTRO.transform);
+		}
+	}
 
 	public void DestroGN_FACT() {
 		Prompts.DestroyPrompt(GN_FACT);
 	}
-
-
-
 }
