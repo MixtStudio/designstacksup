@@ -16,6 +16,7 @@ public class MediaPlayerManager : Mixt.Singleton<MediaPlayerManager> {
 	}
 
 	public void Begin(bool load) {
+		transform.GetChild(0).gameObject.SetActive(true);
 		mediaPlayer.Play();
 		loadScene = load;
 	}
