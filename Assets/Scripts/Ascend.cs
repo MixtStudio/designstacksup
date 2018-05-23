@@ -19,6 +19,8 @@ public class Ascend : MonoBehaviour {
 	private bool ascending = false;
 	private DesignDial designDial;
 
+	private RatTrap ratTrap;
+
 
 	private DynamicTextController AB_FACT;
 
@@ -26,6 +28,8 @@ public class Ascend : MonoBehaviour {
 
 
 	void OnEnable() {
+		if (ratTrap == null)
+			ratTrap = FindObjectOfType<RatTrap>();
 		CloudEffect.SetActive(false);
 		designDial = FindObjectOfType<DesignDial>();
 		GameObject.FindGameObjectWithTag("MainCamera").transform.SetParent(transform, true);
@@ -41,6 +45,7 @@ public class Ascend : MonoBehaviour {
 
 		switch (ascendCount){
 			case 1:
+				ratTrap.DestroGN_FACT();
 				height = 10.0f;
 				prompt = Prompts.PromptName.AB_FACT_1;
 				break;
