@@ -6,6 +6,7 @@ using RenderHeads.Media.AVProVideo;
 public class MediaPlayerManager : Mixt.Singleton<MediaPlayerManager> {
 
 	private MediaPlayer mediaPlayer;
+	private bool loadScene;
 	
 	protected override void Init() {}
 	
@@ -14,20 +15,17 @@ public class MediaPlayerManager : Mixt.Singleton<MediaPlayerManager> {
 		mediaPlayer.Events.AddListener(OnVideoEvent);
 	}
 
-	public void Begin() {
+	public void Begin(bool load) {
 		mediaPlayer.Play();
+		loadScene = load;
 	}
 
 	public void OnVideoEvent(MediaPlayer mp, MediaPlayerEvent.EventType et, ErrorCode errorCode) {
 		Debug.Log("Event:   " + et.ToString());
-		if(et == MediaPlayerEvent.EventType.FinishedPlaying && mediaPlayer.m_AutoStart == false) {
+		if(et == MediaPlayerEvent.EventType.FinishedPlaying && loadScene) {
 			LoadManager.Instance.AdditiveLoadByName("Scene1additive");
 			AudioManager.Instance.NowStop(AudioManager.Audio.IntroText);
 			gameObject.SetActive(false);
-		}
-		else if(et == MediaPlayerEvent.EventType.FinishedPlaying && mediaPlayer.m_AutoStart == true) {
-				//LoadManager.Instance.AdditiveLoadByName("Scene1additive");
-				//gameObject.SetActive(false);
 		}
 	}
 }

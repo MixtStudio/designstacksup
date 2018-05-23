@@ -36,7 +36,6 @@ public class Ascend : MonoBehaviour {
 		Prompts.PromptName prompt;
 
 		Vector3 AB_FACT_POSITION = TransformUtils.GetLookAtPosition(2);
-		//AB_FACT_POSITION = new Vector3(AB_FACT_POSITION.x, AB_FACT_POSITION.y + 1.5f, AB_FACT_POSITION.z);
 		AB_FACT_POSITION = new Vector3(AB_FACT_POSITION.x, AB_FACT_POSITION.y + 1.5f, AB_FACT_POSITION.z);
 
 		switch (ascendCount){
@@ -51,20 +50,12 @@ public class Ascend : MonoBehaviour {
 				break;
 				
 			case 3: 
-				height = 100.0f;
+				height = 250.0f;
 				prompt = Prompts.PromptName.AB_FACT_3;
-				break;
+				break;				
 				
 			case 4:
 				prompt = Prompts.PromptName.AB_FACT_1;
-				height = 1000.0f;
-				break;
-				
-			case 5:
-				prompt = Prompts.PromptName.AB_FACT_1;
-				//LoadManager.Instance.LoadByName("NZReveal");
-				//FadeManager.Instance.DoFade(2.0f, 2.0f, Temp1, Temp2);
-				//StartCoroutine(Transition(2.0f));
 				Transition();
 				return;
 				
@@ -72,8 +63,6 @@ public class Ascend : MonoBehaviour {
 				prompt = Prompts.PromptName.AB_FACT_1;
 				return;
 		}
-
-		//AB_FACT = Prompts.GetPrompt(new Vector3(transform.position.x+offset.x, transform.position.y+ offset.y, transform.position.z+offset.z),Quaternion.identity,prompt,1,transform);
 
 		AB_FACT = Prompts.GetPrompt(AB_FACT, AB_FACT_POSITION, Quaternion.identity, prompt, .5f,transform);
 		Quaternion AB_FACT_ROTATION = TransformUtils.GetLookAtRotation(AB_FACT.transform);
@@ -120,15 +109,7 @@ public class Ascend : MonoBehaviour {
 	
 	private Action Temp1;
 	private Action Temp2;
-	/*
-	private IEnumerator Transition(float delaytime) {
-		yield return new WaitForSeconds(delaytime);
-		//FadeManager.Instance.DoFade(2.0f, 2.0f, Temp1, Temp2);
-		//AudioManager.Instance.StopAll(2.0f);
-		//StartCoroutine(LoadManager.Instance.LoadByName("NZReveal", 2.0f));
-		LoadManager.Instance.LoadByName("NZReveal");
-	}
-	*/
+
 	private void Transition() {
 		FadeManager.Instance.DoFade(2.0f, 2.0f, Temp1, Temp2);
 		AudioManager.Instance.StopAll(2.0f);

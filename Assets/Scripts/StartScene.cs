@@ -17,11 +17,6 @@ public class StartScene : MonoBehaviour {
 	
 	void Start () {
 		FadeManager.Instance.DoFade(0.0f, 0.0f, Temp1, Temp2);
-		PRESS_ANY_BUTTON = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y + offset.y, transform.position.z+offset.z),Prompts.PromptName.PRESS_ANY_BUTTON_TO_START);
-		Vector3 direction = PRESS_ANY_BUTTON.transform.position - Camera.main.transform.position;
-		PRESS_ANY_BUTTON.transform.rotation = Quaternion.LookRotation(direction.normalized);
-		PRESS_ANY_BUTTON.transform.localScale *= .4f;
-
 		PRESS_ANY_BUTTON = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y + offset.y, transform.position.z+offset.z),Quaternion.identity,Prompts.PromptName.PRESS_ANY_BUTTON_TO_START,.4f);
 		PRESS_ANY_BUTTON.transform.rotation = TransformUtils.GetLookAtRotation(PRESS_ANY_BUTTON.transform);
 
@@ -37,7 +32,7 @@ public class StartScene : MonoBehaviour {
 			interactionSourceStates = InteractionManager.GetCurrentReading();
 			foreach (InteractionSourceState interactionSourceState in interactionSourceStates) {
 				if (interactionSourceState.anyPressed) {
-					MediaPlayerManager.Instance.Begin();
+					MediaPlayerManager.Instance.Begin(true);
 					AudioManager.Instance.NowPlay(AudioManager.Audio.IntroText, false, true);
 					Prompts.DestroyPrompt(PRESS_ANY_BUTTON);
 					begin = true;

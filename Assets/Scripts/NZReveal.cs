@@ -20,7 +20,7 @@ public class NZReveal : MonoBehaviour {
 	
 	void Update () {
 		if( ((Time.time - timeCheck) >= delayTime) && !trigger ){
-			MediaPlayerManager.Instance.Begin();
+			MediaPlayerManager.Instance.Begin(false);
 			AudioManager.Instance.NowPlay(AudioManager.Audio.EndText);
 			trigger = true;
 		}
