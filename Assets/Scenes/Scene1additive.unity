@@ -4987,6 +4987,7 @@ MonoBehaviour:
   _color2: {r: 0.9037957, g: 1, b: 0, a: 0.5019608}
   _investColor: {r: 1, g: 0.6084906, b: 0.65455055, a: 1}
   _highlightColor: {r: 0.94509804, g: 0.45882353, b: 0.48235294, a: 1}
+  _barsRotation: 280
   PrefabSize: 1
   MaxCategorySum: 3932.0996
 --- !u!4 &1416220683

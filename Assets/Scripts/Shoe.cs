@@ -8,8 +8,6 @@ public class Shoe : MonoBehaviour {
 
 	private DynamicTextController AB_INTRO;
 	private DynamicTextController AB_DIAL_UP;
-	//private RatTrap ratTrap;
-	private static bool canRotate;
 
 	private Vector3 offset = new Vector3(.4f, .2f, 0);
 
@@ -22,11 +20,8 @@ public class Shoe : MonoBehaviour {
 	}
 
 	void OnEnable () {
-		canRotate = true;
-		//if (ratTrap == null)
-		//	ratTrap = FindObjectOfType<RatTrap>();
-		////ratTrap.DestroGN_FACT();
-
+		transform.position = new Vector3(transform.position.x, 1.17f, transform.position.z);
+		transform.rotation = Quaternion.Euler(14.68f, 270, 0);
 		AB_INTRO = Prompts.GetPrompt(new Vector3(transform.position.x + offset.x, transform.position.y + offset.y, transform.position.z), Quaternion.identity,Prompts.PromptName.AB_INTRO,.15f);
 		AB_INTRO.transform.rotation = TransformUtils.GetLookAtRotation(AB_INTRO.transform);
 
@@ -35,8 +30,6 @@ public class Shoe : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (canRotate) {
-			transform.Rotate(Vector3.up, 20 * Time.deltaTime);
-		}
+		//transform.Rotate(Vector3.up, 20 * Time.deltaTime);		
 	}
 }

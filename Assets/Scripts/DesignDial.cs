@@ -9,7 +9,7 @@ public class DesignDial : MonoBehaviour {
 	private HandDraggable handDraggable;
 	private DynamicTextController DIAL_UP_DESIGN;
 	private Vector3 DIAL_UP_DESIGN_POS;
-	private float offset = .5f;
+	//private float offset = .5f;
 
 
 	public void SetSpawnPos(Vector3 pos) { spawnPos = pos; }

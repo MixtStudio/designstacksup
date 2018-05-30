@@ -13,6 +13,11 @@ public class Ascend : MonoBehaviour {
 	private int cloudTrigger = 2;
 	private int ascendCount;
 
+	[SerializeField]
+	private GameObject FlyingShoePrefab;
+
+	private GameObject FlyingShoeInstance;
+
 	private float delta = 0.0f;
 	private Vector3 startPos;
 	private Vector3 endPos;
@@ -21,10 +26,9 @@ public class Ascend : MonoBehaviour {
 
 	private RatTrap ratTrap;
 
-
 	private DynamicTextController AB_FACT;
 
-	private Vector3 offset = new Vector3(.2f,1f,1f);
+	//private Vector3 offset = new Vector3(.2f,1f,1f);
 
 
 	void OnEnable() {
@@ -47,22 +51,28 @@ public class Ascend : MonoBehaviour {
 			case 1:
 				ratTrap.DestroGN_FACT();
 				height = 10.0f;
+				//SpawnFlyingShoe();
 				prompt = Prompts.PromptName.AB_FACT_1;
 				break;
 				
 			case 2:
 				height = 50.0f;
+				//Destroy(FlyingShoeInstance);
+				//SpawnFlyingShoe();
 				prompt = Prompts.PromptName.AB_FACT_2;
 				break;
 				
 			case 3: 
 				height = 250.0f;
+				//Destroy(FlyingShoeInstance);
+				//SpawnFlyingShoe();
 				BorderFog.SetActive(false);
 				prompt = Prompts.PromptName.AB_FACT_3;
 				break;				
 				
 			case 4:
 				prompt = Prompts.PromptName.AB_FACT_1;
+				//Destroy(FlyingShoeInstance);
 				Transition();
 				return;
 				
@@ -99,6 +109,9 @@ public class Ascend : MonoBehaviour {
 	void Update () {
 		if (ascending)
 			Ascending();
+		if (FlyingShoeInstance != null) {
+			FlyingShoeInstance.transform.RotateAround(Vector3.zero, Vector3.up, 10 * Time.deltaTime);
+		}
 	}
 
 	private void Ascending() {
@@ -129,5 +142,13 @@ public class Ascend : MonoBehaviour {
 		}
 	}
 
+	private void SpawnFlyingShoe() {
+		Vector3 AB_FLY_POS = TransformUtils.GetLookAtPosition(2);
+		FlyingShoeInstance = Instantiate(FlyingShoePrefab,transform);
+		FlyingShoeInstance.transform.position = new Vector3(AB_FLY_POS.x, AB_FLY_POS.y+.8f, AB_FLY_POS.z+2.04f);
+		FlyingShoeInstance.transform.rotation = Quaternion.Euler(12.71f, -112.27f, 3.12f);
+		//FlyingShoeInstance.transform.rotation = TransformUtils.GetLookAtRotation(FlyingShoeInstance.transform);
+		FlyingShoeInstance.transform.localScale *= 6.66f;
 
+	}
 }
