@@ -75,6 +75,7 @@ public class SpawnFallingBlocks : MonoBehaviour {
 
 		GameObject.FindObjectOfType<TransitionManager>().SetBarsHolder(SOC.BarsHolder);
 
+		
 		int index = categoryList.Count;
 
 		//Allows a random fall of blocks
@@ -100,8 +101,8 @@ public class SpawnFallingBlocks : MonoBehaviour {
 					block = SpawnBlock(c, spawnHeight + i, true);
 					Renderer rend = block.GetComponent<Renderer>();
 					rend.material.color = Color.white;
-					Color colorTarget = AssignColor(index);
-					rend.material.DOColor(colorTarget, 1);
+					Color colorTarget = AssignColor(categoryIndex);
+					rend.material.DOColor(colorTarget, 1.5f);
 					yield return wait;
 				}
 
@@ -110,7 +111,6 @@ public class SpawnFallingBlocks : MonoBehaviour {
 				SOC.InvestBlocks.Add(block);
 				//investBlock.layer = 11;
 				block.GetComponentInChildren<Renderer>().material.color = SOC.InvestColor;
-
 
 				//Adds the interaction to category and block
 				AddGraphInteraction(c);

@@ -10,21 +10,26 @@ public class StartScene : MonoBehaviour {
 	private InteractionSourceState[] interactionSourceStates;
 	private bool begin;
 	private DynamicTextController PRESS_ANY_BUTTON;
-	private Vector3 offset = new Vector3(0,2,1.5f);
+	//private Vector3 PRESS_ANY_BUTTON_POS;
+	//private Vector3 offset = new Vector3(0,2,1.5f);
 
 	private Action Temp1;
 	private Action Temp2;
 	
 	void Start () {
 		FadeManager.Instance.DoFade(0.0f, 0.0f, Temp1, Temp2);
-		PRESS_ANY_BUTTON = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y + offset.y, transform.position.z+offset.z),Quaternion.identity,Prompts.PromptName.PRESS_ANY_BUTTON_TO_START,.4f);
-		PRESS_ANY_BUTTON.transform.rotation = TransformUtils.GetLookAtRotation(PRESS_ANY_BUTTON.transform);
+		//PRESS_ANY_BUTTON_POS = TransformUtils.GetLookAtPosition(1);
+		//PRESS_ANY_BUTTON = Prompts.GetPrompt(new Vector3(PRESS_ANY_BUTTON_POS.x, PRESS_ANY_BUTTON_POS.y+1, PRESS_ANY_BUTTON_POS.z),Quaternion.identity,Prompts.PromptName.PRESS_ANY_BUTTON_TO_START,.4f);
+		PRESS_ANY_BUTTON = Prompts.GetPrompt(Vector3.zero, Quaternion.identity, Prompts.PromptName.PRESS_ANY_BUTTON_TO_START, .4f);
+		//PRESS_ANY_BUTTON.transform.rotation = TransformUtils.GetLookAtRotation(PRESS_ANY_BUTTON.transform);
 
 	}
 	
 	void Update () {
 
 		if (PRESS_ANY_BUTTON != null) {
+			Vector3 PRESS_ANY_BUTTON_POS = TransformUtils.GetLookAtPosition(1);
+			PRESS_ANY_BUTTON.transform.position = new Vector3(PRESS_ANY_BUTTON_POS.x, 1.8f, PRESS_ANY_BUTTON_POS.z);
 			PRESS_ANY_BUTTON.transform.rotation = TransformUtils.GetLookAtRotation(PRESS_ANY_BUTTON.transform);
 		}
 

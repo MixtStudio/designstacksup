@@ -1456,7 +1456,6 @@
     <Compile Include="Assets\Scripts\Shoe.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\SliderHandDrag.cs" />
-    <Compile Include="Assets\Scripts\SliderHandDragConstraint.cs" />
     <Compile Include="Assets\Scripts\SpawnFallingBlocks.cs" />
     <Compile Include="Assets\Scripts\SpawnObjectsController.cs" />
     <Compile Include="Assets\Scripts\StartScene.cs" />

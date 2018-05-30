@@ -28,7 +28,6 @@ public class RatTrap : MonoBehaviour {
 	private DynamicTextController GN_FACT;
 
 	private Vector3 offset = new Vector3(.4f,.2f,0);
-	private static bool rotateLookCamera = false;
 	public void SetSpawnPosition(Vector3 pos) { spawnPos = pos; }
 
 
@@ -68,11 +67,12 @@ public class RatTrap : MonoBehaviour {
 	}
 
 	private void GetSpawnPos() {
-		Vector3 spawnPos = Camera.main.transform.position + Camera.main.transform.forward * 3;
+		//Vector3 spawnPos = Camera.main.transform.position + Camera.main.transform.forward * 3;
+		spawnPos = Camera.main.transform.position + Camera.main.transform.forward * 3;
 	}
 
 	private void DraggingStart() {
-		rotateLookCamera = true;
+		//rotateLookCamera = true;
 		canRotate = false;
 		AudioManager.Instance.NowPlay(AudioManager.Audio.TrapRattle);
 		if (!fallingCheck) {

@@ -31,11 +31,13 @@ public class GazeFinder : Mixt.Singleton<GazeFinder> {
 			}
 			
 			GraphInteraction newGraphInteraction = hit.transform.parent.GetComponent<GraphInteraction>();
-			
-			if(newGraphInteraction != graphInteraction){
-				graphInteraction.OnGazeExit();
-				newGraphInteraction.OnGazeEnter();
-				graphInteraction = newGraphInteraction;				
+
+			if (newGraphInteraction != null) {
+				if (newGraphInteraction != graphInteraction) {
+					graphInteraction.OnGazeExit();
+					newGraphInteraction.OnGazeEnter();
+					graphInteraction = newGraphInteraction;
+				}
 			}			
         } 
 		else {

@@ -67,6 +67,14 @@ public class SpawnObjectsController : Mixt.Singleton<SpawnObjectsController> {
 		}
 	}
 
+	[SerializeField]
+	private float _barsRotation;
+	public float BarsRotation {
+		get {
+			return _barsRotation;
+		}
+	}
+
 	[HideInInspector]
 	public float PrefabSize = 1f;
 
@@ -96,11 +104,18 @@ public class SpawnObjectsController : Mixt.Singleton<SpawnObjectsController> {
 		//instance = this;
 		CategoryList = new List<Category>();
 		InvestBlocks = new List<GameObject>();
-		CreateHarcodeBar();
+		CreateBars();
 	}
 
 
-	private void CreateHarcodeBar() {
+	//private void Update() {
+	//	if (BarsHolder != null) {
+	//		BarsHolder.transform.Rotate(Vector3.up, 5 * Time.deltaTime);
+	//		Debug.Log("I am rotating: " + BarsHolder.transform.rotation);
+	//	}
+	//}
+
+	private void CreateBars() {
 
 		BarsHolder = new GameObject() {
 			name = "BarsHolder",
@@ -112,38 +127,23 @@ public class SpawnObjectsController : Mixt.Singleton<SpawnObjectsController> {
 
 		CategoryList = new List<Category>();
 		// 2. Fills categoryList
-		CategoryList = GetHardCodeList();
+		CategoryList = GetCategoryList();
 		//CategoryList = ShiftLeft(CategoryList, 11);
 		MaxCategorySum = GetMaxCategorySum();
+		
+		//Rotation of Bars
+		BarsHolder.transform.rotation = Quaternion.Euler(0, BarsRotation, 0);
+
 		FallingBlocksInstance = new SpawnFallingBlocks();
 		
 		//3.Uses data to create objects
 		FallingBlocksInstance.CreateGraphs();
 	}
 
-	public static List<Category> ShiftLeft(List<Category> lst, int shifts) {
-		for (int i = shifts; i < lst.Count; i++) {
-			lst[i - shifts] = lst[i];
-		}
 
-		for (int i = lst.Count - shifts; i < lst.Count; i++) {
-			lst[i] = default(Category);
-		}
-		return lst;
-	}
-
-	private List<Category> GetHardCodeList() {
+	private List<Category> GetCategoryList() {
 		List<Category> categories = new List<Category>();
 
-		categories.Add(new Category("Public & Private Transport\nIndustry(not Freight)", 58));
-		categories.Add(new Category("Aerospace Industry", 46));
-		categories.Add(new Category("Automotive Industry", 42));
-		categories.Add(new Category("Tourism", 40));
-		categories.Add(new Category("Security & Cyber", 30));
-		categories.Add(new Category("Commercial Travel Industry", 27));
-		categories.Add(new Category("Animal Health", 13));
-		categories.Add(new Category("Civil Engineering Industry", 12));
-		categories.Add(new Category("Data Services", 3));
 		categories.Add(new Category("Manufacturing Industry", 2691));
 		categories.Add(new Category("Human Health", 895));
 		categories.Add(new Category("Financial", 757));
@@ -164,44 +164,17 @@ public class SpawnObjectsController : Mixt.Singleton<SpawnObjectsController> {
 		categories.Add(new Category("Communications Industry", 157));
 		categories.Add(new Category("Education", 133));
 		categories.Add(new Category("Leisure Industry less tourism", 124));
+		categories.Add(new Category("Public & Private Transport\nIndustry(not Freight)", 58));
+		categories.Add(new Category("Aerospace Industry", 46));
+		categories.Add(new Category("Automotive Industry", 42));
+		categories.Add(new Category("Tourism", 40));
+		categories.Add(new Category("Security & Cyber", 30));
+		categories.Add(new Category("Commercial Travel Industry", 27));
+		categories.Add(new Category("Animal Health", 13));
+		categories.Add(new Category("Civil Engineering Industry", 12));
+		categories.Add(new Category("Data Services", 3));
 		return categories;
 	}
-
-
-	//private List<Category> GetHardCodeList() {
-	//	List<Category> categories = new List<Category>();
-
-	//	categories.Add(new Category("Manufacturing Industry", 2691));
-	//	categories.Add(new Category("Human Health", 895));
-	//	categories.Add(new Category("Financial", 757));
-	//	categories.Add(new Category("Environmental Industry", 651));
-	//	categories.Add(new Category("Construction", 607));
-	//	categories.Add(new Category("Agriculture", 467));
-	//	categories.Add(new Category("Logistics Industry", 445));
-	//	categories.Add(new Category("Retail Industry", 432));
-	//	categories.Add(new Category("Other Public Sector", 428));
-	//	categories.Add(new Category("Food and Beverage\nIndustry", 378));
-	//	categories.Add(new Category("Defence Industry", 298));
-	//	categories.Add(new Category("Engineering Industry\n(excluding Civils)", 269));
-	//	categories.Add(new Category("Digital and Creative\nIndustry", 261));
-	//	categories.Add(new Category("Process Industry", 257));
-	//	categories.Add(new Category("Utilities", 231));
-	//	categories.Add(new Category("Marine Industry", 173));
-	//	categories.Add(new Category("Designer Fashion", 172));
-	//	categories.Add(new Category("Communications Industry", 157));
-	//	categories.Add(new Category("Education", 133));
-	//	categories.Add(new Category("Leisure Industry less tourism", 124));
-	//	categories.Add(new Category("Public & Private Transport\nIndustry(not Freight)", 58));
-	//	categories.Add(new Category("Aerospace Industry", 46));
-	//	categories.Add(new Category("Automotive Industry", 42));
-	//	categories.Add(new Category("Tourism", 40));
-	//	categories.Add(new Category("Security & Cyber", 30));
-	//	categories.Add(new Category("Commercial Travel Industry", 27));
-	//	categories.Add(new Category("Animal Health", 13));
-	//	categories.Add(new Category("Civil Engineering Industry", 12));
-	//	categories.Add(new Category("Data Services", 3));
-	//	return categories;
-	//}
 
 
 	/// <summary>

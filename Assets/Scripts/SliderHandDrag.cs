@@ -16,7 +16,7 @@ namespace HoloToolkit.Unity.InputModule {
 		public float timeThreshold = 2.0f;
 		public float backupTimeThreshold = 30.0f;
 
-		private GameObject barsHolder;
+		//private GameObject barsHolder;
 		private List<GameObject> investBlocks;
 
 		private float timeCounter;
@@ -36,9 +36,8 @@ namespace HoloToolkit.Unity.InputModule {
 		protected override void Start() {
 			base.Start();
 			Visiblity(false);
-			transform.position = TransformUtils.GetLookAtPosition(1);
-			//HostTransform.position = TransformUtils.GetLookAtPosition(1);
-			HostTransform.position = new Vector3(HostTransform.position.x, minHeight, HostTransform.position.z);
+			Debug.Log("tHIS IS POS " + transform.position);
+			//HostTransform.position = new Vector3(HostTransform.position.x, minHeight, HostTransform.position.z);
 			SpawnObjectsController.Instance.FallingBlocksInstance.GraphCompleted += OnGraphCompleted;
 			if (percentageThreshold > 1.0f)
 				percentageThreshold = 1.0f;
@@ -58,8 +57,7 @@ namespace HoloToolkit.Unity.InputModule {
 
 		protected override void Update() {
 			base.Update();
-			Update_DIAL_UP_DESIGN();
-
+	
 			if (!pedastalCheck) {
 				if (HostTransform.position.y >= (percentageThreshold * maxHeight))
 					timeCounter += Time.deltaTime;
@@ -127,7 +125,6 @@ namespace HoloToolkit.Unity.InputModule {
 		protected override void UpdateDragging() {
 			base.UpdateDragging();
 			ConstraintCheck();
-			//Update_DIAL_UP_DESIGN();
 			if (graphCompleted)
 				StartCoroutine(ChangeScale());
 		}
@@ -167,10 +164,15 @@ namespace HoloToolkit.Unity.InputModule {
 		}
 
 		public void OnGraphCompleted(object source, EventArgs e) {
+			//Dial becomes visible 
+			Vector3 DIAL_UP_DESIGN_POS = TransformUtils.GetLookAtPosition(1);
+			HostTransform.position = new Vector3(DIAL_UP_DESIGN_POS.x, minHeight, DIAL_UP_DESIGN_POS.z);
 			Visiblity(true);
-			MakeInvestBlocksReady();
+
 			Quaternion rotation = TransformUtils.GetLookAtRotation(transform);
 			DIAL_UP_DESIGN = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y + .2f, transform.position.z), rotation, Prompts.PromptName.GRAB_ME, .4f);
+			MakeInvestBlocksReady();
+
 			graphCompleted = true;
 			AudioManager.Instance.NowPlay(AudioManager.Audio.DesignBallSpawn);
 		}
@@ -191,21 +193,7 @@ namespace HoloToolkit.Unity.InputModule {
 			}
 		}
 
-		//private void Create_DIAL_UP_DESIGN(Prompts.PromptName prompt,float offset) {
-		//	Quaternion rotation = TransformUtils.GetLookAtRotation(transform);
-		//	DIAL_UP_DESIGN = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y + offset, transform.position.z),rotation,prompt,.4f);
-		//	//Vector3 direction = transform.position - Camera.main.transform.position;
-		//	//DIAL_UP_DESIGN.transform.rotation = Quaternion.LookRotation(direction.normalized);
-		//}
-
-		private void Update_DIAL_UP_DESIGN() {
-			if (DIAL_UP_DESIGN != null) {
-				//DIAL_UP_DESIGN.transform.position = new Vector3(transform.position.x,transform.position.y + offset_DIAL, transform.position.z);
-				//DIAL_UP_DESIGN.transform.rotation = TransformUtils.GetLookAtRotation(DIAL_UP_DESIGN.transform);
-			}
-		}
-
-
+	
 		public void BeginFalling() { 
 			SetDragging(false);
 			Rigidbody rg = GetComponent<Rigidbody>();
