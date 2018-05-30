@@ -18,21 +18,15 @@ public class StartScene : MonoBehaviour {
 	
 	void Start () {
 		FadeManager.Instance.DoFade(0.0f, 0.0f, Temp1, Temp2);
-		//PRESS_ANY_BUTTON_POS = TransformUtils.GetLookAtPosition(1);
-		//PRESS_ANY_BUTTON = Prompts.GetPrompt(new Vector3(PRESS_ANY_BUTTON_POS.x, PRESS_ANY_BUTTON_POS.y+1, PRESS_ANY_BUTTON_POS.z),Quaternion.identity,Prompts.PromptName.PRESS_ANY_BUTTON_TO_START,.4f);
-		PRESS_ANY_BUTTON = Prompts.GetPrompt(Vector3.zero, Quaternion.identity, Prompts.PromptName.PRESS_ANY_BUTTON_TO_START, .4f);
-		//PRESS_ANY_BUTTON.transform.rotation = TransformUtils.GetLookAtRotation(PRESS_ANY_BUTTON.transform);
 
+		PRESS_ANY_BUTTON = Prompts.GetPrompt(Vector3.zero, Quaternion.identity, Prompts.PromptName.PRESS_ANY_BUTTON_TO_START, .4f);
+		Vector3 PRESS_ANY_BUTTON_POS = TransformUtils.GetLookAtPosition(1.5f);
+		PRESS_ANY_BUTTON.transform.position = new Vector3(PRESS_ANY_BUTTON_POS.x, 1.8f, PRESS_ANY_BUTTON_POS.z);
+		PRESS_ANY_BUTTON.transform.rotation = TransformUtils.GetLookAtRotation(PRESS_ANY_BUTTON.transform);
 	}
 	
 	void Update () {
-
-		if (PRESS_ANY_BUTTON != null) {
-			Vector3 PRESS_ANY_BUTTON_POS = TransformUtils.GetLookAtPosition(1);
-			PRESS_ANY_BUTTON.transform.position = new Vector3(PRESS_ANY_BUTTON_POS.x, 1.8f, PRESS_ANY_BUTTON_POS.z);
-			PRESS_ANY_BUTTON.transform.rotation = TransformUtils.GetLookAtRotation(PRESS_ANY_BUTTON.transform);
-		}
-
+		
 		if (!begin) {
 			interactionSourceStates = InteractionManager.GetCurrentReading();
 			foreach (InteractionSourceState interactionSourceState in interactionSourceStates) {
@@ -46,4 +40,12 @@ public class StartScene : MonoBehaviour {
 			}
 		}
 	}
+
+	//private void LateUpdate() {
+	//	if (PRESS_ANY_BUTTON != null) {
+	//		Vector3 PRESS_ANY_BUTTON_POS = TransformUtils.GetLookAtPosition(1);
+	//		PRESS_ANY_BUTTON.transform.position = new Vector3(PRESS_ANY_BUTTON_POS.x, 1.8f, PRESS_ANY_BUTTON_POS.z);
+	//		PRESS_ANY_BUTTON.transform.rotation = TransformUtils.GetLookAtRotation(PRESS_ANY_BUTTON.transform);
+	//	}
+	//}
 }

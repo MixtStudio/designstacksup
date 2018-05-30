@@ -73,15 +73,23 @@ public class TransitionManager : Mixt.Singleton<TransitionManager> {
 
 		var wait = new WaitForSeconds(.1f);
 
+		//Random fall
 		while (columns.Count != 0) {
 			Transform column = columns[Random.Range(0, columns.Count - 1)];
-			column.DOScaleY(0, 3);
-			column.DOMoveY(-.1f, 4);
+			column.DOScaleY(0, 1.5f);
+			column.DOMoveY(-.001f, 1.5f);
 			columns.Remove(column);
 			yield return wait;
 		}
 
-		wait = new WaitForSeconds(5);
+		//for (int i = 0; i < columns.Count; i++) {
+		//	Transform column = columns[i];
+		//	column.DOScaleY(0, 1.5f);
+		//	column.DOMoveY(-.001f, 1.5f);
+		//	yield return wait;
+		//}
+
+		wait = new WaitForSeconds(2.5f);
 		yield return wait;
 		Destroy(barsHolder);
 		Destroy(GameObject.Find("TextContainer"));
