@@ -14,4 +14,11 @@ public class TransformUtils : MonoBehaviour {
 		Quaternion rotation = Quaternion.LookRotation(direction.normalized);
 		return rotation;
 	}
+
+	public static Vector2 GetPivotToCenterOffset(RectTransform transform) {
+		Vector2 newPosition = new Vector2();
+		newPosition.x = .5f - transform.pivot.x;
+		newPosition.y = .5f - transform.pivot.y;
+		return newPosition;
+	}
 }

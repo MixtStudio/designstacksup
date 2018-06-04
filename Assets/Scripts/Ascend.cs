@@ -49,7 +49,7 @@ public class Ascend : MonoBehaviour {
 
 		switch (ascendCount){
 			case 1:
-				ratTrap.DestroGN_FACT();
+				Prompts.DestroyPrompt(RatTrapSpawner.Instance.GN_FACT);
 				height = 10.0f;
 				//SpawnFlyingShoe();
 				prompt = Prompts.PromptName.AB_FACT_1;

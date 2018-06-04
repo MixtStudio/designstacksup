@@ -29,7 +29,7 @@ public class GraphInteraction : MonoBehaviour {
 	private string GetSumString(Category c) {
 		return string.Format("<size=220%><line-height=50%>${0}m</size>\n" +
 							"<size=60%><b>{1}</b></size>\n"
-							+"{2}", c.CurrentSum, "Design-related economic activity within the", c.Name);
+							+ "{2}", c.CurrentSum, "Design-related economic activity within the", c.Name);
 	}
 
 	private void Update() {
@@ -58,7 +58,7 @@ public class GraphInteraction : MonoBehaviour {
 
 	public void OnGazeEnter() {
 		currentColor = GetComponentInChildren<Renderer>().material.color;
-		foreach(Renderer rend in GetComponentsInChildren<Renderer>()) {
+		foreach (Renderer rend in GetComponentsInChildren<Renderer>()) {
 			rend.material.color = SpawnObjectsController.Instance.HighlightColor;
 		}
 
@@ -66,7 +66,7 @@ public class GraphInteraction : MonoBehaviour {
 	}
 
 	public void OnGazeExit() {
-	
+
 		foreach (Renderer rend in GetComponentsInChildren<Renderer>()) {
 			rend.material.color = currentColor;
 		}
@@ -79,4 +79,3 @@ public class GraphInteraction : MonoBehaviour {
 		textComp.gameObject.SetActive(false);
 	}
 }
-

@@ -46,13 +46,15 @@ public class Pedastal : MonoBehaviour {
 		}
 	}
 
+	//public IEnumerator WaitSpawnRatTrap(float waitTime) {
+	//	yield return new WaitForSeconds(waitTime);
+	//	GameObject spawnedObj = Instantiate(spawnPrefab);
+	//	spawnedObj.transform.position = SpawnPoint.transform.position;
+	//	spawnedObj.GetComponent<RatTrap>().SetSpawnPosition(SpawnPoint.transform.position);
+	//}
+
 	public IEnumerator WaitSpawnRatTrap(float waitTime) {
 		yield return new WaitForSeconds(waitTime);
-		GameObject spawnedObj = Instantiate(spawnPrefab);
-		spawnedObj.transform.position = SpawnPoint.transform.position;
-		spawnedObj.GetComponent<RatTrap>().SetSpawnPosition(SpawnPoint.transform.position);
-
+		RatTrapSpawner.Instance.SpawnInteractiveRatTrap("GN", SpawnPoint.transform.position,SpawnPoint.transform.rotation );
 	}
-
-
 }
