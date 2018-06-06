@@ -5,7 +5,6 @@ using UnityEngine;
 public class Pedastal : MonoBehaviour {
 
 	public GameObject spawnPrefab;
-	public GameObject SpawnPoint;
 	public float riseSpeed = 1.0f;
 	public float spawnWaitTime = 0.5f;
 
@@ -55,6 +54,6 @@ public class Pedastal : MonoBehaviour {
 
 	public IEnumerator WaitSpawnRatTrap(float waitTime) {
 		yield return new WaitForSeconds(waitTime);
-		RatTrapSpawner.Instance.SpawnInteractiveRatTrap("GN", SpawnPoint.transform.position,SpawnPoint.transform.rotation );
+		RatTrapSpawner.Instance.SpawnInteractiveRatTrap("GN", RatTrapSpawner.PedestalSpawnPoint.position,RatTrapSpawner.PedestalSpawnPoint.rotation);
 	}
 }

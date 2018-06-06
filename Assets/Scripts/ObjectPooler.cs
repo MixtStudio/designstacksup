@@ -13,10 +13,11 @@ public class ObjectPooler: Mixt.Singleton<ObjectPooler> {
 
 	public List<Pool> pools;
 	public Dictionary<string, Queue<GameObject>> poolDictionary;
+	
 
 	protected override void Init() {
-		poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
+		poolDictionary = new Dictionary<string, Queue<GameObject>>();
 		foreach (Pool pool in pools) {
 			Queue<GameObject> objectPool = new Queue<GameObject>();
 

@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class RatTrapSpawner : Mixt.Singleton<RatTrapSpawner> {
 
-	public static int interactiveRatTrapsCount;
-	public float revealRadius = 3.0f;
+	[HideInInspector]
+	public static Transform PedestalSpawnPoint;
+
+	public static int interactiveRatTrapsCount=0;	
+
 	[HideInInspector]
 	public DynamicTextController GN_FACT;
-	private GameObject[] hiddenObjs;
+	//private GameObject[] hiddenObjs;
+
 
 	protected override void Init() {
+		PedestalSpawnPoint = this.transform;
+		PedestalSpawnPoint.position =new Vector3(0.5f, 1.2f, 0.5f);
 	}
 
 	public IEnumerator SpawnMultiple(int numberToSpawn, Vector3 spawnPoint, Quaternion spawnRotation) {
@@ -63,27 +69,12 @@ public class RatTrapSpawner : Mixt.Singleton<RatTrapSpawner> {
 		GN_FACT.transform.rotation = TransformUtils.GetLookAtRotation(GN_FACT.transform);
 	}
 
-	public void RevealArea() {
-		Debug.Log("Revealing Area");
-
-		if (hiddenObjs == null) {
-			hiddenObjs = RevealManager.Instance.GetHiddenObjects();
-		}
-
-		RevealManager.Instance.IncrementRevealNum(transform.position, revealRadius);
-		if (interactiveRatTrapsCount < RevealManager.Instance.revealNumThreshold) {
-			SpawnInteractiveRatTrap("GN", transform.position, transform.rotation );
-		} 
-	}
-
-	public void SpawnInteractiveRatTrap(string tag, Vector3 spawnPoint,Quaternion spawnRotation) {
-		interactiveRatTrapsCount++;
+	public GameObject SpawnInteractiveRatTrap(string tag, Vector3 spawnPoint,Quaternion spawnRotation) {
 		GameObject ratTrapCopy = ObjectPooler.Instance.SpawnFromPool(tag, true, spawnPoint, spawnRotation);
-		ratTrapCopy.GetComponent<RatTrap>().interactiveTrap = true;
 		Rigidbody rg = ratTrapCopy.GetComponent<Rigidbody>();
-		rg.isKinematic = true;
 		rg.velocity = Vector3.zero;
 		rg.angularVelocity = Vector3.zero;
+		return ratTrapCopy;
 	}
 }
 
