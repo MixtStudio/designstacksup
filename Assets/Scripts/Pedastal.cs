@@ -54,6 +54,6 @@ public class Pedastal : MonoBehaviour {
 
 	public IEnumerator WaitSpawnRatTrap(float waitTime) {
 		yield return new WaitForSeconds(waitTime);
-		RatTrapSpawner.Instance.SpawnInteractiveRatTrap("GN", RatTrapSpawner.PedestalSpawnPoint.position,RatTrapSpawner.PedestalSpawnPoint.rotation);
+		RatTrapSpawner.Instance.SpawnInteractiveRatTrap();
 	}
 }

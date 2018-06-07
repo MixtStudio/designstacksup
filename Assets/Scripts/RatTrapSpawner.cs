@@ -5,7 +5,7 @@ using UnityEngine;
 public class RatTrapSpawner : Mixt.Singleton<RatTrapSpawner> {
 
 	[HideInInspector]
-	public static Transform PedestalSpawnPoint;
+	public static Transform RatTrapSpawnPoint;
 
 	public static int interactiveRatTrapsCount=0;	
 
@@ -15,12 +15,12 @@ public class RatTrapSpawner : Mixt.Singleton<RatTrapSpawner> {
 
 
 	protected override void Init() {
-		PedestalSpawnPoint = this.transform;
-		PedestalSpawnPoint.position =new Vector3(0.5f, 1.2f, 0.5f);
+		RatTrapSpawnPoint = this.transform;
+		RatTrapSpawnPoint.position =new Vector3(0.5f, 1.2f, 0.5f);
 	}
 
 	public IEnumerator SpawnMultiple(int numberToSpawn, Vector3 spawnPoint, Quaternion spawnRotation) {
-
+		Debug.Log("I am being called");
 		float upForce = 8;
 		float sideForce = 5f;
 
@@ -69,9 +69,10 @@ public class RatTrapSpawner : Mixt.Singleton<RatTrapSpawner> {
 		GN_FACT.transform.rotation = TransformUtils.GetLookAtRotation(GN_FACT.transform);
 	}
 
-	public GameObject SpawnInteractiveRatTrap(string tag, Vector3 spawnPoint,Quaternion spawnRotation) {
-		GameObject ratTrapCopy = ObjectPooler.Instance.SpawnFromPool(tag, true, spawnPoint, spawnRotation);
+	public GameObject SpawnInteractiveRatTrap() {
+		GameObject ratTrapCopy = ObjectPooler.Instance.SpawnFromPool("GN", true, RatTrapSpawnPoint.position, RatTrapSpawnPoint.rotation);
 		Rigidbody rg = ratTrapCopy.GetComponent<Rigidbody>();
+		//rg.isKinematic = true;
 		rg.velocity = Vector3.zero;
 		rg.angularVelocity = Vector3.zero;
 		return ratTrapCopy;

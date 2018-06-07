@@ -2223,48 +2223,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &583782683
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 583782684}
-  - component: {fileID: 583782685}
-  m_Layer: 0
-  m_Name: RatTrapSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &583782684
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 583782683}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 876584616}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &583782685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 583782683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58c2c0db8465a904abc2c9a2a96f5b5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  revealRadius: 3
-  GN_FACT: {fileID: 0}
 --- !u!1 &652755906
 GameObject:
   m_ObjectHideFlags: 0
@@ -2879,7 +2837,6 @@ Transform:
   - {fileID: 56757621}
   - {fileID: 1839129517}
   - {fileID: 1335997093}
-  - {fileID: 583782684}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3737,8 +3694,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1335997093}
   - component: {fileID: 1335997094}
+  - component: {fileID: 1335997096}
+  - component: {fileID: 1335997095}
   m_Layer: 0
-  m_Name: ObjectPoolerManager
+  m_Name: ObjectSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3775,6 +3734,29 @@ MonoBehaviour:
   - tag: GN
     prefab: {fileID: 1195325995825786, guid: adc2d9a02c123f54e937ab3b7ff79bd6, type: 2}
     size: 40
+--- !u!114 &1335997095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1335997092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d29bf4c7329651478a805074c43b4c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1335997096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1335997092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c2c0db8465a904abc2c9a2a96f5b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GN_FACT: {fileID: 0}
 --- !u!1 &1412156198
 GameObject:
   m_ObjectHideFlags: 0
@@ -5560,6 +5542,7 @@ MonoBehaviour:
   - {r: 0, g: 0.666, b: 0.666, a: 1}
   forestFloor: {fileID: 1663573862931558, guid: 64a9d74018734914f87cfc25625b7375,
     type: 2}
+  revealRadius: 3
 --- !u!1 &1895161103
 GameObject:
   m_ObjectHideFlags: 0

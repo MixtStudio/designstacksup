@@ -8,8 +8,7 @@ public class RatTrap : MonoBehaviour, IPooledObjects {
 
 	[SerializeField]
 	private float rotationSpeed;
-	public bool interactiveTrap {
-		get { return true; }set { }}
+	public bool interactiveTrap { get; set; }
 	private Vector3 spawnPos { get; set; } 
 	private Quaternion spawnRot { get; set; }
 
@@ -24,7 +23,6 @@ public class RatTrap : MonoBehaviour, IPooledObjects {
 		interactiveTrap = interactive;
 		AudioManager.Instance.NowPlay(AudioManager.Audio.TrapSpawn);
 	
-
 		if (interactiveTrap) {
 			handDraggable = GetComponent<HandDraggable>();
 			rb = GetComponent<Rigidbody>();
@@ -61,7 +59,7 @@ public class RatTrap : MonoBehaviour, IPooledObjects {
 
 	private void DraggingStart() {
 		Debug.Log("I AM DRAG");
-
+		//rb.isKinematic = false;
 		AudioManager.Instance.NowPlay(AudioManager.Audio.TrapRattle);
 		Prompts.DestroyPrompt(GN_INTRO);
 		Debug.Log("Is RatTrap interactive: " + interactiveTrap);
@@ -73,17 +71,16 @@ public class RatTrap : MonoBehaviour, IPooledObjects {
 
 	void OnCollisionEnter(Collision col) {
 		if (col.collider.gameObject.tag == "Floor") {
-
+			//rb.isKinematic = true;
 			AudioManager.Instance.NowPlay(AudioManager.Audio.TrapImpact);
 
-			rb.isKinematic = false;
 			RatTrapSpawner.Instance.Spawn_GN_FACT();
 			RevealManager.Instance.RevealArea(gameObject.transform);
 				
 			switch (RatTrapSpawner.interactiveRatTrapsCount) {
 				case 2:
 					Debug.Log("I NEVER ENTER SHOULD SPAWN MULTIPLE");
-					RatTrapSpawner.Instance.SpawnMultiple(50, transform.position, transform.rotation);
+					StartCoroutine(RatTrapSpawner.Instance.SpawnMultiple(50, transform.position, transform.rotation));		
 					break;
 				case 3:
 					Debug.Log("I NEVER ENTER ");
@@ -91,8 +88,8 @@ public class RatTrap : MonoBehaviour, IPooledObjects {
 					break;
 				}
 
-			Destroy(gameObject.GetComponent<HandDraggable>());
-			Destroy(gameObject.GetComponent<RatTrap>());
+			//Destroy(gameObject.GetComponent<HandDraggable>());
+			//Destroy(gameObject.GetComponent<RatTrap>());
 		}
 	}
 

@@ -104,6 +104,7 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 			Debug.Log("Begin loading Scene3");
 			StartCoroutine(LoadManager.Instance.AdditiveLoadByName("Scene3additive", 7.0f));
 			loaded = true;
+			ShoeSpawner.SpawnInteractiveShoe();
 		}
 	}
 
@@ -151,7 +152,7 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 		IncrementRevealNum(transform.position);
 
 		if (RatTrapSpawner.interactiveRatTrapsCount < RevealManager.Instance.revealNumThreshold) {
-			ratTrapSpawner.SpawnInteractiveRatTrap("GN", RatTrapSpawner.PedestalSpawnPoint.position, RatTrapSpawner.PedestalSpawnPoint.rotation);
+			ratTrapSpawner.SpawnInteractiveRatTrap();
 		}
 	}
 }
