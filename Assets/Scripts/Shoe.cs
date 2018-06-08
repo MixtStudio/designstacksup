@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Shoe : MonoBehaviour, IPooledObjects {
 
@@ -13,40 +14,54 @@ public class Shoe : MonoBehaviour, IPooledObjects {
 
 	public void OnObjectSpawn(bool interactive) {
 		interactiveShoe = interactive;
-		AssignShoeMaterial();
-		MeshCollider mc = this.GetComponent<MeshCollider>();
-	
+		ascend = FindObjectOfType<Ascend>();
+		gameObject.transform.parent = ascend.gameObject.transform;
+		AssignShoeMaterial(interactiveShoe);
+
+
 		if (interactiveShoe) {
-		
-			Debug.Log(" I am the ascend" + ascend);
 			AB_INTRO = Prompts.GetPrompt(new Vector3(transform.position.x + offset.x, transform.position.y + offset.y, transform.position.z), Quaternion.identity, Prompts.PromptName.AB_INTRO, .15f);
 			AB_INTRO.transform.rotation = TransformUtils.GetLookAtRotation(AB_INTRO.transform);
-			mc.enabled = true;
-			ascend = FindObjectOfType<Ascend>();
+			
 			AudioManager.Instance.NowPlay(AudioManager.Audio.ShoeSpawn);
-		} 
-		
-		else {
-			mc.enabled = false;
-			Destroy(this.GetComponent<Shoe>());
+		} else {
+			transform.DOShakeRotation(5, 10, 3, 20, false).SetLoops(-1, LoopType.Incremental);
+			//gameObject.transform.localScale
 		}
 	}
 
-	private void AssignShoeMaterial() {
-		//gameObject.GetComponent<Renderer>().material;
+	private void AssignShoeMaterial(bool interactive) {
+		if (interactive) {
+			gameObject.GetComponent<Renderer>().material = ShoeSpawner.Instance.shoeMaterials[0];
+		} 
+		
+		else {
+			System.Random rand = new System.Random();
+			gameObject.GetComponent<Renderer>().material = rand.Next(2) == 0 ? ShoeSpawner.Instance.shoeMaterials[1] : ShoeSpawner.Instance.shoeMaterials[2];
+		}
+		
 	}
 
 	private void OnTriggerEnter(Collider col) {
+
+		//Debug.Log("Collsion with: " + col);
+		if (interactiveShoe) {
+			if (col.gameObject.tag == "DesignDial") {
+				AudioManager.Instance.NowPlay(AudioManager.Audio.StatStepFinal);
+				ascend.StartAscending();
+			}
+		}
 	
-		Debug.Log("Collsion with: " + col);
-		if (col.gameObject.tag == "DesignDial") {
-			AudioManager.Instance.NowPlay(AudioManager.Audio.StatStepFinal);
-			ascend.StartAscending();
+		if (col.gameObject.tag == "ShoeKiller") {
+			ShoeSpawner.SpawnFlyingShoe(ascend.designDial.transform.position,1);
+			ObjectPooler.Instance.AddToPool("AB", gameObject);
 		}
 	}
 
 	private void Update() {
-		transform.Rotate(Vector3.up, 20 * Time.deltaTime);
+		if (interactiveShoe) {
+			transform.Rotate(Vector3.up, 20 * Time.deltaTime);
+		}
 	}
 }
 

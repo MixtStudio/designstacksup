@@ -3730,7 +3730,7 @@ MonoBehaviour:
   pools:
   - tag: AB
     prefab: {fileID: 1289363460459046, guid: 99e63d27c4e5bb240861a63a80d15264, type: 2}
-    size: 40
+    size: 100
   - tag: GN
     prefab: {fileID: 1195325995825786, guid: adc2d9a02c123f54e937ab3b7ff79bd6, type: 2}
     size: 40
@@ -3745,6 +3745,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d29bf4c7329651478a805074c43b4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shoeMaterials:
+  - {fileID: 2100000, guid: 932997c62d488964480aefd45f6494ca, type: 2}
+  - {fileID: 2100000, guid: 69792d5329a622046bcf520d912b7cf2, type: 2}
+  - {fileID: 2100000, guid: 004a5aceaf26dc847a38b1bbd5d6e2f6, type: 2}
 --- !u!114 &1335997096
 MonoBehaviour:
   m_ObjectHideFlags: 0

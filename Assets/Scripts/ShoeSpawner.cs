@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShoeSpawner : Mixt.Singleton<RatTrapSpawner> {
+public class ShoeSpawner : Mixt.Singleton<ShoeSpawner> {
 
 	public static bool canSpawnFlyingShoes=false;
+	public Material[] shoeMaterials;
 
 	[HideInInspector]
 	public static Transform ShoeSpawnPoint;
@@ -23,27 +24,31 @@ public class ShoeSpawner : Mixt.Singleton<RatTrapSpawner> {
 		ShoeSpawnPoint.rotation= Quaternion.Euler(14.68f, 270, 0);
 	}
 
+
 	public static GameObject SpawnInteractiveShoe() {
-		GameObject shoeCopy = ObjectPooler.Instance.SpawnFromPool("AB", true, ShoeSpawnPoint.position, ShoeSpawnPoint.rotation);
+		GameObject shoeCopy = ObjectPooler.Instance.SpawnFromPool("AB", false, true, ShoeSpawnPoint.position, ShoeSpawnPoint.rotation);
 		Rigidbody rg = shoeCopy.GetComponent<Rigidbody>();
 		rg.velocity = Vector3.zero;
 		rg.angularVelocity = Vector3.zero;
 		return shoeCopy;
 	}
 
-	public static void SpawnFlyingShoe() {
-		float upForce = 3;
-		float sideForce = 2;
+	public static void SpawnFlyingShoe(Vector3 flyingShoeSpawnPoint, int amountToSpawn) {
 
-		Vector3 spawnPoint = RandomPointInBox(ShoeSpawnPoint.position, Vector3.one*2);
-		GameObject shoeCopy= ObjectPooler.Instance.SpawnFromPool("AB", false, spawnPoint, Quaternion.identity);
-		float xForce = Random.Range(-sideForce, sideForce);
-		float yForce = Random.Range(upForce, upForce);
-		float zForce = Random.Range(-sideForce, sideForce);
+		for (int i = 0; i <amountToSpawn; i++) {
+			float upForce = .3f;
+			float sideForce = .2f;
 
-		Vector3 force = new Vector3(xForce, yForce, zForce);
-		Rigidbody rb = shoeCopy.GetComponent<Rigidbody>();
-		rb.isKinematic = false;
-		rb.velocity = force;
+			Vector3 spawnPoint = RandomPointInBox(flyingShoeSpawnPoint, Vector3.one * 15);
+			GameObject shoeCopy = ObjectPooler.Instance.SpawnFromPool("AB", true, false, spawnPoint, Quaternion.identity);
+			float xForce = Random.Range(-sideForce, sideForce);
+			float yForce = Random.Range(upForce, upForce);
+			float zForce = Random.Range(-sideForce, sideForce);
+
+			Vector3 force = new Vector3(xForce, yForce, zForce);
+			Rigidbody rb = shoeCopy.GetComponent<Rigidbody>();
+			rb.isKinematic = false;
+			rb.velocity = force;
+		}	
 	}
 }

@@ -32,7 +32,7 @@ public class ObjectPooler: Mixt.Singleton<ObjectPooler> {
 	}
 
 
-	public GameObject SpawnFromPool(string tag, bool interactive, Vector3 position,Quaternion rotation) {
+	public GameObject SpawnFromPool(string tag, bool enqueue, bool interactive, Vector3 position,Quaternion rotation) {
 		if (!poolDictionary.ContainsKey(tag)) {
 			Debug.LogWarning("Pool with tag " + tag + "doesn't exist");
 			return null;
@@ -49,7 +49,25 @@ public class ObjectPooler: Mixt.Singleton<ObjectPooler> {
 			pooledObject.OnObjectSpawn(interactive);
 		}
 
+		if (enqueue) {
 			poolDictionary[tag].Enqueue(objectToSpawn);
+		}
+			
 		return objectToSpawn;
 	}
+
+	public void AddToPool(string tag, GameObject obj) {
+		obj.SetActive(false);
+		poolDictionary[tag].Enqueue(obj);
+
+	}
+
+	//private void GrowPool(string tag) {
+	//	for(int i = 0; i < 10; i++) {
+			
+	//		GameObject obj = Instantiate(pool.prefab);
+	//		obj.SetActive(false);
+	//		objectPool.Enqueue(obj);
+	//	}
+	//}
 }

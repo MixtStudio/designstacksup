@@ -28,7 +28,7 @@ public class RatTrapSpawner : Mixt.Singleton<RatTrapSpawner> {
 		var wait = new WaitForSeconds(.05f);
 
 		for (int i = 0; i < numberToSpawn; i++) {
-			GameObject copyObj = ObjectPooler.Instance.SpawnFromPool("GN", false, spawnPoint, spawnRotation);
+			GameObject copyObj = ObjectPooler.Instance.SpawnFromPool("GN", true, false, spawnPoint, spawnRotation);
 
 			float xForce = Random.Range(-sideForce, sideForce);
 			float yForce = Random.Range(upForce, upForce);
@@ -38,6 +38,7 @@ public class RatTrapSpawner : Mixt.Singleton<RatTrapSpawner> {
 			copyObj.GetComponent<Rigidbody>().velocity = force;
 			yield return wait;
 		}
+
 		yield break;
 	}
 
@@ -70,7 +71,7 @@ public class RatTrapSpawner : Mixt.Singleton<RatTrapSpawner> {
 	}
 
 	public GameObject SpawnInteractiveRatTrap() {
-		GameObject ratTrapCopy = ObjectPooler.Instance.SpawnFromPool("GN", true, RatTrapSpawnPoint.position, RatTrapSpawnPoint.rotation);
+		GameObject ratTrapCopy = ObjectPooler.Instance.SpawnFromPool("GN", false, true, RatTrapSpawnPoint.position, RatTrapSpawnPoint.rotation);
 		Rigidbody rg = ratTrapCopy.GetComponent<Rigidbody>();
 		//rg.isKinematic = true;
 		rg.velocity = Vector3.zero;

@@ -13,15 +13,13 @@ public class Ascend : MonoBehaviour {
 	private int cloudTrigger = 2;
 	private int ascendCount;
 
-
-
 	//private GameObject FlyingShoeInstance;
 
 	private float delta = 0.0f;
 	private Vector3 startPos;
 	private Vector3 endPos;
 	private bool ascending = false;
-	private DesignDial designDial;
+	public DesignDial designDial;
 
 	private RatTrap ratTrap;
 
@@ -56,7 +54,9 @@ public class Ascend : MonoBehaviour {
 				
 			case 2:
 				height = 50.0f;
-
+				ShoeSpawner.SpawnFlyingShoe(designDial.transform.position,90);
+		
+				//ShoeSpawner.canSpawnFlyingShoes = true;
 				//Destroy(FlyingShoeInstance);
 				//SpawnFlyingShoe();
 				prompt = Prompts.PromptName.AB_FACT_2;
@@ -114,11 +114,11 @@ public class Ascend : MonoBehaviour {
 		//}		
 	}
 
-	private void FixedUpdate() {
-		if (ShoeSpawner.canSpawnFlyingShoes) {
-			ShoeSpawner.SpawnFlyingShoe();
-		}
-	}
+	//private void FixedUpdate() {
+	//	if (ShoeSpawner.canSpawnFlyingShoes) {
+	//		ShoeSpawner.SpawnFlyingShoe(designDial.transform.position);
+	//	}
+	//}
 
 	private void Ascending() {
 		delta += Time.deltaTime * ascendSpeed;

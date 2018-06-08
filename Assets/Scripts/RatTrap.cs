@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
 using TMPro;
+using DG.Tweening;
+
 
 public class RatTrap : MonoBehaviour, IPooledObjects {
 
@@ -26,8 +28,12 @@ public class RatTrap : MonoBehaviour, IPooledObjects {
 		if (interactiveTrap) {
 			handDraggable = GetComponent<HandDraggable>();
 			rb = GetComponent<Rigidbody>();
+			//rb.isKinematic = true;
+			//gameObject.transform.localScale = Vector3.zero;
+			//gameObject.transform.DOScale(1, 1f);
 			RatTrapSpawner.interactiveRatTrapsCount++;
 			handDraggable.StartedDragging += DraggingStart;
+
 			if (RatTrapSpawner.interactiveRatTrapsCount == 1) {
 				GN_INTRO = Prompts.GetPrompt(new Vector3(transform.position.x + offset.x, transform.position.y + offset.y, transform.position.z), Quaternion.identity, Prompts.PromptName.GN_INTRO, .15f);
 				GN_INTRO.transform.rotation = TransformUtils.GetLookAtRotation(GN_INTRO.transform);
@@ -66,30 +72,23 @@ public class RatTrap : MonoBehaviour, IPooledObjects {
 
 		if (RatTrapSpawner.interactiveRatTrapsCount == 1) {
 			TransitionManager.Instance.BeginFalling();
+			
 		}
 	}
 
 	void OnCollisionEnter(Collision col) {
 		if (col.collider.gameObject.tag == "Floor") {
-			//rb.isKinematic = true;
+
 			AudioManager.Instance.NowPlay(AudioManager.Audio.TrapImpact);
 
-			RatTrapSpawner.Instance.Spawn_GN_FACT();
-			RevealManager.Instance.RevealArea(gameObject.transform);
-				
-			switch (RatTrapSpawner.interactiveRatTrapsCount) {
-				case 2:
-					Debug.Log("I NEVER ENTER SHOULD SPAWN MULTIPLE");
-					StartCoroutine(RatTrapSpawner.Instance.SpawnMultiple(50, transform.position, transform.rotation));		
-					break;
-				case 3:
-					Debug.Log("I NEVER ENTER ");
-					Prompts.DestroyPrompt(GN_DIAL_UP);
-					break;
-				}
+			if (RatTrapSpawner.interactiveRatTrapsCount == 3) {
+				Prompts.DestroyPrompt(GN_DIAL_UP);
+			}
 
-			//Destroy(gameObject.GetComponent<HandDraggable>());
-			//Destroy(gameObject.GetComponent<RatTrap>());
+			RevealManager.Instance.RevealArea(gameObject.transform);
+						
+			Destroy(gameObject.GetComponent<HandDraggable>());
+			Destroy(gameObject.GetComponent<RatTrap>());
 		}
 	}
 

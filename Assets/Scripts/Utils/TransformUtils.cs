@@ -21,4 +21,6 @@ public class TransformUtils : MonoBehaviour {
 		newPosition.y = .5f - transform.pivot.y;
 		return newPosition;
 	}
+
+
 }

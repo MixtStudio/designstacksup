@@ -12,13 +12,10 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 	public float revealRadius = 3.0f;
 
 	private RatTrapSpawner ratTrapSpawner;
-
-
-	//private int revealNum = 0;
 	private GameObject[] hiddenObjs;
 	List<GameObject> treeList;
 	private GameObject floor;
-	private float colourChangeSpeed = 1.0f; // may need to implement a failsafe if the user triggers the reveals too fast (the colour change speed is too fast atm for that to happen)
+	private float colourChangeSpeed = 1.0f; 
 	private float delta;
 	private bool colourTransition = false;
 	private Color startFloorColour;
@@ -45,18 +42,17 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 	public GameObject[] GetHiddenObjects() { return hiddenObjs; }
 
 	private void Update() {
-		if (colourTransition)
+		if (colourTransition) {
 			ColourTransition();
+		}		
 	}
 
 	public void IncrementRevealNum(Vector3 revealPosition) {
-		//revealNum++;
 		ColourChange();
 		ThresholdCheck(revealPosition);
 	}	
 
 	private void ThresholdCheck(Vector3 revealPosition) {
-		//Debug.Log("Reveal Number "+revealNum);
 		if (RatTrapSpawner.interactiveRatTrapsCount == 1) {
 			Debug.Log("Reveal Closest 24");
 			for (int i = 0; i < 24; i++) {
@@ -102,9 +98,12 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 
 		if (treesCountCurrent == treesCountTotal && !loaded) {
 			Debug.Log("Begin loading Scene3");
-			StartCoroutine(LoadManager.Instance.AdditiveLoadByName("Scene3additive", 7.0f));
 			loaded = true;
-			ShoeSpawner.SpawnInteractiveShoe();
+			CoroutineUtils.Wait(LoadManager.Instance.AdditiveLoadByName("Scene3additive", 7.0f),
+				 () => CoroutineUtils.Wait(new WaitUntil(() => FindObjectOfType<Ascend>() != null), () => {
+					ShoeSpawner.SpawnInteractiveShoe();
+				})
+			);
 		}
 	}
 
@@ -143,13 +142,18 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 	}
 
 	public void RevealArea(Transform transform) {
-		Debug.Log("Revealing Area");
 
 		if (hiddenObjs == null) {
 			hiddenObjs = RevealManager.Instance.GetHiddenObjects();
 		}
 
 		IncrementRevealNum(transform.position);
+
+		RatTrapSpawner.Instance.Spawn_GN_FACT();
+
+		if (RatTrapSpawner.interactiveRatTrapsCount == 2) {
+			StartCoroutine(RatTrapSpawner.Instance.SpawnMultiple(50, transform.position, transform.rotation));
+		}
 
 		if (RatTrapSpawner.interactiveRatTrapsCount < RevealManager.Instance.revealNumThreshold) {
 			ratTrapSpawner.SpawnInteractiveRatTrap();
