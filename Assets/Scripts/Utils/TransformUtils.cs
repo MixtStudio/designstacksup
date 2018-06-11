@@ -22,5 +22,14 @@ public class TransformUtils : MonoBehaviour {
 		return newPosition;
 	}
 
+	public static Quaternion GetRandomYRotation() {
+		float value = Random.Range(0, 360);
+		return Quaternion.Euler(0, value, 0);
+	}
+
+	public static Vector3 GetRandomScale(float min, float max) {
+		float value = Random.Range(min, max);
+		return new Vector3(value,value,value);
+	}
 
 }

@@ -41,10 +41,12 @@ public class TransitionManager : Mixt.Singleton<TransitionManager> {
 		sliderHandDrag.BeginFalling();
 		columns2 = new SortedList<string, Transform>();
 		columns = new List<Transform>();
+		int i = 0;
 
 		foreach (Transform trans in barsHolder.transform) {
-			//columns2.Add("hola", trans);
-			columns.Add(trans);
+			columns2.Add(string.Format("col{0}",i), trans);
+			i++;
+			//columns.Add(trans);
 		}
 				
 
@@ -78,17 +80,10 @@ public class TransitionManager : Mixt.Singleton<TransitionManager> {
 
 		var wait = new WaitForSeconds(.1f);
 
-		//Random fall
-		//while (columns.Count != 0) {
-		//	Transform column = columns[Random.Range(0, columns.Count - 1)];
-		//	column.DOScaleY(0, 1.5f);
-		//	column.DOMoveY(-.001f, 1.5f);
-		//	columns.Remove(column);
-		//	yield return wait;
-		//}
-
-		for (int i = 0; i < columns.Count; i++) {
-			Transform column = columns[i];
+		List<Category> categories = SpawnObjectsController.CategoryList;
+		for (int i= categories.Count-1; i >= 0; i--) {
+			Transform column = categories[i].CategoryContainer.transform;
+			//Transform column = columns[i];
 			column.DOScaleY(0, 1.5f);
 			column.DOMoveY(-.001f, 1.5f);
 			yield return wait;

@@ -3748,7 +3748,7 @@ MonoBehaviour:
   shoeMaterials:
   - {fileID: 2100000, guid: 932997c62d488964480aefd45f6494ca, type: 2}
   - {fileID: 2100000, guid: 69792d5329a622046bcf520d912b7cf2, type: 2}
-  - {fileID: 2100000, guid: 004a5aceaf26dc847a38b1bbd5d6e2f6, type: 2}
+  - {fileID: 2100000, guid: 24f22a4208509ec4f9a70fabd65e06c3, type: 2}
 --- !u!114 &1335997096
 MonoBehaviour:
   m_ObjectHideFlags: 0

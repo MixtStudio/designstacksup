@@ -25,7 +25,7 @@ public class Shoe : MonoBehaviour, IPooledObjects {
 			
 			AudioManager.Instance.NowPlay(AudioManager.Audio.ShoeSpawn);
 		} else {
-			transform.DOShakeRotation(5, 10, 3, 20, false).SetLoops(-1, LoopType.Incremental);
+			transform.DOShakeRotation(10, 5, 2, 20, false).SetLoops(-1, LoopType.Incremental);
 			//gameObject.transform.localScale
 		}
 	}

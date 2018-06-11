@@ -40,7 +40,8 @@ public class ShoeSpawner : Mixt.Singleton<ShoeSpawner> {
 			float sideForce = .2f;
 
 			Vector3 spawnPoint = RandomPointInBox(flyingShoeSpawnPoint, Vector3.one * 15);
-			GameObject shoeCopy = ObjectPooler.Instance.SpawnFromPool("AB", true, false, spawnPoint, Quaternion.identity);
+			GameObject shoeCopy = ObjectPooler.Instance.SpawnFromPool("AB", true, false, spawnPoint, TransformUtils.GetRandomYRotation());
+			shoeCopy.transform.localScale = TransformUtils.GetRandomScale(.8f, 2.4f);
 			float xForce = Random.Range(-sideForce, sideForce);
 			float yForce = Random.Range(upForce, upForce);
 			float zForce = Random.Range(-sideForce, sideForce);
