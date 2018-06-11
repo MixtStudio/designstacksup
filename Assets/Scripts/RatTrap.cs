@@ -20,6 +20,7 @@ public class RatTrap : MonoBehaviour, IPooledObjects {
 	private Vector3 offset = new Vector3(.4f,.2f,0);
 	private HandDraggable handDraggable;
 	private Rigidbody rb;
+	//private static bool kinematic_flag=true;
 
 	public void OnObjectSpawn(bool interactive) {
 		interactiveTrap = interactive;
@@ -28,14 +29,11 @@ public class RatTrap : MonoBehaviour, IPooledObjects {
 		if (interactiveTrap) {
 			handDraggable = GetComponent<HandDraggable>();
 			rb = GetComponent<Rigidbody>();
-			//rb.isKinematic = true;
-			//gameObject.transform.localScale = Vector3.zero;
-			//gameObject.transform.DOScale(1, 1f);
 			RatTrapSpawner.interactiveRatTrapsCount++;
 			handDraggable.StartedDragging += DraggingStart;
 
 			if (RatTrapSpawner.interactiveRatTrapsCount == 1) {
-				GN_INTRO = Prompts.GetPrompt(new Vector3(transform.position.x + offset.x, transform.position.y + offset.y, transform.position.z), Quaternion.identity, Prompts.PromptName.GN_INTRO, .15f);
+				GN_INTRO = Prompts.GetPrompt(new Vector3(transform.position.x + offset.x, transform.position.y +.15f + offset.y, transform.position.z), Quaternion.identity, Prompts.PromptName.GN_INTRO, .15f);
 				GN_INTRO.transform.rotation = TransformUtils.GetLookAtRotation(GN_INTRO.transform);
 			}
 
@@ -57,6 +55,10 @@ public class RatTrap : MonoBehaviour, IPooledObjects {
 
 
 	private void Update() {
+		//if (!kinematic_flag) {
+		//	rb.isKinematic = false;
+		//}
+
 		transform.Rotate(Vector3.up, 20 * Time.deltaTime);
 		Update_GN_PROMPTS();
 		Debug.Log("Interactive traps " + RatTrapSpawner.interactiveRatTrapsCount);
@@ -65,7 +67,8 @@ public class RatTrap : MonoBehaviour, IPooledObjects {
 
 	private void DraggingStart() {
 		Debug.Log("I AM DRAG");
-		//rb.isKinematic = false;
+		//kinematic_flag = false;
+		
 		AudioManager.Instance.NowPlay(AudioManager.Audio.TrapRattle);
 		Prompts.DestroyPrompt(GN_INTRO);
 		Debug.Log("Is RatTrap interactive: " + interactiveTrap);

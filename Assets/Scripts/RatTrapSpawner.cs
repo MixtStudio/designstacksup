@@ -17,6 +17,7 @@ public class RatTrapSpawner : Mixt.Singleton<RatTrapSpawner> {
 	protected override void Init() {
 		RatTrapSpawnPoint = this.transform;
 		RatTrapSpawnPoint.position =new Vector3(0.5f, 1.2f, 0.5f);
+		RatTrapSpawnPoint.rotation = Quaternion.identity;
 	}
 
 	public IEnumerator SpawnMultiple(int numberToSpawn, Vector3 spawnPoint, Quaternion spawnRotation) {

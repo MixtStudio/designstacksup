@@ -36,8 +36,7 @@ namespace HoloToolkit.Unity.InputModule {
 		protected override void Start() {
 			base.Start();
 			Visiblity(false);
-			Debug.Log("tHIS IS POS " + transform.position);
-			//HostTransform.position = new Vector3(HostTransform.position.x, minHeight, HostTransform.position.z);
+	
 			SpawnObjectsController.Instance.FallingBlocksInstance.GraphCompleted += OnGraphCompleted;
 			if (percentageThreshold > 1.0f)
 				percentageThreshold = 1.0f;
@@ -153,7 +152,6 @@ namespace HoloToolkit.Unity.InputModule {
 			foreach(Category c in SpawnObjectsController.CategoryList) {
 				c.CurrentSum = (int)Math.Round(c.Sum + (scaleNum*100));
 			}
-
 
 			foreach (GameObject IB in SpawnObjectsController.Instance.InvestBlocks) {
 				IB.transform.localScale = new Vector3(IB.transform.localScale.x, scaleFactor * scaleNum, IB.transform.localScale.z);
