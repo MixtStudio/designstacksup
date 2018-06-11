@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+//using System.Collections;
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
 using DG.Tweening;
@@ -8,6 +9,7 @@ public class TransitionManager : Mixt.Singleton<TransitionManager> {
 
 	private GameObject barsHolder;
 	private bool fallCheck = false;
+	private SortedList<string, Transform> columns2;
 	private List<Transform> columns;
 	private Pedastal pedastal;
 	private SliderHandDrag sliderHandDrag;
@@ -37,11 +39,16 @@ public class TransitionManager : Mixt.Singleton<TransitionManager> {
 
 		AudioManager.Instance.NowPlay(AudioManager.Audio.ForestAmbience, true, false);
 		sliderHandDrag.BeginFalling();
-
+		columns2 = new SortedList<string, Transform>();
 		columns = new List<Transform>();
+		int i = 0;
 
-		foreach(Transform trans in barsHolder.transform)
-			columns.Add(trans);		
+		foreach (Transform trans in barsHolder.transform) {
+			columns2.Add(string.Format("col{0}",i), trans);
+			i++;
+			//columns.Add(trans);
+		}
+				
 
 		fallCheck = true;
 		StartCoroutine(FallingColumns());
@@ -73,21 +80,14 @@ public class TransitionManager : Mixt.Singleton<TransitionManager> {
 
 		var wait = new WaitForSeconds(.1f);
 
-		//Random fall
-		while (columns.Count != 0) {
-			Transform column = columns[Random.Range(0, columns.Count - 1)];
+		List<Category> categories = SpawnObjectsController.CategoryList;
+		for (int i= categories.Count-1; i >= 0; i--) {
+			Transform column = categories[i].CategoryContainer.transform;
+			//Transform column = columns[i];
 			column.DOScaleY(0, 1.5f);
 			column.DOMoveY(-.001f, 1.5f);
-			columns.Remove(column);
 			yield return wait;
 		}
-
-		//for (int i = 0; i < columns.Count; i++) {
-		//	Transform column = columns[i];
-		//	column.DOScaleY(0, 1.5f);
-		//	column.DOMoveY(-.001f, 1.5f);
-		//	yield return wait;
-		//}
 
 		wait = new WaitForSeconds(2.5f);
 		yield return wait;

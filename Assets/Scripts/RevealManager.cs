@@ -9,50 +9,51 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 	public Color[] FloorColourArray;
 	public Color[] BackgroundColourArray;
 	public GameObject forestFloor;
+	public float revealRadius = 3.0f;
 
-	private int revealNum = 0;
+	private RatTrapSpawner ratTrapSpawner;
 	private GameObject[] hiddenObjs;
 	List<GameObject> treeList;
 	private GameObject floor;
-	private float colourChangeSpeed = 1.0f; // may need to implement a failsafe if the user triggers the reveals too fast (the colour change speed is too fast atm for that to happen)
+	private float colourChangeSpeed = 1.0f; 
 	private float delta;
 	private bool colourTransition = false;
 	private Color startFloorColour;
 	private Color startBackgroundColour;
-	private int revealCount = 0;
-	private int revealTotal;
+	private int treesCountCurrent = 0;
+	private int treesCountTotal;
 	private bool loaded = false;	
 
 	protected override void Init() {}
 	
 	private void Start() {
-		floor = GameObject.FindGameObjectWithTag("Floor");		
+		floor = GameObject.FindGameObjectWithTag("Floor");
+		ratTrapSpawner = RatTrapSpawner.Instance;
 	}
 
 	public IEnumerator ScanHidden () {
 		yield return new WaitForSeconds(0.1f);
 		hiddenObjs = GameObject.FindGameObjectsWithTag("Tree");
 		treeList = new List<GameObject>(hiddenObjs);
-		revealTotal = hiddenObjs.Length;
-		Debug.Log(revealTotal + " Trees detected");
+		treesCountTotal = hiddenObjs.Length;
+		Debug.Log(treesCountTotal + " Trees detected");
 	}	
 	
 	public GameObject[] GetHiddenObjects() { return hiddenObjs; }
 
 	private void Update() {
-		if (colourTransition)
+		if (colourTransition) {
 			ColourTransition();
+		}		
 	}
 
-	public void IncrementRevealNum(Vector3 revealPosition, float revealRadius) {
-		revealNum++;
+	public void IncrementRevealNum(Vector3 revealPosition) {
 		ColourChange();
-		ThresholdCheck(revealPosition, revealRadius);
+		ThresholdCheck(revealPosition);
 	}	
 
-	private void ThresholdCheck(Vector3 revealPosition, float revealRadius) {
-		Debug.Log("Reveal Number "+revealNum);
-		if (revealNum == 1) {
+	private void ThresholdCheck(Vector3 revealPosition) {
+		if (RatTrapSpawner.interactiveRatTrapsCount == 1) {
 			Debug.Log("Reveal Closest 24");
 			for (int i = 0; i < 24; i++) {
 				GameObject closest = FindClosest(treeList, revealPosition);
@@ -60,9 +61,11 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 				if (!AudioManager.Instance.IsAudioPlaying(AudioManager.Audio.TreesGrowing))
 					AudioManager.Instance.NowPlay(AudioManager.Audio.TreesGrowing);
 				treeList.Remove(closest);
-				revealCount++;
+				treesCountCurrent++;
 			}
-		} else if(revealNum >= revealNumThreshold) {
+		}
+		
+		else if(RatTrapSpawner.interactiveRatTrapsCount >= revealNumThreshold) {
 			Debug.Log("Revealing Everything");
 			floor.SetActive(false);
 			Instantiate(forestFloor);
@@ -74,9 +77,11 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 					AudioManager.Instance.NowPlay(AudioManager.Audio.TreesGrowing);
 				treeList.Remove(closest);
 				i++;
-				revealCount++;
+				treesCountCurrent++;
 			}
-		} else {
+		}
+		
+		else {
 			Debug.Log("Reveal Nearby");
 			AudioManager.Instance.NowPlay(AudioManager.Audio.Birds);
 			for (int i = 0; i < treeList.Count; i++) {
@@ -86,14 +91,19 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 					if (!AudioManager.Instance.IsAudioPlaying(AudioManager.Audio.TreesGrowing))
 						AudioManager.Instance.NowPlay(AudioManager.Audio.TreesGrowing);
 					treeList.RemoveAt(i);
-					revealCount++;
+					treesCountCurrent++;
 				}
 			}
 		}
-		if (revealCount == revealTotal && !loaded) {
+
+		if (treesCountCurrent == treesCountTotal && !loaded) {
 			Debug.Log("Begin loading Scene3");
-			StartCoroutine(LoadManager.Instance.AdditiveLoadByName("Scene3additive", 7.0f));
 			loaded = true;
+			CoroutineUtils.Wait(LoadManager.Instance.AdditiveLoadByName("Scene3additive", 7.0f),
+				 () => CoroutineUtils.Wait(new WaitUntil(() => FindObjectOfType<Ascend>() != null), () => {
+					ShoeSpawner.SpawnInteractiveShoe();
+				})
+			);
 		}
 	}
 
@@ -107,9 +117,9 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 	private void ColourTransition() {
 		delta += Time.deltaTime * colourChangeSpeed;
 
-		floor.GetComponent<MeshRenderer>().material.color = Color.Lerp(startFloorColour, FloorColourArray[revealNum - 1], delta);
+		floor.GetComponent<MeshRenderer>().material.color = Color.Lerp(startFloorColour, FloorColourArray[RatTrapSpawner.interactiveRatTrapsCount - 1], delta);
 
-		Camera.main.backgroundColor = Color.Lerp(startBackgroundColour, BackgroundColourArray[revealNum - 1], delta);
+		Camera.main.backgroundColor = Color.Lerp(startBackgroundColour, BackgroundColourArray[RatTrapSpawner.interactiveRatTrapsCount - 1], delta);
 
 		if (delta >= 1.0f) {
 			colourTransition = false;
@@ -129,5 +139,24 @@ public class RevealManager : Mixt.Singleton<RevealManager> {
 		}
 
 		return minObj;
+	}
+
+	public void RevealArea(Transform transform) {
+
+		if (hiddenObjs == null) {
+			hiddenObjs = RevealManager.Instance.GetHiddenObjects();
+		}
+
+		IncrementRevealNum(transform.position);
+
+		RatTrapSpawner.Instance.Spawn_GN_FACT();
+
+		if (RatTrapSpawner.interactiveRatTrapsCount == 2) {
+			StartCoroutine(RatTrapSpawner.Instance.SpawnMultiple(50, transform.position, transform.rotation));
+		}
+
+		if (RatTrapSpawner.interactiveRatTrapsCount < RevealManager.Instance.revealNumThreshold) {
+			ratTrapSpawner.SpawnInteractiveRatTrap();
+		}
 	}
 }

@@ -9,6 +9,7 @@ TagManager:
   - DesignDial
   - ForestFloor
   - Pedastal
+  - ShoeKiller
   layers:
   - Default
   - TransparentFX

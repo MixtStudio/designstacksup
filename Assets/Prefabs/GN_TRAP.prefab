@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 23258528853246246}
   - component: {fileID: 65165388654821644}
   - component: {fileID: 54863257455183644}
-  - component: {fileID: 114801784692383168}
   - component: {fileID: 114756368584620542}
+  - component: {fileID: 114193160038042592}
   m_Layer: 8
   m_Name: GN_TRAP
   m_TagString: Untagged
@@ -118,20 +118,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.29077008, y: 0.3064452, z: 0.112185866}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114756368584620542
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1195325995825786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5193d9ea6fb46ce4d814ba5db0cb21b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  revealRadius: 3
-  rotationSpeed: 0.5
---- !u!114 &114801784692383168
+--- !u!114 &114193160038042592
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -148,3 +135,15 @@ MonoBehaviour:
   PositionLerpSpeed: 0.2
   RotationLerpSpeed: 0.2
   IsDraggingEnabled: 1
+--- !u!114 &114756368584620542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1195325995825786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5193d9ea6fb46ce4d814ba5db0cb21b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 0.5

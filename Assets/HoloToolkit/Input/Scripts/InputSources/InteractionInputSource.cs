@@ -709,7 +709,7 @@ namespace HoloToolkit.Unity.InputModule
             Vector3 newGripPosition = Vector3.zero;
             sourceData.GripPosition.IsAvailable =
 #if UNITY_2017_2_OR_NEWER
-                interactionSourceState.sourcePose.TryGetPosition(out newGripPosition, InteractionSourceNode.Grip);
+                interactionSourceState.sourcePose.TryGetPosition(out newGripPosition);
 #else
                 false;
 #endif
