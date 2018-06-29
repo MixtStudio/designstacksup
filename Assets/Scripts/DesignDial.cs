@@ -9,11 +9,7 @@ public class DesignDial : MonoBehaviour {
 	private HandDraggable handDraggable;
 	private DynamicTextController DIAL_UP_DESIGN;
 	private Vector3 DIAL_UP_DESIGN_POS;
-	//private float offset = .5f;
 
-
-	public void SetSpawnPos(Vector3 pos) { spawnPos = pos; }
-	public Vector3 GetSpawnPos() { return spawnPos; }
 
 	private void Update() {
 		Update_DIAL_UP_DESIGN();
@@ -24,13 +20,16 @@ public class DesignDial : MonoBehaviour {
 	}
 	
 	public void Respawn() {
-		transform.localPosition = spawnPos;
+		
+		spawnPos = TransformUtils.GetLookAtPosition(1);
+		transform.localPosition = new Vector3(spawnPos.x, transform.localPosition.y,spawnPos.z);
 		handDraggable.SetDragging(true);
 		AudioManager.Instance.NowPlay(AudioManager.Audio.DesignBallSpawn);
 	}
 
 	void Start() {
-		spawnPos = transform.localPosition;
+		spawnPos=TransformUtils.GetLookAtPosition(1);
+		transform.localPosition = new Vector3 (spawnPos.x,spawnPos.y+.3f,spawnPos.z);
 		Quaternion rotation = TransformUtils.GetLookAtRotation(transform);
 		DIAL_UP_DESIGN = Prompts.GetPrompt(new Vector3(transform.position.x, transform.position.y+.2f, transform.position.z), rotation,Prompts.PromptName.AB_DIAL_UP_DESIGN,.15f);
 		handDraggable = GetComponent<HandDraggable>();
